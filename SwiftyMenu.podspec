@@ -29,6 +29,7 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.social_media_url = 'https://twitter.com/KarimEbrahem512'
 
   s.ios.deployment_target = '10.0'
+  s.swift_version = '5.0'
 
   s.source_files = 'SwiftyMenu/Classes/**/*'
   s.resources = 'SwiftyMenu/Assets/*'
