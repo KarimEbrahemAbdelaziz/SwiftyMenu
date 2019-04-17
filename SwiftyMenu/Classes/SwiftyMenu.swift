@@ -55,7 +55,7 @@ public class SwiftyMenu: UIView {
             selectButton.setTitle(placeHolderText, for: .normal)
         }
     }
-    @IBInspectable public var arrow: UIImage? = UIImage(named: "downArrow", in: Bundle(for: SwiftyMenu.self), compatibleWith: nil) {
+    @IBInspectable public var arrow: UIImage? {
         didSet {
             selectButton.titleEdgeInsets.left = 5
             selectButton.setImage(arrow, for: .normal)
@@ -138,6 +138,10 @@ public class SwiftyMenu: UIView {
         selectButton.setTitle(placeHolderText, for: .normal)
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
+        
+        let frameworkBundle = Bundle(for: SwiftyMenu.self)
+        let image = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)
+        arrow = image
         
         if arrow == nil {
             selectButton.titleEdgeInsets.left = 16

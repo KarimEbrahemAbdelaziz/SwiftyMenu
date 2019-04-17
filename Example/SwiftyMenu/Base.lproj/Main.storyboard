@@ -30,7 +30,6 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please Pick Option"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="arrow" value="downArrow"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="heightConstraint" destination="vhV-by-FEt" id="yVB-RG-zPR"/>
@@ -59,7 +58,4 @@
             </objects>
         </scene>
     </scenes>
-    <resources>
-        <image name="downArrow" width="9" height="6"/>
-    </resources>
 </document>
