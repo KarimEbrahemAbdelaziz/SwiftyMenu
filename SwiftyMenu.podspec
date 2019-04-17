@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of SwiftyMenu.'
+  s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,9 +28,11 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.source           = { :git => 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/KarimEbrahem512'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
+  s.swift_version = '5.0'
 
   s.source_files = 'SwiftyMenu/Classes/**/*'
+  s.resources = 'SwiftyMenu/Assets/*'
   
   # s.resource_bundles = {
   #   'SwiftyMenu' => ['SwiftyMenu/Assets/*.png']

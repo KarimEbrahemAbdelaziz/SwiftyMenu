@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwiftyMenu: 9181195bd6be4791735ae37b482747ef165434db
+  SwiftyMenu: 7ab610acb349e83c40b20ea919ffc48ffcf78ec7
 
 PODFILE CHECKSUM: e76fbe8ebeca450e6d7f72e5036d5d85d327d6d2
 
