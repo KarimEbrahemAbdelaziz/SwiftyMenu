@@ -1,0 +1,22 @@
+{
+  "name": "SwiftyMenu",
+  "version": "0.1.0",
+  "summary": "A short description of SwiftyMenu.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/KEMansour/SwiftyMenu",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "KEMansour": "karim.ebrahem@areebgroup.com"
+  },
+  "source": {
+    "git": "https://github.com/KEMansour/SwiftyMenu.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SwiftyMenu/Classes/**/*"
+}

@@ -1,6 +1,6 @@
 # SwiftyMenu
 
-[![CI Status](https://img.shields.io/travis/KEMansour/SwiftyMenu.svg?style=flat)](https://travis-ci.org/KEMansour/SwiftyMenu)
+[![CI Status](https://img.shields.io/travis/KarimEbrahem/SwiftyMenu.svg?style=flat)](https://travis-ci.org/KarimEbrahem/SwiftyMenu)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyMenu.svg?style=flat)](https://cocoapods.org/pods/SwiftyMenu)
 [![License](https://img.shields.io/cocoapods/l/SwiftyMenu.svg?style=flat)](https://cocoapods.org/pods/SwiftyMenu)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyMenu.svg?style=flat)](https://cocoapods.org/pods/SwiftyMenu)
@@ -22,7 +22,7 @@ pod 'SwiftyMenu'
 
 ## Author
 
-KEMansour, karim.ebrahem@areebgroup.com
+Karim Ebrahem, karimabdelazizmansour@gmail.com
 
 ## License
 

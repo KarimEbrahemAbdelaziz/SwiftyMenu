@@ -18,15 +18,15 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+This drop down is to overcome the loss of usability and user experience due to the UIPickerView.
                        DESC
 
-  s.homepage         = 'https://github.com/KEMansour/SwiftyMenu'
+  s.homepage         = 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'KEMansour' => 'karim.ebrahem@areebgroup.com' }
-  s.source           = { :git => 'https://github.com/KEMansour/SwiftyMenu.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'KarimEbrahemAbdelaziz' => 'karimabdelazizmansour@gmail.com' }
+  s.source           = { :git => 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/KarimEbrahem512'
 
   s.ios.deployment_target = '8.0'
 
