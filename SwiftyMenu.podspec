@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -22,7 +22,7 @@ This drop down is to overcome the loss of usability and user experience due to t
                        DESC
 
   s.homepage         = 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu'
-  s.screenshots = 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png?raw=true'
+  s.screenshots = 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png?raw=true'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'KarimEbrahemAbdelaziz' => 'karimabdelazizmansour@gmail.com' }
   s.source           = { :git => 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git', :tag => s.version.to_s }
