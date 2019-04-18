@@ -22,7 +22,7 @@ This drop down is to overcome the loss of usability and user experience due to t
                        DESC
 
   s.homepage         = 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  # s.screenshots = ''
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'KarimEbrahemAbdelaziz' => 'karimabdelazizmansour@gmail.com' }
   s.source           = { :git => 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git', :tag => s.version.to_s }
