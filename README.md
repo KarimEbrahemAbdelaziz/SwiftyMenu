@@ -2,7 +2,7 @@
 
 [![Facebook: @KarimEbrahemAbdelaziz](http://img.shields.io/badge/contact-%40KarimEbrahem-70a1fb.svg?style=flat)](https://www.facebook.com/KarimEbrahemAbdelaziz)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/README.md)
-[![CI Status](https://img.shields.io/travis/KarimEbrahem/SwiftyMenu.svg?style=flat)](https://travis-ci.org/KarimEbrahemAbdelaziz/SwiftyMenu.svg?branch=master)
+[![CI Status](https://img.shields.io/travis/KarimEbrahemAbdelaziz/SwiftyMenu/master.svg?style=flat)](https://travis-ci.org/KarimEbrahemAbdelaziz/SwiftyMenu.svg?branch=master)
 [![Version](http://img.shields.io/badge/version-0.1.0-green.svg?style=flat)](https://cocoapods.org/pods/SwiftyMenu)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](https://cocoadocs.org/pods/SwiftyMenu/)
 
