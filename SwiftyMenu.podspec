@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
 # This description is used to generate tags and improve search results.
