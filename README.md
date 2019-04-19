@@ -39,17 +39,17 @@ Use [CocoaPods](http://www.cocoapods.org).
 
 ### Storyboard
 
-<img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/4.png" width="800" height="600">
+<img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/4.gif" width="800" height="600">
 
 ```swift
 // Connect view in storyboard with you outlet
 @IBOutlet private weak var dropDownMenu: SwiftyMenu!
 
 // Define your options array (for now SwiftyMenu only accept String array, soon it'll be generic 😉)
-private let options = ["Option 1", "Option 2", "Option 3", "Option 4"]
+private let optionsData = ["Option 1", "Option 2", "Option 3", "Option 4"]
 
 // Give array of options to SwiftyMenu
-dropDownMenu.options = dropDownOptionsDataSource
+dropDownMenu.options = optionsData
 
 // Give SwiftyMenu the clusore to excute when update it's constraints
 // If you didn't give it to dropDownMenu, there won't be any animation
