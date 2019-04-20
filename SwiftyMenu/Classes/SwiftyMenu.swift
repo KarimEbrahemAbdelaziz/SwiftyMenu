@@ -28,15 +28,7 @@ public class SwiftyMenu: UIView {
     
     public var selectedIndex: Int?
     public var options = [String]()
-    
-    // MARK: - Closures
-    
-    private var updateHeightConstraint: () -> () = { }
-    private var didSelectCompletion: (String, Int) -> () = { selectedText, index in }
-    private var TableWillAppearCompletion: () -> () = { }
-    private var TableDidAppearCompletion: () -> () = { }
-    private var TableWillDisappearCompletion: () -> () = { }
-    private var TableDidDisappearCompletion: () -> () = { }
+    public weak var delegate: SwiftyMenuDelegate!
     
     // MARK: - IBInspectable
     
@@ -210,7 +202,7 @@ extension SwiftyMenu: UITableViewDelegate {
         selectedIndex = indexPath.row
         let selectedText = self.options[self.selectedIndex!]
         selectButton.setTitle(selectedText, for: .normal)
-        didSelectCompletion(selectedText, indexPath.row)
+        delegate.didSelectOption(selectedText, indexPath.row)
         tableView.reloadData()
         collapseMenu()
     }
@@ -220,46 +212,28 @@ extension SwiftyMenu: UITableViewDelegate {
 
 extension SwiftyMenu {
     private func expandMenu() {
+        delegate.swiftyMenuWillAppear()
         self.state = .shown
         heightConstraint.constant = listHeight == 0 ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5, animations: {
             self.parentViewController.view.layoutIfNeeded()
+        }) { didAppeared in
+            if didAppeared {
+                self.delegate.swiftyMenuDidAppear()
+            }
         }
     }
     
     private func collapseMenu() {
+        delegate.swiftyMenuWillDisappear()
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5, animations: {
             self.parentViewController.view.layoutIfNeeded()
+        }) { didDisappeared in
+            if didDisappeared {
+                self.delegate.swiftyMenuDidDisappear()
+            }
         }
-    }
-}
-
-// MARK: - Delegates
-
-extension SwiftyMenu {
-    public func updateConstraints(completion: @escaping () -> ()) {
-        updateHeightConstraint = completion
-    }
-    
-    public func didSelectOption(completion: @escaping (_ selectedText: String, _ index: Int) -> ()) {
-        didSelectCompletion = completion
-    }
-    
-    public func listWillAppear(completion: @escaping () -> ()) {
-        TableWillAppearCompletion = completion
-    }
-    
-    public func listDidAppear(completion: @escaping () -> ()) {
-        TableDidAppearCompletion = completion
-    }
-    
-    public func listWillDisappear(completion: @escaping () -> ()) {
-        TableWillDisappearCompletion = completion
-    }
-    
-    public func listDidDisappear(completion: @escaping () -> ()) {
-        TableDidDisappearCompletion = completion
     }
 }

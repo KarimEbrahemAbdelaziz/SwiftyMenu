@@ -20,12 +20,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dropDown.didSelectOption { (selectedText, index) in
-            print("Selected String: \(selectedText) at index: \(index)")
-        }
-        
+        dropDown.delegate = self
         dropDown.options = dropDownOptionsDataSource
     }
 
+}
+
+// MARK: - SwiftMenuDelegate
+
+extension ViewController: SwiftyMenuDelegate {
+    func didSelectOption(_ selectedOption: String, _ index: Int) {
+        print("Selected option: \(selectedOption), at index: \(index)")
+    }
+    
+    func swiftyMenuWillAppear() {
+        print("SwiftyMenu will appear.")
+    }
+    
+    func swiftyMenuDidAppear() {
+        print("SwiftyMenu did appear.")
+    }
+    
+    func swiftyMenuWillDisappear() {
+        print("SwiftyMenu will disappear.")
+    }
+    
+    func swiftyMenuDidDisappear() {
+        print("SwiftyMenu did disappear.")
+    }
 }
 
