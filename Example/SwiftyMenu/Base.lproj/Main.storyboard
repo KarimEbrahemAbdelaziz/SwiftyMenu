@@ -28,6 +28,11 @@
                                     <constraint firstAttribute="height" constant="35" id="7UK-p1-k6b"/>
                                     <constraint firstAttribute="width" constant="250" id="Oxg-ZM-a7e"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
+                                        <integer key="value" value="150"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="heightConstraint" destination="7UK-p1-k6b" id="cxF-24-ja6"/>
                                 </connections>

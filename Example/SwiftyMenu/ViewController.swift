@@ -20,12 +20,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dropDown.updateConstraints {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        
         dropDown.didSelectOption { (selectedText, index) in
             print("Selected String: \(selectedText) at index: \(index)")
         }

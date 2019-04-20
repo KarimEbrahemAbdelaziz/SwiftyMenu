@@ -1,6 +1,6 @@
 //
 //  SwiftyMenu.swift
-//  DropDownMenu
+//  SwiftyMenu
 //
 //  Created by Karim Ebrahem on 4/17/19.
 //  Copyright © 2019 Karim Ebrahem. All rights reserved.
@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
-@IBDesignable
 public class SwiftyMenu: UIView {
     
     // MARK: - Properties
@@ -71,11 +71,7 @@ public class SwiftyMenu: UIView {
             layer.borderColor = borderColor.cgColor
         }
     }
-    @IBInspectable public var listHeight: CGFloat = 150 {
-        didSet {
-            
-        }
-    }
+    @IBInspectable public var listHeight: Int = 0
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
             layer.borderWidth = borderWidth
@@ -127,11 +123,10 @@ public class SwiftyMenu: UIView {
         selectButton = UIButton(frame: self.frame)
         self.addSubview(selectButton)
         
-        selectButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: selectButton!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: height).isActive = true
-        NSLayoutConstraint(item: selectButton!, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: selectButton!, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: selectButton!, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0).isActive = true
+        selectButton.snp.makeConstraints { maker in
+            maker.leading.trailing.top.equalTo(self)
+            maker.height.equalTo(height)
+        }
         
         let color = placeHolderColor
         selectButton.setTitleColor(color, for: .normal)
@@ -160,17 +155,17 @@ public class SwiftyMenu: UIView {
         optionsTableView = UITableView()
         self.addSubview(optionsTableView)
         
-        optionsTableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: optionsTableView!, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: optionsTableView!, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: selectButton, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: optionsTableView!, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: optionsTableView!, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0).isActive = true
+        optionsTableView.snp.makeConstraints { maker in
+            maker.leading.trailing.bottom.equalTo(self)
+            maker.top.equalTo(selectButton.snp_bottom)
+        }
         
         optionsTableView.delegate = self
         optionsTableView.dataSource = self
         optionsTableView.rowHeight = CGFloat(rowHeight)
         optionsTableView.separatorInset.left = 8
         optionsTableView.separatorInset.right = 8
+        optionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
     }
     
     @objc private func handleMenuState() {
@@ -193,7 +188,7 @@ extension SwiftyMenu: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
         cell.textLabel?.text = options[indexPath.row]
         cell.textLabel?.textColor = optionColor
         cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -226,14 +221,18 @@ extension SwiftyMenu: UITableViewDelegate {
 extension SwiftyMenu {
     private func expandMenu() {
         self.state = .shown
-        heightConstraint.constant = CGFloat(rowHeight * Double(options.count + 1))
-        updateHeightConstraint()
+        heightConstraint.constant = listHeight == 0 ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
+        UIView.animate(withDuration: 1) {
+            self.parentViewController.view.layoutIfNeeded()
+        }
     }
     
     private func collapseMenu() {
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
-        updateHeightConstraint()
+        UIView.animate(withDuration: 1) {
+            self.parentViewController.view.layoutIfNeeded()
+        }
     }
 }
 
