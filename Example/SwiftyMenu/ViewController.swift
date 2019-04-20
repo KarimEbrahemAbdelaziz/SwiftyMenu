@@ -20,8 +20,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup component
         dropDown.delegate = self
         dropDown.options = dropDownOptionsDataSource
+        
+        // Custome UI
+        dropDown.rowHeight = 35
+        dropDown.listHeight = 150
     }
 
 }

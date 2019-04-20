@@ -85,6 +85,18 @@ extension ViewController: SwiftyMenuDelegate {
     }
 }
 ```
+## Customize UI 😎
+
+You can configure SwiftyMenu from Storyboard or Code as following:
+
+```swift
+// Change option's row height (default 35)
+dropDownMenu.rowHeight = 35
+
+// Change option's drop down menu height 
+// default is 0, which make drop down height = number of options * rowHeight
+dropDownMenu.listHeight = 150
+````
 
 ## Author
 
