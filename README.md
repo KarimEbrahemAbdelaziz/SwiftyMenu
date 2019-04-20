@@ -1,16 +1,29 @@
-# SwiftyMenu
+<p align="center">
+    <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/Logo.png" width="480” max-width="90%" alt="SwiftyMenu" />
+</p>
 
-[![Facebook: @KarimEbrahemAbdelaziz](http://img.shields.io/badge/contact-%40KarimEbrahem-70a1fb.svg?style=flat)](https://www.facebook.com/KarimEbrahemAbdelaziz)
-[![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/README.md)
-[![CI Status](https://img.shields.io/travis/KarimEbrahemAbdelaziz/SwiftyMenu/master.svg?style=flat)](https://travis-ci.org/KarimEbrahemAbdelaziz/SwiftyMenu.svg?branch=master)
-[![Version](http://img.shields.io/badge/version-0.2.1-green.svg?style=flat)](https://cocoapods.org/pods/SwiftyMenu)
-[![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](https://cocoadocs.org/pods/SwiftyMenu/)
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
+    <a href="https://travis-ci.org/KarimEbrahemAbdelaziz/SwiftyMenu.svg?branch=master">
+        <img src="https://img.shields.io/travis/KarimEbrahemAbdelaziz/SwiftyMenu/master.svg?style=flat" alt="CI Status" />
+    </a>
+    <a href="https://cocoadocs.org/pods/SwiftyMenu/">
+        <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
+    </a>
+    <img src="http://img.shields.io/badge/version-0.2.1-green.svg?style=flat" alt="Version" />
+    <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
+        <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
+    </a>
+    <br>
+    <a href="https://www.facebook.com/KarimEbrahemAbdelaziz">
+        <img src="http://img.shields.io/badge/facebook-%40KarimEbrahemAbdelaziz-70a1fb.svg?style=flat" alt="Facebook: @KarimEbrahemAbdelaziz" />
+    </a>
+    <a href="https://twitter.com/KarimEbrahem512">
+        <img src="https://img.shields.io/badge/twitter-@KarimEbrahem512-blue.svg?style=flat" alt="Twitter: @KarimEbrahem512" />
+    </a>
+</p>
 
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/2.gif" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png" width="250" height="500">
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements ⚙️
 
