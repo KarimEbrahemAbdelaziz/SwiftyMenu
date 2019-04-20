@@ -48,20 +48,41 @@ Use [CocoaPods](http://www.cocoapods.org).
 // Define your options array (for now SwiftyMenu only accept String array, soon it'll be generic 😉)
 private let optionsData = ["Option 1", "Option 2", "Option 3", "Option 4"]
 
+// Assign the component that implement SwiftyMenuDelegate to SwiftyMenu component
+dropDownMenu.delegate = self
+
 // Give array of options to SwiftyMenu
 dropDownMenu.options = optionsData
+```
 
-// Give SwiftyMenu the clusore to excute when update it's constraints
-// If you didn't give it to dropDownMenu, there won't be any animation
-dropDownMenu.updateConstraints {
-    UIView.animate(withDuration: 0.5, animations: {
-        self.view.layoutIfNeeded()
-    })
-}
+Then implement SwiftyMenuDelegate:
 
-// Give SwiftyMenu the clusore to excute when user select an option
-dropDownMenu.didSelectOption { (selectedOption, index) in
-    print("Selected String: \(selectedOption) at index: \(index)")
+```swift
+extension ViewController: SwiftyMenuDelegate {
+    // Get selected option from SwiftyMenu
+    func didSelectOption(_ selectedOption: String, _ index: Int) {
+        print("Selected option: \(selectedOption), at index: \(index)")
+    }
+    
+    // SwiftyMenu drop down menu will appear
+    func swiftyMenuWillAppear() {
+        print("SwiftyMenu will appear.")
+    }
+
+    // SwiftyMenu drop down menu did appear
+    func swiftyMenuDidAppear() {
+        print("SwiftyMenu did appear.")
+    }
+
+    // SwiftyMenu drop down menu will disappear
+    func swiftyMenuWillDisappear() {
+        print("SwiftyMenu will disappear.")
+        }
+
+    // SwiftyMenu drop down menu did disappear
+    func swiftyMenuDidDisappear() {
+        print("SwiftyMenu did disappear.")
+    }
 }
 ```
 
