@@ -23,6 +23,22 @@
     </a>
 </p>
 
+#
+
+SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow you to have drop down menu that doesn't appear over your views, which give you awesome user experience.
+
+## TODO 💪🏻
+
+- [ ] Allow SwiftyMenu to pop over all views.
+- [ ] Allow custom header and options cells.
+- [ ] Allow different interactions to dismiss SwiftyMenu.
+
+And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
+
+#
+
+## Screenshots 👀
+
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/2.gif" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png" width="250" height="500">
 
 ## Requirements ⚙️
