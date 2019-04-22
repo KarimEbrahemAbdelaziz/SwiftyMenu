@@ -34,23 +34,23 @@ class ViewController: UIViewController {
 // MARK: - SwiftMenuDelegate
 
 extension ViewController: SwiftyMenuDelegate {
-    func didSelectOption(_ selectedOption: String, _ index: Int) {
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: String, _ index: Int) {
         print("Selected option: \(selectedOption), at index: \(index)")
     }
     
-    func swiftyMenuWillAppear() {
+    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu will appear.")
     }
     
-    func swiftyMenuDidAppear() {
+    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did appear.")
     }
     
-    func swiftyMenuWillDisappear() {
+    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu will disappear.")
     }
     
-    func swiftyMenuDidDisappear() {
+    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did disappear.")
     }
 }

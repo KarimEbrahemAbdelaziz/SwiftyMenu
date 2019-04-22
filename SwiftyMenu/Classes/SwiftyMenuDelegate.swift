@@ -8,19 +8,19 @@
 import Foundation
 
 public protocol SwiftyMenuDelegate: NSObjectProtocol {
-    func didSelectOption(_ selectedOption: String, _ index: Int)
-    func swiftyMenuWillAppear()
-    func swiftyMenuDidAppear()
-    func swiftyMenuWillDisappear()
-    func swiftyMenuDidDisappear()
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: String, _ index: Int)
+    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu)
+    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu)
+    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu)
+    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu)
 }
 
 public extension SwiftyMenuDelegate {
-    func swiftyMenuWillAppear() { }
+    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) { }
     
-    func swiftyMenuDidAppear() { }
+    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) { }
     
-    func swiftyMenuWillDisappear() { }
+    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) { }
     
-    func swiftyMenuDidDisappear() { }
+    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) { }
 }

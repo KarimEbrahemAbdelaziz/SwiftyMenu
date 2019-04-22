@@ -202,7 +202,7 @@ extension SwiftyMenu: UITableViewDelegate {
         selectedIndex = indexPath.row
         let selectedText = self.options[self.selectedIndex!]
         selectButton.setTitle(selectedText, for: .normal)
-        delegate?.didSelectOption(selectedText, indexPath.row)
+        delegate?.didSelectOption(self, selectedText, indexPath.row)
         tableView.reloadData()
         collapseMenu()
     }
@@ -212,27 +212,27 @@ extension SwiftyMenu: UITableViewDelegate {
 
 extension SwiftyMenu {
     private func expandMenu() {
-        delegate?.swiftyMenuWillAppear()
+        delegate?.swiftyMenuWillAppear(self)
         self.state = .shown
         heightConstraint.constant = listHeight == 0 ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
         UIView.animate(withDuration: 0.5, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didAppeared in
             if didAppeared {
-                self.delegate?.swiftyMenuDidAppear()
+                self.delegate?.swiftyMenuDidAppear(self)
             }
         }
     }
     
     private func collapseMenu() {
-        delegate?.swiftyMenuWillDisappear()
+        delegate?.swiftyMenuWillDisappear(self)
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
         UIView.animate(withDuration: 0.5, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didDisappeared in
             if didDisappeared {
-                self.delegate?.swiftyMenuDidDisappear()
+                self.delegate?.swiftyMenuDidDisappear(self)
             }
         }
     }
