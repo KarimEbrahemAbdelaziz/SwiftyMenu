@@ -27,6 +27,14 @@ class ViewController: UIViewController {
         // Custome UI
         dropDown.rowHeight = 35
         dropDown.listHeight = 150
+        dropDown.borderWidth = 1.0
+        
+        // Custome Colors
+        dropDown.borderColor = .black
+        dropDown.optionColor = .red
+        dropDown.placeHolderColor = .blue
+        dropDown.menuHeaderBackgroundColor = .lightGray
+        dropDown.rowBackgroundColor = .orange
     }
 
 }

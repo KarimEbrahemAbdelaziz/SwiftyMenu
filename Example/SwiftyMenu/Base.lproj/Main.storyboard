@@ -32,6 +32,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
                                         <integer key="value" value="150"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="heightConstraint" destination="7UK-p1-k6b" id="cxF-24-ja6"/>

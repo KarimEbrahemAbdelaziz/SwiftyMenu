@@ -33,8 +33,13 @@ public class SwiftyMenu: UIView {
     // MARK: - IBInspectable
     
     @IBInspectable public var rowHeight: Double = 35
+    @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
+        didSet {
+            selectButton.backgroundColor = menuHeaderBackgroundColor
+        }
+    }
     @IBInspectable public var rowBackgroundColor: UIColor = .white
-    @IBInspectable public var selectedRowColor: UIColor = .white
+    @IBInspectable public var selectedRowColor: UIColor?
     @IBInspectable public var hideOptionsWhenSelect = true
     @IBInspectable public var optionColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
     @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
@@ -58,7 +63,7 @@ public class SwiftyMenu: UIView {
             selectButton.titleEdgeInsets.left = CGFloat(titleLeftInset)
         }
     }
-    @IBInspectable public var borderColor: UIColor =  UIColor.lightGray {
+    @IBInspectable public var borderColor: UIColor =  UIColor.clear {
         didSet {
             layer.borderColor = borderColor.cgColor
         }
@@ -125,6 +130,7 @@ public class SwiftyMenu: UIView {
         selectButton.setTitle(placeHolderText, for: .normal)
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
+        selectButton.backgroundColor = menuHeaderBackgroundColor
         
         let frameworkBundle = Bundle(for: SwiftyMenu.self)
         let image = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)
@@ -157,6 +163,7 @@ public class SwiftyMenu: UIView {
         optionsTableView.rowHeight = CGFloat(rowHeight)
         optionsTableView.separatorInset.left = 8
         optionsTableView.separatorInset.right = 8
+        optionsTableView.backgroundColor = .clear
         optionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
     }
     
@@ -185,6 +192,7 @@ extension SwiftyMenu: UITableViewDataSource {
         cell.textLabel?.textColor = optionColor
         cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
         cell.tintColor = optionColor
+        cell.backgroundColor = rowBackgroundColor
         cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
         cell.selectionStyle = .none
         return cell
@@ -202,6 +210,7 @@ extension SwiftyMenu: UITableViewDelegate {
         selectedIndex = indexPath.row
         let selectedText = self.options[self.selectedIndex!]
         selectButton.setTitle(selectedText, for: .normal)
+        selectButton.setTitleColor(optionColor, for: .normal)
         delegate?.didSelectOption(self, selectedText, indexPath.row)
         tableView.reloadData()
         collapseMenu()
