@@ -24,12 +24,15 @@ class ViewController: UIViewController {
         dropDown.delegate = self
         dropDown.options = dropDownOptionsDataSource
         
-        // Custome UI
+        // Custom Behavior
+        dropDown.scrollingEnabled = false
+        
+        // Custom UI
         dropDown.rowHeight = 35
         dropDown.listHeight = 150
         dropDown.borderWidth = 1.0
         
-        // Custome Colors
+        // Custom Colors
         dropDown.borderColor = .black
         dropDown.optionColor = .red
         dropDown.placeHolderColor = .blue

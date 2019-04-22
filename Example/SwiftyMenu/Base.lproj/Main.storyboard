@@ -32,9 +32,6 @@
                                             <constraint firstAttribute="width" constant="250" id="Oxg-ZM-a7e"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
-                                                <integer key="value" value="150"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>

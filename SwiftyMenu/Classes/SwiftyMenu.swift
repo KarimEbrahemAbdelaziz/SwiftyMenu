@@ -32,6 +32,11 @@ public class SwiftyMenu: UIView {
     
     // MARK: - IBInspectable
     
+    @IBInspectable public var scrollingEnabled: Bool = true {
+        didSet {
+            optionsTableView.isScrollEnabled = scrollingEnabled
+        }
+    }
     @IBInspectable public var rowHeight: Double = 35
     @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
         didSet {
@@ -163,7 +168,8 @@ public class SwiftyMenu: UIView {
         optionsTableView.rowHeight = CGFloat(rowHeight)
         optionsTableView.separatorInset.left = 8
         optionsTableView.separatorInset.right = 8
-        optionsTableView.backgroundColor = .clear
+        optionsTableView.backgroundColor = rowBackgroundColor
+        optionsTableView.isScrollEnabled = scrollingEnabled
         optionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
     }
     
@@ -223,7 +229,7 @@ extension SwiftyMenu {
     private func expandMenu() {
         delegate?.swiftyMenuWillAppear(self)
         self.state = .shown
-        heightConstraint.constant = listHeight == 0 ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
+        heightConstraint.constant = listHeight == 0 || !scrollingEnabled ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
         UIView.animate(withDuration: 0.5, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didAppeared in
