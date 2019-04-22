@@ -21,28 +21,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-dq-Ipz" customClass="SwiftyMenu" customModule="SwiftyMenu">
-                                <rect key="frame" x="62.5" y="120" width="250" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="7UK-p1-k6b"/>
-                                    <constraint firstAttribute="width" constant="250" id="Oxg-ZM-a7e"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
-                                        <integer key="value" value="150"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="heightConstraint" destination="7UK-p1-k6b" id="cxF-24-ja6"/>
-                                </connections>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-Fi-mme">
+                                <rect key="frame" x="62.5" y="120" width="250" height="151"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-dq-Ipz" customClass="SwiftyMenu" customModule="SwiftyMenu">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="7UK-p1-k6b"/>
+                                            <constraint firstAttribute="width" constant="250" id="Oxg-ZM-a7e"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
+                                                <integer key="value" value="150"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="heightConstraint" destination="7UK-p1-k6b" id="cxF-24-ja6"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eg6-xa-Q7o">
+                                        <rect key="frame" x="0.0" y="43" width="250" height="50"/>
+                                        <color key="backgroundColor" red="0.46881388460000001" green="0.44683777229999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CPO-w8-P92"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS5-4Y-B4p">
+                                        <rect key="frame" x="0.0" y="101" width="250" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.36078431370000003" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="I3K-LS-s7T"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.78344153462441313" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ag2-dq-Ipz" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="SI4-cc-l20"/>
-                            <constraint firstItem="Ag2-dq-Ipz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="gxD-Dy-T1J"/>
+                            <constraint firstItem="RXo-Fi-mme" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="I5S-fC-aHe"/>
+                            <constraint firstItem="RXo-Fi-mme" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="zA3-OL-VYR"/>
                         </constraints>
                     </view>
                     <connections>
