@@ -10,7 +10,7 @@
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
-    <img src="http://img.shields.io/badge/version-0.2.1-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-0.3.0-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
@@ -29,9 +29,12 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 
 ## TODO 💪🏻
 
-- [ ] Allow SwiftyMenu to pop over all views.
 - [ ] Allow custom header and options cells.
 - [ ] Allow different interactions to dismiss SwiftyMenu.
+- [ ] Allow to customize the default seperator.
+- [x] Support multi SwiftyMenu in one screen.
+- [x] Support stack view and add example.
+- [x] Add different customization to colors for default cells.
 
 And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
 
@@ -89,27 +92,27 @@ Then implement SwiftyMenuDelegate:
 ```swift
 extension ViewController: SwiftyMenuDelegate {
     // Get selected option from SwiftyMenu
-    func didSelectOption(_ selectedOption: String, _ index: Int) {
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: String, _ index: Int) {
         print("Selected option: \(selectedOption), at index: \(index)")
     }
     
     // SwiftyMenu drop down menu will appear
-    func swiftyMenuWillAppear() {
+    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu will appear.")
     }
 
     // SwiftyMenu drop down menu did appear
-    func swiftyMenuDidAppear() {
+    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did appear.")
     }
 
     // SwiftyMenu drop down menu will disappear
-    func swiftyMenuWillDisappear() {
+    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu will disappear.")
         }
 
     // SwiftyMenu drop down menu did disappear
-    func swiftyMenuDidDisappear() {
+    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did disappear.")
     }
 }
@@ -125,6 +128,19 @@ dropDownMenu.rowHeight = 35
 // Change option's drop down menu height 
 // default is 0, which make drop down height = number of options * rowHeight
 dropDownMenu.listHeight = 150
+
+// Change drop down menu border width
+dropDownMenu.borderWidth = 1.0
+
+// Change drop down menu scroll behavior 
+dropDownMenu.scrollingEnabled = false
+
+// Change drop down menu default colors
+dropDownMenu.borderColor = .black
+dropDownMenu.optionColor = .red
+dropDownMenu.placeHolderColor = .blue
+dropDownMenu.menuHeaderBackgroundColor = .lightGray
+dropDownMenu.rowBackgroundColor = .orange
 ````
 
 ## Author
