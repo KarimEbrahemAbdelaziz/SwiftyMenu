@@ -34,6 +34,7 @@ public class SwiftyMenu: UIView {
     // MARK: - IBInspectable
     
     @IBInspectable public var isMultiSelect: Bool = false
+    @IBInspectable public var hideOptionsWhenSelect: Bool = false
     @IBInspectable public var scrollingEnabled: Bool = true {
         didSet {
             optionsTableView.isScrollEnabled = scrollingEnabled
@@ -47,7 +48,6 @@ public class SwiftyMenu: UIView {
     }
     @IBInspectable public var rowBackgroundColor: UIColor = .white
     @IBInspectable public var selectedRowColor: UIColor?
-    @IBInspectable public var hideOptionsWhenSelect = false
     @IBInspectable public var optionColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
     @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
         didSet {
