@@ -27,7 +27,7 @@ public class SwiftyMenu: UIView {
     private var height: CGFloat!
     
     public var selectedIndex: Int?
-    public var selectedIndecis: [Int: Int]?
+    public var selectedIndecis: [Int: Int] = [:]
     public var options = [String]()
     public weak var delegate: SwiftyMenuDelegate?
     
@@ -137,6 +137,7 @@ public class SwiftyMenu: UIView {
         selectButton.setTitle(placeHolderText, for: .normal)
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
+        selectButton.titleEdgeInsets.right = 16
         selectButton.backgroundColor = menuHeaderBackgroundColor
         
         let frameworkBundle = Bundle(for: SwiftyMenu.self)
@@ -196,7 +197,15 @@ extension SwiftyMenu: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isMultiSelect {
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
+            cell.textLabel?.text = options[indexPath.row]
+            cell.textLabel?.textColor = optionColor
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+            cell.tintColor = optionColor
+            cell.backgroundColor = rowBackgroundColor
+            cell.accessoryType = selectedIndecis[indexPath.row] != nil ? .checkmark : .none
+            cell.selectionStyle = .none
+            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = options[indexPath.row]
@@ -218,23 +227,64 @@ extension SwiftyMenu: UITableViewDelegate {
         return CGFloat(rowHeight)
     }
     
+    private func setSelectedOptionsAsTitle() {
+        if isMultiSelect {
+            if selectedIndecis.isEmpty {
+                selectButton.setTitle(placeHolderText, for: .normal)
+                selectButton.setTitleColor(placeHolderColor, for: .normal)
+            } else {
+                let titles = selectedIndecis.mapValues { (index) -> String in
+                    return options[index]
+                }
+                var selectedTitle = ""
+                titles.forEach { option in
+                    selectedTitle.append(contentsOf: "\(option.value), ")
+                }
+                selectButton.setTitle(selectedTitle, for: .normal)
+                selectButton.setTitleColor(optionColor, for: .normal)
+            }
+        } else {
+            if selectedIndex == nil {
+                selectButton.setTitle(placeHolderText, for: .normal)
+                selectButton.setTitleColor(placeHolderColor, for: .normal)
+            } else {
+                selectButton.setTitle(options[selectedIndex!], for: .normal)
+                selectButton.setTitleColor(optionColor, for: .normal)
+            }
+        }
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isMultiSelect {
-            
+            if selectedIndecis[indexPath.row] != nil {
+                selectedIndecis[indexPath.row] = nil
+                setSelectedOptionsAsTitle()
+                tableView.reloadData()
+                if hideOptionsWhenSelect {
+                    collapseMenu()
+                }
+            } else {
+                selectedIndecis[indexPath.row] = indexPath.row
+                setSelectedOptionsAsTitle()
+                let selectedText = self.options[selectedIndecis[indexPath.row]!]
+                delegate?.didSelectOption(self, selectedText, indexPath.row)
+                tableView.reloadData()
+                if hideOptionsWhenSelect {
+                    collapseMenu()
+                }
+            }
         } else {
             if selectedIndex == indexPath.row {
                 selectedIndex = nil
-                selectButton.setTitle(placeHolderText, for: .normal)
-                selectButton.setTitleColor(placeHolderColor, for: .normal)
+                setSelectedOptionsAsTitle()
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
                     collapseMenu()
                 }
             } else {
                 selectedIndex = indexPath.row
+                setSelectedOptionsAsTitle()
                 let selectedText = self.options[self.selectedIndex!]
-                selectButton.setTitle(selectedText, for: .normal)
-                selectButton.setTitleColor(optionColor, for: .normal)
                 delegate?.didSelectOption(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {

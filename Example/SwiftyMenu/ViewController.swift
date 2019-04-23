@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         
         // Custom Behavior
         dropDown.scrollingEnabled = false
+        dropDown.isMultiSelect = true
         
         // Custom UI
         dropDown.rowHeight = 35
