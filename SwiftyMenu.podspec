@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '0.4.1'
+  s.version          = '0.4.2'
   s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.social_media_url = 'https://twitter.com/KarimEbrahem512'
 
   s.ios.deployment_target = '10.0'
-  s.swift_version = '5.0'
+  s.swift_version = '4.2'
 
   s.source_files = 'SwiftyMenu/Classes/**/*'
   s.resources = 'SwiftyMenu/Assets/*'
