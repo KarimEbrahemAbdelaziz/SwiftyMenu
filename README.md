@@ -10,7 +10,7 @@
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
-    <img src="http://img.shields.io/badge/version-0.4.4-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-0.4.6-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
@@ -39,6 +39,8 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 - [x] Support multi selection in SwiftMenu 🔥.
 - [x] Support multi SwiftyMenu in one screen.
 - [x] Support stack view and add example.
+- [x] Support call backs and delegation.
+- [x] Support different types of Animations. 
 - [x] Add different customization to colors for default cells.
 
 And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
@@ -69,12 +71,12 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 Use [CocoaPods](http://www.cocoapods.org).
 
 #### Swift 5
-1. Add `pod 'SwiftyMenu', '~> 0.4.4'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.4.6'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
 #### Swift 4.2
-1. Add `pod 'SwiftyMenu', '~> 0.4.3'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.4.5'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
@@ -128,6 +130,24 @@ extension ViewController: SwiftyMenuDelegate {
     }
 }
 ```
+
+Also you can use callbacks to know what happen:
+
+```swift
+// Support different callbacks for different events
+dropDownMenu.didExpand = {
+    print("SwiftyMenu Expanded!")
+}
+
+dropDownMenu.didCollapse = {
+    print("SwiftyMeny Collapsed")
+}
+
+dropDownMenu.didSelectOption = { (selection: Selection) in
+    print("\(selection.value) at index: \(selection.index)")
+}
+```
+
 ## Customize UI 😎
 
 You can configure SwiftyMenu from Storyboard or Code as following:
@@ -152,6 +172,12 @@ dropDownMenu.optionColor = .red
 dropDownMenu.placeHolderColor = .blue
 dropDownMenu.menuHeaderBackgroundColor = .lightGray
 dropDownMenu.rowBackgroundColor = .orange
+
+// Change drop down menu default expand and collapse animation
+dropDownMenu.expandingAnimationStyle = .spring(level: .high)
+dropDownMenu.expandingDuration = 0.5
+dropDownMenu.collapsingAnimationStyle = .linear
+dropDownMenu.collapsingDuration = 0.5
 ````
 
 ## Author

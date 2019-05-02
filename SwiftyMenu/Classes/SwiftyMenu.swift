@@ -14,7 +14,7 @@ import SnapKit
 /// 1: Object of SwiftyMenu where the selection occured
 /// 2: Model on which the interaction was made
 /// 3: Index of the model
-public typealias Selection = (SwiftyMenu, String, Int)
+public typealias Selection = (menu :SwiftyMenu, value: String, index: Int)
 
 public class SwiftyMenu: UIView {
     
@@ -390,8 +390,8 @@ extension SwiftyMenu {
         
         switch collapsingAnimationStyle {
         case .linear:
-            UIView.animate(withDuration: expandingDuration,
-                           delay: expandingDelay,
+            UIView.animate(withDuration: collapsingDuration,
+                           delay: collapsingDelay,
                            animations: animationBlock,
                            completion: collapsingAnimationCompletionBlock)
             
@@ -422,7 +422,7 @@ extension SwiftyMenu {
     
     private func collapsingAnimationCompletionBlock(didAppeared: Bool) {
         if didAppeared {
-            self.delegate?.swiftyMenuDidAppear(self)
+            self.delegate?.swiftyMenuDidDisappear(self)
             self.didCollapse()
         }
     }
