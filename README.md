@@ -34,8 +34,8 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 - [ ] Allow custom header and options cells.
 - [ ] Allow different interactions to dismiss SwiftyMenu.
 - [ ] Allow to customize the default seperator.
-- [x] Support Swift 5 (tag 0.4.4).
-- [x] Support Swift 4.2 (tag 0.4.3).
+- [x] Support Swift 5 (tag 0.4.6).
+- [x] Support Swift 4.2 (tag 0.4.5).
 - [x] Support multi selection in SwiftMenu 🔥.
 - [x] Support multi SwiftyMenu in one screen.
 - [x] Support stack view and add example.
