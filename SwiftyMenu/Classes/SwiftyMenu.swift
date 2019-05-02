@@ -366,7 +366,7 @@ extension SwiftyMenu {
             UIView.animate(withDuration: expandingDuration,
                            delay: expandingDelay,
                            animations: animationBlock,
-                           completion: completionBlock)
+                           completion: expandingAnimationCompletionBlock)
             
         case .spring(level: let powerLevel):
             let damping = CGFloat(0.5 / powerLevel.rawValue)
@@ -378,14 +378,7 @@ extension SwiftyMenu {
                            initialSpringVelocity: initialVelocity,
                            options: [],
                            animations: animationBlock,
-                           completion: completionBlock)
-        UIView.animate(withDuration: expandingDuration, animations: {
-            self.parentViewController.view.layoutIfNeeded()
-        }) { didAppeared in
-            if didAppeared {
-                self.delegate?.swiftyMenuDidAppear(self)
-                self.didExpand()
-            }
+                           completion: expandingAnimationCompletionBlock)
         }
     }
     
@@ -400,7 +393,7 @@ extension SwiftyMenu {
             UIView.animate(withDuration: expandingDuration,
                            delay: expandingDelay,
                            animations: animationBlock,
-                           completion: completionBlock)
+                           completion: collapsingAnimationCompletionBlock)
             
         case .spring(level: let powerLevel):
             let damping = CGFloat(1.0 * powerLevel.rawValue)
@@ -412,14 +405,7 @@ extension SwiftyMenu {
                            initialSpringVelocity: initialVelocity,
                            options: .curveEaseIn,
                            animations: animationBlock,
-                           completion: completionBlock)
-        UIView.animate(withDuration: collapsingDuration, animations: {
-            self.parentViewController.view.layoutIfNeeded()
-        }) { didDisappeared in
-            if didDisappeared {
-                self.delegate?.swiftyMenuDidDisappear(self)
-                self.didCollapse()
-            }
+                           completion: collapsingAnimationCompletionBlock)
         }
     }
     
@@ -427,9 +413,17 @@ extension SwiftyMenu {
         self.parentViewController.view.layoutIfNeeded()
     }
     
-    private func completionBlock(didAppeared: Bool) {
+    private func expandingAnimationCompletionBlock(didAppeared: Bool) {
         if didAppeared {
             self.delegate?.swiftyMenuDidAppear(self)
+            self.didExpand()
+        }
+    }
+    
+    private func collapsingAnimationCompletionBlock(didAppeared: Bool) {
+        if didAppeared {
+            self.delegate?.swiftyMenuDidAppear(self)
+            self.didCollapse()
         }
     }
 }
