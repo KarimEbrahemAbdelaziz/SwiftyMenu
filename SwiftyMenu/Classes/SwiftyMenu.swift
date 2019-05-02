@@ -29,6 +29,26 @@ public class SwiftyMenu: UIView {
         case shown
         case hidden
     }
+    
+    /// defines Animation Style for the drop down animation
+    ///
+    /// - linear: smooth animation
+    /// - spring: bouncy animation
+    public enum AnimationStyle {
+        case linear
+        case spring(level: SpringPowerLevel)
+        
+        /// defines how bouncy the animation should be
+        ///
+        /// - low: a bit of smooth and a bit of bounciness at the end
+        /// - normal: not too bouncy and not too smooth
+        /// - high: too bouncy
+        public enum SpringPowerLevel: Double {
+            case low = 0.75
+            case normal = 1.0
+            case high = 1.5
+        }
+    }
     private var width: CGFloat!
     private var height: CGFloat!
     
@@ -114,8 +134,14 @@ public class SwiftyMenu: UIView {
         }
     }
     
-    @IBInspectable public var expandingDuration: CGFloat = 0.5
-    @IBInspectable public var collapsingDuration: CGFloat = 0.5
+    @IBInspectable public var expandingDuration: Double = 0.5
+    @IBInspectable public var collapsingDuration: Double = 0.5
+    
+    @IBInspectable public var expandingDelay: Double = 0.0
+    @IBInspectable public var collapsingDelay: Double = 0.0
+    
+    public var expandingAnimationStyle: AnimationStyle = .linear
+    public var collapsingAnimationStyle: AnimationStyle = .linear
     
     // MARK: - Init
     
@@ -334,6 +360,25 @@ extension SwiftyMenu {
         self.willExpand()
         self.state = .shown
         heightConstraint.constant = listHeight == 0 || !scrollingEnabled ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
+        
+        switch expandingAnimationStyle {
+        case .linear:
+            UIView.animate(withDuration: expandingDuration,
+                           delay: expandingDelay,
+                           animations: animationBlock,
+                           completion: completionBlock)
+            
+        case .spring(level: let powerLevel):
+            let damping = CGFloat(0.5 / powerLevel.rawValue)
+            let initialVelocity = CGFloat(0.5 * powerLevel.rawValue)
+            
+            UIView.animate(withDuration: expandingDuration,
+                           delay: expandingDelay,
+                           usingSpringWithDamping: damping,
+                           initialSpringVelocity: initialVelocity,
+                           options: [],
+                           animations: animationBlock,
+                           completion: completionBlock)
         UIView.animate(withDuration: expandingDuration, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didAppeared in
@@ -349,6 +394,25 @@ extension SwiftyMenu {
         self.willCollapse()
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
+        
+        switch collapsingAnimationStyle {
+        case .linear:
+            UIView.animate(withDuration: expandingDuration,
+                           delay: expandingDelay,
+                           animations: animationBlock,
+                           completion: completionBlock)
+            
+        case .spring(level: let powerLevel):
+            let damping = CGFloat(1.0 * powerLevel.rawValue)
+            let initialVelocity = CGFloat(10.0 * powerLevel.rawValue)
+            
+            UIView.animate(withDuration: collapsingDuration,
+                           delay: collapsingDelay,
+                           usingSpringWithDamping: damping,
+                           initialSpringVelocity: initialVelocity,
+                           options: .curveEaseIn,
+                           animations: animationBlock,
+                           completion: completionBlock)
         UIView.animate(withDuration: collapsingDuration, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didDisappeared in
@@ -356,6 +420,16 @@ extension SwiftyMenu {
                 self.delegate?.swiftyMenuDidDisappear(self)
                 self.didCollapse()
             }
+        }
+    }
+    
+    private func animationBlock() {
+        self.parentViewController.view.layoutIfNeeded()
+    }
+    
+    private func completionBlock(didAppeared: Bool) {
+        if didAppeared {
+            self.delegate?.swiftyMenuDidAppear(self)
         }
     }
 }
