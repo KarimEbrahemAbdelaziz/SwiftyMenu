@@ -114,6 +114,9 @@ public class SwiftyMenu: UIView {
         }
     }
     
+    @IBInspectable public var expandingDuration: CGFloat = 0.5
+    @IBInspectable public var collapsingDuration: CGFloat = 0.5
+    
     // MARK: - Init
     
     public override init(frame: CGRect) {
@@ -331,7 +334,7 @@ extension SwiftyMenu {
         self.willExpand()
         self.state = .shown
         heightConstraint.constant = listHeight == 0 || !scrollingEnabled ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: expandingDuration, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didAppeared in
             if didAppeared {
@@ -346,7 +349,7 @@ extension SwiftyMenu {
         self.willCollapse()
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: collapsingDuration, animations: {
             self.parentViewController.view.layoutIfNeeded()
         }) { didDisappeared in
             if didDisappeared {
