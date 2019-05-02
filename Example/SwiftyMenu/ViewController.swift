@@ -24,6 +24,19 @@ class ViewController: UIViewController {
         dropDown.delegate = self
         dropDown.options = dropDownOptionsDataSource
         
+        // Support CallBacks
+        dropDown.didExpand = {
+            print("SwiftyMenu Expanded!")
+        }
+        
+        dropDown.didCollapse = {
+            print("SwiftyMeny Collapsed")
+        }
+        
+        dropDown.didSelectOption = { (selection: Selection) in
+            print("\(selection.value) at index: \(selection.index)")
+        }
+        
         // Custom Behavior
         dropDown.scrollingEnabled = false
         dropDown.isMultiSelect = false
@@ -40,6 +53,12 @@ class ViewController: UIViewController {
         dropDown.placeHolderColor = .blue
         dropDown.menuHeaderBackgroundColor = .lightGray
         dropDown.rowBackgroundColor = .orange
+        
+        // Custom Animation
+        dropDown.expandingAnimationStyle = .spring(level: .high)
+        dropDown.expandingDuration = 0.5
+        dropDown.collapsingAnimationStyle = .linear
+        dropDown.collapsingDuration = 0.5
     }
 
 }
