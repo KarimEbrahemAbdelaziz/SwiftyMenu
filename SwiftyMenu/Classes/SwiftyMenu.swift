@@ -54,7 +54,11 @@ public class SwiftyMenu: UIView {
     
     public var selectedIndex: Int?
     public var selectedIndecis: [Int: Int] = [:]
-    public var options = [String]()
+    public var options = [String]() {
+        didSet {
+            self.optionsTableView.reloadData()
+        }
+    }
     public weak var delegate: SwiftyMenuDelegate?
     
     /// Callback triggered after the menu was expanded
