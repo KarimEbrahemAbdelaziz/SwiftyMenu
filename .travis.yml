@@ -32,16 +32,13 @@ jobs:
       before_install: set -o pipefail
       script: xcodebuild test -enableCodeCoverage YES -workspace Example/SwiftyMenu.xcworkspace -scheme SwiftyMenu-Example -sdk iphonesimulator12.2 ONLY_ACTIVE_ARCH=NO | xcpretty
 
-    - &pod
-      stage: lint
+    - stage: lint
+      name: "Linting the pod"
       osx_image: xcode10.2
       env: SWIFT=5.0
       cache: cocoapods
       install: gem install cocoapods --pre -v 1.7.0.beta.3
       script: pod lib lint
-    - <<: *pod
-      osx_image: xcode10.1
-      env: SWIFT=4.2
 
     - name: '`pod trunk push`'
       stage: deploy
