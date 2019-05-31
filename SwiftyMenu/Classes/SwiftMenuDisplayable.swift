@@ -2,7 +2,7 @@
 //  SwiftMenuDisplayable.swift
 //  Pods-SwiftyMenu_Example
 //
-//  Created by Amr Elghadban on 5/31/19.
+//  Created by Amr Elghadban (AmrAngry) on 5/31/19.
 //
 
 import Foundation
