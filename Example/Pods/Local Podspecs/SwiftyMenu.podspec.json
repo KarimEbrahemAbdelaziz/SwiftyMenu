@@ -1,9 +1,10 @@
 {
   "name": "SwiftyMenu",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "summary": "SwiftyMenu is simple drop down menu for iOS.",
   "description": "This drop down is to overcome the loss of usability and user experience due to the UIPickerView.",
   "homepage": "https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu",
+  "screenshots": "https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png?raw=true",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -13,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git",
-    "tag": "0.1.0"
+    "tag": "0.1.3"
   },
   "social_media_url": "https://twitter.com/KarimEbrahem512",
   "platforms": {
@@ -21,5 +22,10 @@
   },
   "swift_version": "5.0",
   "source_files": "SwiftyMenu/Classes/**/*",
-  "resources": "SwiftyMenu/Assets/*"
+  "resources": "SwiftyMenu/Assets/*",
+  "dependencies": {
+    "SnapKit": [
+      "~> 4.2.0"
+    ]
+  }
 }

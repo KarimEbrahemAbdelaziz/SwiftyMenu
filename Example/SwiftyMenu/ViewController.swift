@@ -20,18 +20,70 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dropDown.updateConstraints {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.layoutIfNeeded()
-            })
-        }
-        
-        dropDown.didSelectOption { (selectedText, index) in
-            print("Selected String: \(selectedText) at index: \(index)")
-        }
-        
+        // Setup component
+        dropDown.delegate = self
         dropDown.options = dropDownOptionsDataSource
+        
+        // Support CallBacks
+        dropDown.didExpand = {
+            print("SwiftyMenu Expanded!")
+        }
+        
+        dropDown.didCollapse = {
+            print("SwiftyMeny Collapsed")
+        }
+        
+        dropDown.didSelectOption = { (selection: Selection) in
+            print("\(selection.value) at index: \(selection.index)")
+        }
+        
+        // Custom Behavior
+        dropDown.scrollingEnabled = false
+        dropDown.isMultiSelect = false
+        dropDown.hideOptionsWhenSelect = true
+        
+        // Custom UI
+        dropDown.rowHeight = 35
+        dropDown.listHeight = 150
+        dropDown.borderWidth = 1.0
+        
+        // Custom Colors
+        dropDown.borderColor = .black
+        dropDown.optionColor = .red
+        dropDown.placeHolderColor = .blue
+        dropDown.menuHeaderBackgroundColor = .lightGray
+        dropDown.rowBackgroundColor = .orange
+        
+        // Custom Animation
+        dropDown.expandingAnimationStyle = .spring(level: .high)
+        dropDown.expandingDuration = 0.5
+        dropDown.collapsingAnimationStyle = .linear
+        dropDown.collapsingDuration = 0.5
     }
 
+}
+
+// MARK: - SwiftMenuDelegate
+
+extension ViewController: SwiftyMenuDelegate {
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: String, _ index: Int) {
+        print("Selected option: \(selectedOption), at index: \(index)")
+    }
+    
+    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu will appear.")
+    }
+    
+    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu did appear.")
+    }
+    
+    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu will disappear.")
+    }
+    
+    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu did disappear.")
+    }
 }
 
