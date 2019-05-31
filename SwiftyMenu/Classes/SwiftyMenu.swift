@@ -16,12 +16,6 @@ import SnapKit
 /// 3: Index of the model
 public typealias Selection = (menu :SwiftyMenu, value: SwiftMenuDisplayable, index: Int)
 
-// Markable interface for pathing datasource objects in late binding
-public protocol SwiftMenuDisplayable {
-    var displayValue: String { get }
-    var valueToRetrive: Any { get }
-}
-
 public class SwiftyMenu: UIView {
     
     // MARK: - Properties
