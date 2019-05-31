@@ -8,7 +8,11 @@
 
 import Foundation
 import UIKit
-
+// Markable interface for pathing datasource objects in late binding
+public protocol SwiftMenuDisplayable {
+    var displayValue: String { get }
+    var valueToRetrive: Any { get }
+}
 @IBDesignable
 public class SwiftyMenu: UIView {
     
@@ -27,12 +31,12 @@ public class SwiftyMenu: UIView {
     private var height: CGFloat!
     
     public var selectedIndex: Int?
-    public var options = [String]()
+    public var options = [SwiftMenuDisplayable]()
     
     // MARK: - Closures
     
     private var updateHeightConstraint: () -> () = { }
-    private var didSelectCompletion: (String, Int) -> () = { selectedText, index in }
+    private var didSelectCompletion: (SwiftMenuDisplayable, Int) -> () = { selectedText, index in }
     private var TableWillAppearCompletion: () -> () = { }
     private var TableDidAppearCompletion: () -> () = { }
     private var TableWillDisappearCompletion: () -> () = { }
@@ -194,7 +198,7 @@ extension SwiftyMenu: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = options[indexPath.row]
+        cell.textLabel?.text = options[indexPath.row].displayValue
         cell.textLabel?.textColor = optionColor
         cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
         cell.tintColor = optionColor
@@ -214,7 +218,7 @@ extension SwiftyMenu: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         let selectedText = self.options[self.selectedIndex!]
-        selectButton.setTitle(selectedText, for: .normal)
+        selectButton.setTitle(selectedText.displayValue, for: .normal)
         didSelectCompletion(selectedText, indexPath.row)
         tableView.reloadData()
         collapseMenu()
@@ -244,7 +248,7 @@ extension SwiftyMenu {
         updateHeightConstraint = completion
     }
     
-    public func didSelectOption(completion: @escaping (_ selectedText: String, _ index: Int) -> ()) {
+    public func didSelectOption(completion: @escaping (_ selected: SwiftMenuDisplayable, _ index: Int) -> ()) {
         didSelectCompletion = completion
     }
     
