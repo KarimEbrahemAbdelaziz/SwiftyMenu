@@ -13,6 +13,7 @@ public protocol SwiftMenuDisplayable {
     var displayValue: String { get }
     var valueToRetrive: Any { get }
 }
+
 @IBDesignable
 public class SwiftyMenu: UIView {
     

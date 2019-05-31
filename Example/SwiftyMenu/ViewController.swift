@@ -35,7 +35,8 @@ class ViewController: UIViewController {
 
 }
 
-extension String : SwiftMenuDisplayable {
+// String extension to conform SwiftMenuDisplayable for defult behavior
+extension String: SwiftMenuDisplayable {
     public var valueToRetrive: Any {
         return self
     }
