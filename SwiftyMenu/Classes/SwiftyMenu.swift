@@ -14,7 +14,13 @@ import SnapKit
 /// 1: Object of SwiftyMenu where the selection occured
 /// 2: Model on which the interaction was made
 /// 3: Index of the model
-public typealias Selection = (menu :SwiftyMenu, value: String, index: Int)
+public typealias Selection = (menu :SwiftyMenu, value: SwiftMenuDisplayable, index: Int)
+
+// Markable interface for pathing datasource objects in late binding
+public protocol SwiftMenuDisplayable {
+    var displayValue: String { get }
+    var valueToRetrive: Any { get }
+}
 
 public class SwiftyMenu: UIView {
     
@@ -53,8 +59,9 @@ public class SwiftyMenu: UIView {
     private var height: CGFloat!
     
     public var selectedIndex: Int?
+
     public var selectedIndecis: [Int: Int] = [:]
-    public var options = [String]() {
+    public var options = [SwiftMenuDisplayable]() {
         didSet {
             self.optionsTableView.reloadData()
         }
@@ -69,10 +76,9 @@ public class SwiftyMenu: UIView {
     
     /// Callback triggered when the menu will expand
     public var willExpand: (() -> Void) = { }
-    
+
     /// Callback triggered when the menu will collapse
     public var willCollapse: (() -> Void) = { }
-    
     
     /// triggered after selecting an option from the menu where Selection is an alias
     /// which wraps on
@@ -80,7 +86,14 @@ public class SwiftyMenu: UIView {
     /// selectedOption: the model of the cell object which was selected
     /// index: the index of the model which was selected
     public var didSelectOption: ((Selection) -> Void) = { _ in }
-    
+
+    private var updateHeightConstraint: () -> () = { }
+    private var didSelectCompletion: (SwiftMenuDisplayable, Int) -> () = { selectedText, index in }
+    private var TableWillAppearCompletion: () -> () = { }
+    private var TableDidAppearCompletion: () -> () = { }
+    private var TableWillDisappearCompletion: () -> () = { }
+    private var TableDidDisappearCompletion: () -> () = { }
+
     // MARK: - IBInspectable
     
     @IBInspectable public var isMultiSelect: Bool = false
@@ -255,9 +268,10 @@ extension SwiftyMenu: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if isMultiSelect {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row]
+            cell.textLabel?.text = options[indexPath.row].displayValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -267,7 +281,7 @@ extension SwiftyMenu: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row]
+            cell.textLabel?.text = options[indexPath.row].displayValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -293,7 +307,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
                 let titles = selectedIndecis.mapValues { (index) -> String in
-                    return options[index]
+                    return options[index].displayValue
                 }
                 var selectedTitle = ""
                 titles.forEach { option in
@@ -307,13 +321,14 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectButton.setTitle(placeHolderText, for: .normal)
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
-                selectButton.setTitle(options[selectedIndex!], for: .normal)
+                selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
                 selectButton.setTitleColor(optionColor, for: .normal)
             }
         }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         if isMultiSelect {
             if selectedIndecis[indexPath.row] != nil {
                 selectedIndecis[indexPath.row] = nil
@@ -411,6 +426,23 @@ extension SwiftyMenu {
                            animations: animationBlock,
                            completion: collapsingAnimationCompletionBlock)
         }
+        updateHeightConstraint()
+    }
+}
+
+// MARK: - Delegates
+
+extension SwiftyMenu {
+    public func updateConstraints(completion: @escaping () -> ()) {
+        updateHeightConstraint = completion
+    }
+    
+    public func didSelectOption(completion: @escaping (_ selected: SwiftMenuDisplayable, _ index: Int) -> ()) {
+        didSelectCompletion = completion
+    }
+    
+    public func listWillAppear(completion: @escaping () -> ()) {
+        TableWillAppearCompletion = completion
     }
     
     private func animationBlock() {
