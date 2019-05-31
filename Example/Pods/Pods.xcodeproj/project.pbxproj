@@ -39,25 +39,25 @@
 
 /* Begin PBXFileReference section */
 		0909D963C54F5AC267F3FE2FF5B678F5 /* Pods-SwiftyMenu_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyMenu_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		155D142A89E8316DDE0C191C598F94C6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		155D142A89E8316DDE0C191C598F94C6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1DC625C0CFB7A633C9B19635907296CF /* Pods-SwiftyMenu_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyMenu_Example-Info.plist"; sourceTree = "<group>"; };
-		1E04B5C26E05791869FE729EAB458A69 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		1E04B5C26E05791869FE729EAB458A69 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1E4F12F1DF7BF4089CAB099267F64E66 /* Pods-SwiftyMenu_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyMenu_Example.modulemap"; sourceTree = "<group>"; };
 		3DEDB843E9DE7EB46D1A4F4EABDE45C8 /* SwiftyMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyMenu.swift; path = SwiftyMenu/Classes/SwiftyMenu.swift; sourceTree = "<group>"; };
 		486A9114583FF6F1052E66DD98A962EC /* SwiftyMenu.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyMenu.modulemap; sourceTree = "<group>"; };
 		56EEF780D51E681F99ADAEF1E3263578 /* Pods-SwiftyMenu_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyMenu_Tests-dummy.m"; sourceTree = "<group>"; };
 		68530A9EB0BB5A1AB47A1E7E9CA478DD /* Pods-SwiftyMenu_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyMenu_Example-dummy.m"; sourceTree = "<group>"; };
-		6886CCCF07D375AD4A8561B849A99AE1 /* Pods_SwiftyMenu_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyMenu_Tests.framework; path = "Pods-SwiftyMenu_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		68EAA0A539874C1D00A4F70875E8C86D /* SwiftyMenu.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SwiftyMenu.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6886CCCF07D375AD4A8561B849A99AE1 /* Pods_SwiftyMenu_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyMenu_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68EAA0A539874C1D00A4F70875E8C86D /* SwiftyMenu.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwiftyMenu.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7029983B6811A2B24CA1A9ECE1012B5E /* Pods-SwiftyMenu_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyMenu_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		731AD64E630646E8E01FF7C0394DB692 /* Pods-SwiftyMenu_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyMenu_Example-frameworks.sh"; sourceTree = "<group>"; };
 		74E43A564CE85370D60B63E7413AF8D7 /* Pods-SwiftyMenu_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftyMenu_Example-umbrella.h"; sourceTree = "<group>"; };
 		75A3718D9E2D663F95E9FBA423706912 /* Pods-SwiftyMenu_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyMenu_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		814473D052F2A773831B1F08FE1BC58E /* Pods_SwiftyMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyMenu_Example.framework; path = "Pods-SwiftyMenu_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		814473D052F2A773831B1F08FE1BC58E /* Pods_SwiftyMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB441A53E7B72C03166AAD3E163249D /* Pods-SwiftyMenu_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyMenu_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9346DED6C79C1972BC8E67E77FEF1AF0 /* Pods-SwiftyMenu_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyMenu_Example.release.xcconfig"; sourceTree = "<group>"; };
 		974D8E507BE90520FC21CFA16099C154 /* Pods-SwiftyMenu_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyMenu_Tests.modulemap"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DBD227C5230BCA11533627E95538BB9 /* Pods-SwiftyMenu_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyMenu_Tests-Info.plist"; sourceTree = "<group>"; };
 		A4D635800B8EBDD692EBD0D9DC1D9116 /* Pods-SwiftyMenu_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyMenu_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A7673495FB6C27D479179E01787EF38C /* SwiftyMenu-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyMenu-Info.plist"; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		D485A6CDD251DC22AEDC3E8956016755 /* Pods-SwiftyMenu_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftyMenu_Tests-umbrella.h"; sourceTree = "<group>"; };
 		DD6398519AD38185B485A977020B92DC /* SwiftyMenu-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyMenu-prefix.pch"; sourceTree = "<group>"; };
 		E6BB3C14A2B2CB832CD0B26704F6EA71 /* SwiftyMenu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyMenu.xcconfig; sourceTree = "<group>"; };
-		E95BEEFB2EEB98B065FC5C5BE5200853 /* SwiftyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyMenu.framework; path = SwiftyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E95BEEFB2EEB98B065FC5C5BE5200853 /* SwiftyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F269309CA14EDA97E5E21C39D2E7BA81 /* Pods-SwiftyMenu_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyMenu_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -325,14 +325,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = DD0D1C583690BAF117BE46A54D07DCDC /* Products */;
@@ -419,6 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -468,8 +470,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -514,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
