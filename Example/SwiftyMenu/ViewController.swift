@@ -35,3 +35,13 @@ class ViewController: UIViewController {
 
 }
 
+extension String : SwiftMenuDisplayable {
+    public var valueToRetrive: Any {
+        return self
+    }
+    
+    public var displayValue: String {
+        return self
+    }
+}
+
