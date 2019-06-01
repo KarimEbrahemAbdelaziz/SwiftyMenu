@@ -10,7 +10,7 @@
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
-    <img src="http://img.shields.io/badge/version-0.4.8-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-0.5.0-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
@@ -38,8 +38,9 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 - [ ] Allow custom header and options cells.
 - [ ] Allow different interactions to dismiss SwiftyMenu.
 - [ ] Allow to customize the default seperator.
-- [x] Support Swift 5 (tag 0.4.8).
-- [x] Support Swift 4.2 (tag 0.4.7).
+- [x] Support Generic DataSource.
+- [x] Support Swift 5 (tag 0.5.0).
+- [x] Support Swift 4.2 (tag 0.4.9).
 - [x] Support multi selection in SwiftMenu 🔥.
 - [x] Support multi SwiftyMenu in one screen.
 - [x] Support stack view and add example.
