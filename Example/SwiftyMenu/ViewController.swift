@@ -63,10 +63,11 @@ class ViewController: UIViewController {
 
 }
 
+
 // MARK: - SwiftMenuDelegate
 
 extension ViewController: SwiftyMenuDelegate {
-    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: String, _ index: Int) {
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: SwiftMenuDisplayable, _ index: Int) {
         print("Selected option: \(selectedOption), at index: \(index)")
     }
     
@@ -84,6 +85,17 @@ extension ViewController: SwiftyMenuDelegate {
     
     func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did disappear.")
+    }
+
+}
+// String extension to conform SwiftMenuDisplayable for defult behavior
+extension String: SwiftMenuDisplayable {
+    public var valueToRetrive: Any {
+        return self
+    }
+    
+    public var displayValue: String {
+        return self
     }
 }
 
