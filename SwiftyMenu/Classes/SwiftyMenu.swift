@@ -113,12 +113,15 @@ public class SwiftyMenu: UIView {
     }
     @IBInspectable public var placeHolderText: String? {
         didSet {
-            selectButton.setTitle(placeHolderText, for: .normal)
+            UIView.performWithoutAnimation {
+                selectButton.setTitle(placeHolderText, for: .normal)
+                selectButton.layoutIfNeeded()
+            }
         }
     }
     @IBInspectable public var arrow: UIImage? {
         didSet {
-            selectButton.titleEdgeInsets.left = 5
+//            selectButton.titleEdgeInsets.right = 100
             selectButton.setImage(arrow, for: .normal)
         }
     }
@@ -166,12 +169,23 @@ public class SwiftyMenu: UIView {
         setupUI()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setupArrowImage()
+    }
+    
     private func setupUI () {
         setupView()
         getViewWidth()
         getViewHeight()
         setupSelectButton()
         setupDataTableView()
+    }
+    
+    private func setupArrowImage() {
+        let spacing = self.selectButton.frame.width - 20 // the amount of spacing to appear between image and title
+        selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
     }
     
     private func setupView() {
@@ -200,7 +214,10 @@ public class SwiftyMenu: UIView {
         
         let color = placeHolderColor
         selectButton.setTitleColor(color, for: .normal)
-        selectButton.setTitle(placeHolderText, for: .normal)
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
         selectButton.titleEdgeInsets.right = 16
@@ -297,7 +314,10 @@ extension SwiftyMenu: UITableViewDelegate {
     private func setSelectedOptionsAsTitle() {
         if isMultiSelect {
             if selectedIndecis.isEmpty {
-                selectButton.setTitle(placeHolderText, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(placeHolderText, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
                 let titles = selectedIndecis.mapValues { (index) -> String in
@@ -307,15 +327,24 @@ extension SwiftyMenu: UITableViewDelegate {
                 titles.forEach { option in
                     selectedTitle.append(contentsOf: "\(option.value), ")
                 }
-                selectButton.setTitle(selectedTitle, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(selectedTitle, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(optionColor, for: .normal)
             }
         } else {
             if selectedIndex == nil {
-                selectButton.setTitle(placeHolderText, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(placeHolderText, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
-                selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(optionColor, for: .normal)
             }
         }
@@ -344,9 +373,6 @@ extension SwiftyMenu: UITableViewDelegate {
             }
         } else {
             if selectedIndex == indexPath.row {
-                selectedIndex = nil
-                setSelectedOptionsAsTitle()
-                tableView.reloadData()
                 if hideOptionsWhenSelect {
                     collapseMenu()
                 }
