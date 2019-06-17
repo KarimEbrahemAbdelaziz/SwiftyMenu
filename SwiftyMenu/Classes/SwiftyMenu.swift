@@ -113,7 +113,10 @@ public class SwiftyMenu: UIView {
     }
     @IBInspectable public var placeHolderText: String? {
         didSet {
-            selectButton.setTitle(placeHolderText, for: .normal)
+            UIView.performWithoutAnimation {
+                selectButton.setTitle(placeHolderText, for: .normal)
+                selectButton.layoutIfNeeded()
+            }
         }
     }
     @IBInspectable public var arrow: UIImage? {
@@ -200,7 +203,10 @@ public class SwiftyMenu: UIView {
         
         let color = placeHolderColor
         selectButton.setTitleColor(color, for: .normal)
-        selectButton.setTitle(placeHolderText, for: .normal)
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
         selectButton.titleEdgeInsets.right = 16
@@ -297,7 +303,10 @@ extension SwiftyMenu: UITableViewDelegate {
     private func setSelectedOptionsAsTitle() {
         if isMultiSelect {
             if selectedIndecis.isEmpty {
-                selectButton.setTitle(placeHolderText, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(placeHolderText, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
                 let titles = selectedIndecis.mapValues { (index) -> String in
@@ -307,15 +316,24 @@ extension SwiftyMenu: UITableViewDelegate {
                 titles.forEach { option in
                     selectedTitle.append(contentsOf: "\(option.value), ")
                 }
-                selectButton.setTitle(selectedTitle, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(selectedTitle, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(optionColor, for: .normal)
             }
         } else {
             if selectedIndex == nil {
-                selectButton.setTitle(placeHolderText, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(placeHolderText, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
-                selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
+                UIView.performWithoutAnimation {
+                    selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
+                    selectButton.layoutIfNeeded()
+                }
                 selectButton.setTitleColor(optionColor, for: .normal)
             }
         }
