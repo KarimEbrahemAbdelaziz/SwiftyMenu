@@ -121,7 +121,7 @@ public class SwiftyMenu: UIView {
     }
     @IBInspectable public var arrow: UIImage? {
         didSet {
-            selectButton.titleEdgeInsets.left = 5
+//            selectButton.titleEdgeInsets.right = 100
             selectButton.setImage(arrow, for: .normal)
         }
     }
@@ -169,12 +169,23 @@ public class SwiftyMenu: UIView {
         setupUI()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setupArrowImage()
+    }
+    
     private func setupUI () {
         setupView()
         getViewWidth()
         getViewHeight()
         setupSelectButton()
         setupDataTableView()
+    }
+    
+    private func setupArrowImage() {
+        let spacing = self.selectButton.frame.width - 20 // the amount of spacing to appear between image and title
+        selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
     }
     
     private func setupView() {
