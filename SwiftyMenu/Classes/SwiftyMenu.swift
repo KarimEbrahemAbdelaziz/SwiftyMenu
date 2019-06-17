@@ -373,9 +373,6 @@ extension SwiftyMenu: UITableViewDelegate {
             }
         } else {
             if selectedIndex == indexPath.row {
-                selectedIndex = nil
-                setSelectedOptionsAsTitle()
-                tableView.reloadData()
                 if hideOptionsWhenSelect {
                     collapseMenu()
                 }
