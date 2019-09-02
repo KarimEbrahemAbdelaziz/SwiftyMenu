@@ -58,7 +58,11 @@ public class SwiftyMenu: UIView {
     }
     
     public var selectedIndex: Int?
-    public var selectedIndecis: [Int: Int] = [:]
+    public var selectedIndecis: [Int: Int] = [:] {
+        didSet {
+            setMultiSelectedOptions()
+        }
+    }
     public var options = [SwiftyMenuDisplayable]() {
         didSet {
             self.optionsTableView.reloadData()
@@ -354,6 +358,19 @@ extension SwiftyMenu: UITableViewDelegate {
         return CGFloat(rowHeight)
     }
     
+    fileprivate func setMultiSelectedOptions() {
+        let titles = selectedIndecis.mapValues { (index) -> String in
+            return options[index].displayableValue
+        }
+        var selectedTitle = ""
+        selectedTitle = titles.values.joined(separator: ", ")
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(selectedTitle, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(optionColor, for: .normal)
+    }
+    
     private func setSelectedOptionsAsTitle() {
         if isMultiSelect {
             if selectedIndecis.isEmpty {
@@ -363,16 +380,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 }
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
-                let titles = selectedIndecis.mapValues { (index) -> String in
-                    return options[index].displayableValue
-                }
-                var selectedTitle = ""
-                selectedTitle = titles.values.joined(separator: ", ")
-                UIView.performWithoutAnimation {
-                    selectButton.setTitle(selectedTitle, for: .normal)
-                    selectButton.layoutIfNeeded()
-                }
-                selectButton.setTitleColor(optionColor, for: .normal)
+                setMultiSelectedOptions()
             }
         } else {
             if selectedIndex == nil {
