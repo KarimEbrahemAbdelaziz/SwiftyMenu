@@ -14,7 +14,7 @@ import SnapKit
 /// 1: Object of SwiftyMenu where the selection occured
 /// 2: Model on which the interaction was made
 /// 3: Index of the model
-public typealias Selection = (menu :SwiftyMenu, value: SwiftMenuDisplayable, index: Int)
+public typealias Selection = (menu :SwiftyMenu, value: SwiftyMenuDisplayable, index: Int)
 
 public class SwiftyMenu: UIView {
     
@@ -55,7 +55,7 @@ public class SwiftyMenu: UIView {
     public var selectedIndex: Int?
 
     public var selectedIndecis: [Int: Int] = [:]
-    public var options = [SwiftMenuDisplayable]() {
+    public var options = [SwiftyMenuDisplayable]() {
         didSet {
             self.optionsTableView.reloadData()
         }
@@ -82,7 +82,7 @@ public class SwiftyMenu: UIView {
     public var didSelectOption: ((Selection) -> Void) = { _ in }
 
     private var updateHeightConstraint: () -> () = { }
-    private var didSelectCompletion: (SwiftMenuDisplayable, Int) -> () = { selectedText, index in }
+    private var didSelectCompletion: (SwiftyMenuDisplayable, Int) -> () = { selectedText, index in }
     private var TableWillAppearCompletion: () -> () = { }
     private var TableDidAppearCompletion: () -> () = { }
     private var TableWillDisappearCompletion: () -> () = { }
@@ -282,7 +282,7 @@ extension SwiftyMenu: UITableViewDataSource {
 
         if isMultiSelect {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row].displayValue
+            cell.textLabel?.text = options[indexPath.row].displayableValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -292,7 +292,7 @@ extension SwiftyMenu: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row].displayValue
+            cell.textLabel?.text = options[indexPath.row].displayableValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -321,7 +321,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
                 let titles = selectedIndecis.mapValues { (index) -> String in
-                    return options[index].displayValue
+                    return options[index].displayableValue
                 }
                 var selectedTitle = ""
                 titles.forEach { option in
@@ -342,7 +342,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectButton.setTitleColor(placeHolderColor, for: .normal)
             } else {
                 UIView.performWithoutAnimation {
-                    selectButton.setTitle(options[selectedIndex!].displayValue, for: .normal)
+                    selectButton.setTitle(options[selectedIndex!].displayableValue, for: .normal)
                     selectButton.layoutIfNeeded()
                 }
                 selectButton.setTitleColor(optionColor, for: .normal)
@@ -457,7 +457,7 @@ extension SwiftyMenu {
         updateHeightConstraint = completion
     }
     
-    public func didSelectOption(completion: @escaping (_ selected: SwiftMenuDisplayable, _ index: Int) -> ()) {
+    public func didSelectOption(completion: @escaping (_ selected: SwiftyMenuDisplayable, _ index: Int) -> ()) {
         didSelectCompletion = completion
     }
     
