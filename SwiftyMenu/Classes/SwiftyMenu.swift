@@ -260,6 +260,7 @@ public class SwiftyMenu: UIView {
             selectButton.setTitle(placeHolderText, for: .normal)
             selectButton.layoutIfNeeded()
         }
+        selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         selectButton.imageEdgeInsets.left = width - 16
         selectButton.titleEdgeInsets.right = 16
