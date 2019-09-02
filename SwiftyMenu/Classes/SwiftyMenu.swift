@@ -11,10 +11,15 @@ import UIKit
 import SnapKit
 
 /// Selection is a wrapper alias around 3 parameters
-/// 1: Object of SwiftyMenu where the selection occured
-/// 2: Model on which the interaction was made
-/// 3: Index of the model
-public typealias Selection = (menu :SwiftyMenu, value: SwiftyMenuDisplayable, index: Int)
+/**
+ Selection is a wrapper alias around 3 parameters
+ 
+ ## Parameters ##
+ 1. Object of SwiftyMenu where the selection occured.
+ 2. Model on which the interaction was made with.
+ 3. Index of the menu item selected.
+ */
+public typealias Selection = (menu: SwiftyMenu, value: SwiftyMenuDisplayable, index: Int)
 
 public class SwiftyMenu: UIView {
     
@@ -29,6 +34,8 @@ public class SwiftyMenu: UIView {
         case shown
         case hidden
     }
+    private var width: CGFloat!
+    private var height: CGFloat!
     
     /// defines Animation Style for the drop down animation
     ///
@@ -49,11 +56,8 @@ public class SwiftyMenu: UIView {
             case high = 1.5
         }
     }
-    private var width: CGFloat!
-    private var height: CGFloat!
     
     public var selectedIndex: Int?
-
     public var selectedIndecis: [Int: Int] = [:]
     public var options = [SwiftyMenuDisplayable]() {
         didSet {
@@ -90,27 +94,46 @@ public class SwiftyMenu: UIView {
 
     // MARK: - IBInspectable
     
+    /// Determine if Menu is multi selection or single selection
     @IBInspectable public var isMultiSelect: Bool = false
+    
+    /// Determine if Menu will hide after selection or not
     @IBInspectable public var hideOptionsWhenSelect: Bool = false
+    
+    /// Determine if Menu will scroll or not
     @IBInspectable public var scrollingEnabled: Bool = true {
         didSet {
             optionsTableView.isScrollEnabled = scrollingEnabled
         }
     }
+    
+    /// Determine Menu row height
     @IBInspectable public var rowHeight: Double = 35
+    
+    /// Determine Menu header background color
     @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
         didSet {
             selectButton.backgroundColor = menuHeaderBackgroundColor
         }
     }
+    
+    /// Determine Menu row background color
     @IBInspectable public var rowBackgroundColor: UIColor = .white
+    
+    /// Determine Menu selected row background color
     @IBInspectable public var selectedRowColor: UIColor?
+    
+    /// Determine Menu option text color
     @IBInspectable public var optionColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+    
+    /// Determine Menu placeholder text color
     @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
         didSet {
             selectButton.setTitleColor(placeHolderColor, for: .normal)
         }
     }
+    
+    /// Determine default Menu placeholder text
     @IBInspectable public var placeHolderText: String? {
         didSet {
             UIView.performWithoutAnimation {
@@ -119,42 +142,61 @@ public class SwiftyMenu: UIView {
             }
         }
     }
+    
+    /// Determine arrow image for Menu item
     @IBInspectable public var arrow: UIImage? {
         didSet {
-//            selectButton.titleEdgeInsets.right = 100
             selectButton.setImage(arrow, for: .normal)
         }
     }
+    
+    /// Determine title left inset for Menu item
     @IBInspectable public var titleLeftInset: Int = 0 {
         didSet {
             selectButton.titleEdgeInsets.left = CGFloat(titleLeftInset)
         }
     }
+    
+    /// Determine border color for Menu item
     @IBInspectable public var borderColor: UIColor =  UIColor.clear {
         didSet {
             layer.borderColor = borderColor.cgColor
         }
     }
+    
+    /// Determine menu height
     @IBInspectable public var listHeight: Int = 0
+    
+    /// Determine border color for Menu
     @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
             layer.borderWidth = borderWidth
         }
     }
     
+    /// Determine corner radius for Menu
     @IBInspectable public var cornerRadius: CGFloat = 8.0 {
         didSet {
             layer.cornerRadius = cornerRadius
         }
     }
     
+    /// Determine expanding duration for Menu
     @IBInspectable public var expandingDuration: Double = 0.5
+    
+    /// Determine collapsing duration for Menu
     @IBInspectable public var collapsingDuration: Double = 0.5
     
+    /// Determine expanding delay for Menu
     @IBInspectable public var expandingDelay: Double = 0.0
+    
+    /// Determine collapsing delay for Menu
     @IBInspectable public var collapsingDelay: Double = 0.0
     
+    /// Determine expanding animation style for Menu
     public var expandingAnimationStyle: AnimationStyle = .linear
+    
+    /// Determine collapsing animation style for Menu
     public var collapsingAnimationStyle: AnimationStyle = .linear
     
     // MARK: - Init
@@ -461,7 +503,7 @@ extension SwiftyMenu {
         didSelectCompletion = completion
     }
     
-    public func listWillAppear(completion: @escaping () -> ()) {
+    public func menuWillAppear(completion: @escaping () -> ()) {
         TableWillAppearCompletion = completion
     }
     
