@@ -58,7 +58,7 @@ And much more ideas to make it solid drop down menu for iOS projects 😎💪�
 
 ## Requirements ⚙️
 
-* Xcode 10.2
+* Xcode 10.2+
 * Swift 5
 * iOS 10+
 
@@ -76,12 +76,12 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 Use [CocoaPods](http://www.cocoapods.org).
 
 #### Swift 5
-1. Add `pod 'SwiftyMenu', '~> 0.5.2'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.5.4'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
 #### Swift 4.2
-1. Add `pod 'SwiftyMenu', '~> 0.5.1'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.5.3'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
