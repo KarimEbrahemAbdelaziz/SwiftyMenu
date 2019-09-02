@@ -39,8 +39,8 @@ class ViewController: UIViewController {
         
         // Custom Behavior
         dropDown.scrollingEnabled = false
-        dropDown.isMultiSelect = false
-        dropDown.hideOptionsWhenSelect = true
+        dropDown.isMultiSelect = true
+        dropDown.hideOptionsWhenSelect = false
         
         // Custom UI
         dropDown.rowHeight = 35
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         dropDown.rowBackgroundColor = .orange
         
         // Custom Animation
-        dropDown.expandingAnimationStyle = .spring(level: .high)
+        dropDown.expandingAnimationStyle = .spring(level: .low)
         dropDown.expandingDuration = 0.5
         dropDown.collapsingAnimationStyle = .linear
         dropDown.collapsingDuration = 0.5
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
 // MARK: - SwiftMenuDelegate
 
 extension ViewController: SwiftyMenuDelegate {
-    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: SwiftMenuDisplayable, _ index: Int) {
+    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: SwiftyMenuDisplayable, _ index: Int) {
         print("Selected option: \(selectedOption), at index: \(index)")
     }
     
@@ -88,13 +88,14 @@ extension ViewController: SwiftyMenuDelegate {
     }
 
 }
-// String extension to conform SwiftMenuDisplayable for defult behavior
-extension String: SwiftMenuDisplayable {
-    public var valueToRetrive: Any {
+
+// String extension to conform SwiftyMenuDisplayable for defult behavior
+extension String: SwiftyMenuDisplayable {
+    public var displayableValue: String {
         return self
     }
     
-    public var displayValue: String {
+    public var retrivableValue: Any {
         return self
     }
 }

@@ -366,9 +366,7 @@ extension SwiftyMenu: UITableViewDelegate {
                     return options[index].displayableValue
                 }
                 var selectedTitle = ""
-                titles.forEach { option in
-                    selectedTitle.append(contentsOf: "\(option.value), ")
-                }
+                selectedTitle = titles.values.joined(separator: ", ")
                 UIView.performWithoutAnimation {
                     selectButton.setTitle(selectedTitle, for: .normal)
                     selectButton.layoutIfNeeded()
