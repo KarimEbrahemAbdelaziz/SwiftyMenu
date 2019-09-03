@@ -57,7 +57,11 @@ public class SwiftyMenu: UIView {
         }
     }
     
-    public var selectedIndex: Int?
+    public var selectedIndex: Int? {
+        didSet {
+            setSingleSelectedOption()
+        }
+    }
     public var selectedIndecis: [Int: Int] = [:] {
         didSet {
             setMultiSelectedOptions()
@@ -371,30 +375,34 @@ extension SwiftyMenu: UITableViewDelegate {
         selectButton.setTitleColor(optionColor, for: .normal)
     }
     
+    fileprivate func setSingleSelectedOption() {
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(options[selectedIndex!].displayableValue, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(optionColor, for: .normal)
+    }
+    
+    fileprivate func setPlaceholder() {
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(placeHolderColor, for: .normal)
+    }
+    
     private func setSelectedOptionsAsTitle() {
         if isMultiSelect {
             if selectedIndecis.isEmpty {
-                UIView.performWithoutAnimation {
-                    selectButton.setTitle(placeHolderText, for: .normal)
-                    selectButton.layoutIfNeeded()
-                }
-                selectButton.setTitleColor(placeHolderColor, for: .normal)
+                setPlaceholder()
             } else {
                 setMultiSelectedOptions()
             }
         } else {
             if selectedIndex == nil {
-                UIView.performWithoutAnimation {
-                    selectButton.setTitle(placeHolderText, for: .normal)
-                    selectButton.layoutIfNeeded()
-                }
-                selectButton.setTitleColor(placeHolderColor, for: .normal)
+                setPlaceholder()
             } else {
-                UIView.performWithoutAnimation {
-                    selectButton.setTitle(options[selectedIndex!].displayableValue, for: .normal)
-                    selectButton.layoutIfNeeded()
-                }
-                selectButton.setTitleColor(optionColor, for: .normal)
+                setSingleSelectedOption()
             }
         }
     }
