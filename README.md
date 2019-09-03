@@ -10,7 +10,7 @@
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
-    <img src="http://img.shields.io/badge/version-0.5.6-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-0.5.8-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
@@ -39,8 +39,8 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 - [ ] Allow different interactions to dismiss SwiftyMenu.
 - [ ] Allow to customize the default seperator.
 - [x] Support Generic DataSource.
-- [x] Support Swift 5 (tag 0.5.6).
-- [x] Support Swift 4.2 (tag 0.5.5).
+- [x] Support Swift 5 (tag 0.5.8).
+- [x] Support Swift 4.2 (tag 0.5.7).
 - [x] Support multi selection in SwiftMenu 🔥.
 - [x] Support multi SwiftyMenu in one screen.
 - [x] Support stack view and add example.
@@ -76,12 +76,12 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 Use [CocoaPods](http://www.cocoapods.org).
 
 #### Swift 5
-1. Add `pod 'SwiftyMenu', '~> 0.5.6'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.5.8'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
 #### Swift 4.2
-1. Add `pod 'SwiftyMenu', '~> 0.5.5'` to your *Podfile*.
+1. Add `pod 'SwiftyMenu', '~> 0.5.7'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
 3. Add `import SwiftyMenu` in the .swift files where you want to use it
 
