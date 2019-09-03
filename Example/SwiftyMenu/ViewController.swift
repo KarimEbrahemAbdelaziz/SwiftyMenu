@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         
         // Custom Behavior
         dropDown.scrollingEnabled = false
-        dropDown.isMultiSelect = true
+        dropDown.isMultiSelect = false
         dropDown.hideOptionsWhenSelect = false
         
         // Custom UI
