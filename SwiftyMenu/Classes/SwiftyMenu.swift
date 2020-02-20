@@ -455,7 +455,7 @@ extension SwiftyMenu {
         delegate?.swiftyMenuWillAppear(self)
         self.willExpand()
         self.state = .shown
-        heightConstraint.constant = listHeight == 0 || !scrollingEnabled ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
+        heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(options.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
         
         switch expandingAnimationStyle {
         case .linear:
