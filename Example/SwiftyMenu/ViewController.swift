@@ -13,9 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var dropDown: SwiftyMenu!
     
-    private let dropDownOptionsDataSource = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5",
-                                             "Option 6", "Option 7", "Option 8", "Option 9", "Option 10",
-                                             "Option 11", "Option 12", "Option 13", "Option 14", "Option 15"]
+    private let dropDownOptionsDataSource = ["Option 1"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +36,13 @@ class ViewController: UIViewController {
         }
         
         // Custom Behavior
-        dropDown.scrollingEnabled = false
-        dropDown.isMultiSelect = false
+        dropDown.scrollingEnabled = true
+        dropDown.isMultiSelect = true
         dropDown.hideOptionsWhenSelect = false
         
         // Custom UI
         dropDown.rowHeight = 35
-        dropDown.listHeight = 150
+        dropDown.listHeight = 300
         dropDown.borderWidth = 1.0
         
         // Custom Colors
