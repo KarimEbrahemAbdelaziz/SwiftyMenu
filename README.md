@@ -84,12 +84,30 @@ Use [CocoaPods](http://www.cocoapods.org).
 
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/4.gif" width="800" height="600">
 
+We are supporting Generic Data Source, all you have to do is conforming to our Generic Protocol on which type you want to add to the menu:
+
+```swift
+// Example on String. You can change it to what ever type you want ;)
+// String extension to conform SwiftyMenuDisplayable Protocl
+extension String: SwiftyMenuDisplayable {
+    public var displayableValue: String {
+        return self
+    }
+    
+    public var retrivableValue: Any {
+        return self
+    }
+}
+```
+
+Then setup your view controller:
+
 ```swift
 // Connect view in storyboard with you outlet
 @IBOutlet private weak var dropDownMenu: SwiftyMenu!
 
-// Define your options array (for now SwiftyMenu only accept String array, soon it'll be generic 😉)
-private let optionsData = ["Option 1", "Option 2", "Option 3", "Option 4"]
+// Define your Generic options array)
+private let optionsData: [SwiftyMenuDisplayable] = ["Option 1", "Option 2", "Option 3", "Option 4"]
 
 // Assign the component that implement SwiftyMenuDelegate to SwiftyMenu component
 dropDownMenu.delegate = self
@@ -125,21 +143,6 @@ extension ViewController: SwiftyMenuDelegate {
     // SwiftyMenu drop down menu did disappear
     func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu did disappear.")
-    }
-}
-```
-We are supporting Generic Data Source, all you have to do is conforming to our Generic Protocol on which type you want to add to the menu:
-
-```swift
-// Example on String. You can change it to what ever type you want ;)
-// String extension to conform SwiftyMenuDisplayable Protocl
-extension String: SwiftyMenuDisplayable {
-    public var displayableValue: String {
-        return self
-    }
-    
-    public var retrivableValue: Any {
-        return self
     }
 }
 ```
