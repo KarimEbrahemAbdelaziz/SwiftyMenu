@@ -65,24 +65,24 @@ class ViewController: UIViewController {
 // MARK: - SwiftMenuDelegate
 
 extension ViewController: SwiftyMenuDelegate {
-    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: SwiftyMenuDisplayable, _ index: Int) {
-        print("Selected option: \(selectedOption), at index: \(index)")
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
+        print("Selected item: \(item), at index: \(index)")
     }
     
-    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu will appear.")
+    func swiftyMenu(willExpand swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu willExpand.")
     }
     
-    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu did appear.")
+    func swiftyMenu(didExpand swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu didExpand.")
     }
     
-    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu will disappear.")
+    func swiftyMenu(willCollapse swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu willCollapse.")
     }
     
-    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu did disappear.")
+    func swiftyMenu(didCollapse swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu didCollapse.")
     }
 
 }

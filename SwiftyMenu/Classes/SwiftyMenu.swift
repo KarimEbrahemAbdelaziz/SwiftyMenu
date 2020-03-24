@@ -421,7 +421,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectedIndecis[indexPath.row] = indexPath.row
                 setSelectedOptionsAsTitle()
                 let selectedText = self.options[selectedIndecis[indexPath.row]!]
-                delegate?.didSelectOption(self, selectedText, indexPath.row)
+                delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectOption((self, selectedText, indexPath.row))
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
@@ -437,7 +437,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 selectedIndex = indexPath.row
                 setSelectedOptionsAsTitle()
                 let selectedText = self.options[self.selectedIndex!]
-                delegate?.didSelectOption(self, selectedText, indexPath.row)
+                delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectOption((self, selectedText, indexPath.row))
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
@@ -452,7 +452,7 @@ extension SwiftyMenu: UITableViewDelegate {
 
 extension SwiftyMenu {
     private func expandMenu() {
-        delegate?.swiftyMenuWillAppear(self)
+        delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
         self.state = .shown
         heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(options.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
@@ -479,7 +479,7 @@ extension SwiftyMenu {
     }
     
     private func collapseMenu() {
-        delegate?.swiftyMenuWillDisappear(self)
+        delegate?.swiftyMenu(willCollapse: self)
         self.willCollapse()
         self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
@@ -528,14 +528,14 @@ extension SwiftyMenu {
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
         if didAppeared {
-            self.delegate?.swiftyMenuDidAppear(self)
+            self.delegate?.swiftyMenu(didExpand: self)
             self.didExpand()
         }
     }
     
     private func collapsingAnimationCompletionBlock(didAppeared: Bool) {
         if didAppeared {
-            self.delegate?.swiftyMenuDidDisappear(self)
+            self.delegate?.swiftyMenu(didCollapse: self)
             self.didCollapse()
         }
     }
