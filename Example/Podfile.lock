@@ -1,13 +1,13 @@
 PODS:
   - SnapKit (4.2.0)
-  - SwiftyMenu (0.4.8):
+  - SwiftyMenu (0.5.9):
     - SnapKit (~> 4.2.0)
 
 DEPENDENCIES:
   - SwiftyMenu (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  SwiftyMenu: d43a6e262363530d8c65d732bd821419d886bd91
+  SwiftyMenu: 9bd359714f1e2b599f9b0bfad8ed0d65e4d6b974
 
 PODFILE CHECKSUM: e76fbe8ebeca450e6d7f72e5036d5d85d327d6d2
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

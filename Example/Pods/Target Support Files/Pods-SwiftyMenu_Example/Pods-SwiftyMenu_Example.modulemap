@@ -1,6 +1,0 @@
-framework module Pods_SwiftyMenu_Example {
-  umbrella header "Pods-SwiftyMenu_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
