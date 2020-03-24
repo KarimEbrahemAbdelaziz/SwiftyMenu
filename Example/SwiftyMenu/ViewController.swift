@@ -31,8 +31,8 @@ class ViewController: UIViewController {
             print("SwiftyMeny Collapsed")
         }
         
-        dropDown.didSelectOption = { (selection: Selection) in
-            print("\(selection.value) at index: \(selection.index)")
+        dropDown.didSelectItem = { _, item, index in
+            print("\(item) at index: \(index)")
         }
         
         // Custom Behavior

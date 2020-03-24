@@ -10,33 +10,13 @@ import Foundation
 import UIKit
 import SnapKit
 
-/// Selection is a wrapper alias around 3 parameters
-/**
- Selection is a wrapper alias around 3 parameters
- 
- ## Parameters ##
- 1. Object of SwiftyMenu where the selection occured.
- 2. Model on which the interaction was made with.
- 3. Index of the menu item selected.
- */
-public typealias Selection = (menu: SwiftyMenu, value: SwiftyMenuDisplayable, index: Int)
-
 public class SwiftyMenu: UIView {
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
-    
-    private var selectButton: UIButton!
-    private var optionsTableView: UITableView!
-    private var state: MenuState = .hidden
-    private enum MenuState {
-        case shown
-        case hidden
-    }
-    private var width: CGFloat!
-    private var height: CGFloat!
     
     public var selectedIndex: Int? {
         didSet {
@@ -55,24 +35,36 @@ public class SwiftyMenu: UIView {
     }
     public weak var delegate: SwiftyMenuDelegate?
     
-    /// Callback triggered after the menu was expanded
+    // MARK: - Public Callbacks
+    
+    /// `willExpand` is completion closure that will be executed when `SwiftyMenu` is going to expand.
+    public var willExpand: (() -> Void) = { }
+    
+    /// `didExpand` is completion closure that will be executed once `SwiftyMenu` expanded.
     public var didExpand: (() -> Void) = { }
     
-    /// Callback triggered after the menu was collapsed
-    public var didCollapse: (() -> Void) = { }
-    
-    /// Callback triggered when the menu will expand
-    public var willExpand: (() -> Void) = { }
-
-    /// Callback triggered when the menu will collapse
+    /// `willCollapse` is completion closure that will be executed when `SwiftyMenu` is going to collapse.
     public var willCollapse: (() -> Void) = { }
     
-    /// triggered after selecting an option from the menu where Selection is an alias
-    /// which wraps on
-    /// swiftyMenu: Object of the SwiftyMeny on which the interaction was made
-    /// selectedOption: the model of the cell object which was selected
-    /// index: the index of the model which was selected
-    public var didSelectOption: ((Selection) -> Void) = { _ in }
+    /// `didCollapse` is completion closure that will be executed once `SwiftyMenu` collapsed.
+    public var didCollapse: (() -> Void) = { }
+    
+    /// `didSelectItem` is completion closure that will be executed when select an item from `SwiftyMenu`.
+    /// - Parameters:
+    ///   - swiftyMenu: The `SwiftyMenu` that was selected from it's items.
+    ///   - item: The `Item` that had been selected from `SwiftyMenu`.
+    ///   - index: The `Index` of the selected `Item`.
+    public var didSelectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
+    
+    private var selectButton: UIButton!
+    private var optionsTableView: UITableView!
+    private var state: MenuState = .hidden
+    private enum MenuState {
+        case shown
+        case hidden
+    }
+    private var width: CGFloat!
+    private var height: CGFloat!
 
     private var updateHeightConstraint: () -> () = { }
     private var didSelectCompletion: (SwiftyMenuDisplayable, Int) -> () = { selectedText, index in }
@@ -403,7 +395,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 setSelectedOptionsAsTitle()
                 let selectedText = self.items[selectedIndecis[indexPath.row]!]
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
-                self.didSelectOption((self, selectedText, indexPath.row))
+                self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
                     collapseMenu()
@@ -419,7 +411,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 setSelectedOptionsAsTitle()
                 let selectedText = self.items[self.selectedIndex!]
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
-                self.didSelectOption((self, selectedText, indexPath.row))
+                self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
                     collapseMenu()
