@@ -48,7 +48,7 @@ public class SwiftyMenu: UIView {
             setMultiSelectedOptions()
         }
     }
-    public var options = [SwiftyMenuDisplayable]() {
+    public var items = [SwiftyMenuDisplayable]() {
         didSet {
             self.optionsTableView.reloadData()
         }
@@ -307,14 +307,14 @@ public class SwiftyMenu: UIView {
 extension SwiftyMenu: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.count
+        return items.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if isMultiSelect {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row].displayableValue
+            cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -324,7 +324,7 @@ extension SwiftyMenu: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = options[indexPath.row].displayableValue
+            cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = optionColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
             cell.tintColor = optionColor
@@ -345,7 +345,7 @@ extension SwiftyMenu: UITableViewDelegate {
     
     fileprivate func setMultiSelectedOptions() {
         let titles = selectedIndecis.mapValues { (index) -> String in
-            return options[index].displayableValue
+            return items[index].displayableValue
         }
         var selectedTitle = ""
         selectedTitle = titles.values.joined(separator: ", ")
@@ -358,7 +358,7 @@ extension SwiftyMenu: UITableViewDelegate {
     
     fileprivate func setSingleSelectedOption() {
         UIView.performWithoutAnimation {
-            selectButton.setTitle(options[selectedIndex!].displayableValue, for: .normal)
+            selectButton.setTitle(items[selectedIndex!].displayableValue, for: .normal)
             selectButton.layoutIfNeeded()
         }
         selectButton.setTitleColor(optionColor, for: .normal)
@@ -401,7 +401,7 @@ extension SwiftyMenu: UITableViewDelegate {
             } else {
                 selectedIndecis[indexPath.row] = indexPath.row
                 setSelectedOptionsAsTitle()
-                let selectedText = self.options[selectedIndecis[indexPath.row]!]
+                let selectedText = self.items[selectedIndecis[indexPath.row]!]
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectOption((self, selectedText, indexPath.row))
                 tableView.reloadData()
@@ -417,7 +417,7 @@ extension SwiftyMenu: UITableViewDelegate {
             } else {
                 selectedIndex = indexPath.row
                 setSelectedOptionsAsTitle()
-                let selectedText = self.options[self.selectedIndex!]
+                let selectedText = self.items[self.selectedIndex!]
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectOption((self, selectedText, indexPath.row))
                 tableView.reloadData()
@@ -436,7 +436,7 @@ extension SwiftyMenu {
         delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
         self.state = .shown
-        heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(options.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(options.count + 1)) : CGFloat(listHeight)
+        heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(items.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(items.count + 1)) : CGFloat(listHeight)
         
         switch expandingAnimationStyle {
         case .linear:

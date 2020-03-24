@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         
         // Setup component
         dropDown.delegate = self
-        dropDown.options = dropDownOptionsDataSource
+        dropDown.items = dropDownOptionsDataSource
         
         // Support CallBacks
         dropDown.didExpand = {
