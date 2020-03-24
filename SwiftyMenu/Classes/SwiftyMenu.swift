@@ -23,9 +23,10 @@ public typealias Selection = (menu: SwiftyMenu, value: SwiftyMenuDisplayable, in
 
 public class SwiftyMenu: UIView {
     
-    // MARK: - Properties
-    
+    // MARK: - IBOutlets
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
+    // MARK: - Public Properties
     
     private var selectButton: UIButton!
     private var optionsTableView: UITableView!
@@ -36,26 +37,6 @@ public class SwiftyMenu: UIView {
     }
     private var width: CGFloat!
     private var height: CGFloat!
-    
-    /// defines Animation Style for the drop down animation
-    ///
-    /// - linear: smooth animation
-    /// - spring: bouncy animation
-    public enum AnimationStyle {
-        case linear
-        case spring(level: SpringPowerLevel)
-        
-        /// defines how bouncy the animation should be
-        ///
-        /// - low: a bit of smooth and a bit of bounciness at the end
-        /// - normal: not too bouncy and not too smooth
-        /// - high: too bouncy
-        public enum SpringPowerLevel: Double {
-            case low = 0.75
-            case normal = 1.0
-            case high = 1.5
-        }
-    }
     
     public var selectedIndex: Int? {
         didSet {
