@@ -1,9 +1,25 @@
 //
 //  SwiftyMenu.swift
-//  SwiftyMenu
 //
-//  Created by Karim Ebrahem on 4/17/19.
-//  Copyright © 2019 Karim Ebrahem. All rights reserved.
+//  Copyright (c) 2019-2020 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 import Foundation
@@ -37,24 +53,133 @@ public class SwiftyMenu: UIView {
     
     // MARK: - Public Callbacks
     
-    /// `willExpand` is completion closure that will be executed when `SwiftyMenu` is going to expand.
+    /// `willExpand` is a completion closure that will be executed when `SwiftyMenu` is going to expand.
     public var willExpand: (() -> Void) = { }
     
-    /// `didExpand` is completion closure that will be executed once `SwiftyMenu` expanded.
+    /// `didExpand` is a completion closure that will be executed once `SwiftyMenu` expanded.
     public var didExpand: (() -> Void) = { }
     
-    /// `willCollapse` is completion closure that will be executed when `SwiftyMenu` is going to collapse.
+    /// `willCollapse` is a completion closure that will be executed when `SwiftyMenu` is going to collapse.
     public var willCollapse: (() -> Void) = { }
     
-    /// `didCollapse` is completion closure that will be executed once `SwiftyMenu` collapsed.
+    /// `didCollapse` is a completion closure that will be executed once `SwiftyMenu` collapsed.
     public var didCollapse: (() -> Void) = { }
     
-    /// `didSelectItem` is completion closure that will be executed when select an item from `SwiftyMenu`.
+    /// `didSelectItem` is a completion closure that will be executed when select an item from `SwiftyMenu`.
     /// - Parameters:
     ///   - swiftyMenu: The `SwiftyMenu` that was selected from it's items.
     ///   - item: The `Item` that had been selected from `SwiftyMenu`.
     ///   - index: The `Index` of the selected `Item`.
     public var didSelectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
+
+    // MARK: - Public IBInspectable
+    
+    /// Determine if `SwiftyMenu` is multi selection or single selection.
+    @IBInspectable public var isMultiSelect: Bool = false
+    
+    /// Determine if `SwiftyMenu` will hide after selection or not.
+    @IBInspectable public var hideOptionsWhenSelect: Bool = false
+    
+    /// Determine if `SwiftyMenu` is scrollable.
+    @IBInspectable public var scrollingEnabled: Bool = true {
+        didSet {
+            optionsTableView.isScrollEnabled = scrollingEnabled
+        }
+    }
+    
+    /// Determine `SwiftyMenu` row height.
+    @IBInspectable public var rowHeight: Double = 35
+    
+    /// Determine `SwiftyMenu` header background color.
+    @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
+        didSet {
+            selectButton.backgroundColor = menuHeaderBackgroundColor
+        }
+    }
+    
+    /// Determine `SwiftyMenu` row background color.
+    @IBInspectable public var rowBackgroundColor: UIColor = .white
+    
+    /// Determine `SwiftyMenu` selected row background color.
+    @IBInspectable public var selectedRowColor: UIColor?
+    
+    /// Determine `SwiftyMenu` item text color.
+    @IBInspectable public var itemTextColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+    
+    /// Determine `SwiftyMenu` placeholder text color.
+    @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
+        didSet {
+            selectButton.setTitleColor(placeHolderColor, for: .normal)
+        }
+    }
+    
+    /// Determine default `SwiftyMenu` placeholder text.
+    @IBInspectable public var placeHolderText: String? {
+        didSet {
+            UIView.performWithoutAnimation {
+                selectButton.setTitle(placeHolderText, for: .normal)
+                selectButton.layoutIfNeeded()
+            }
+        }
+    }
+    
+    /// Determine arrow image for `SwiftyMenu` item.
+    @IBInspectable public var arrow: UIImage? {
+        didSet {
+            selectButton.setImage(arrow, for: .normal)
+        }
+    }
+    
+    /// Determine title left inset for `SwiftyMenu` item.
+    @IBInspectable public var titleLeftInset: Int = 0 {
+        didSet {
+            selectButton.titleEdgeInsets.left = CGFloat(titleLeftInset)
+        }
+    }
+    
+    /// Determine border color for `SwiftyMenu` item.
+    @IBInspectable public var borderColor: UIColor =  UIColor.clear {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    /// Determine border width for `SwiftyMenu`.
+    @IBInspectable public var borderWidth: CGFloat = 0.0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    /// Determine corner radius for `SwiftyMenu`.
+    @IBInspectable public var cornerRadius: CGFloat = 8.0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
+    }
+    
+    /// Determine `SwiftyMenu` height.
+    @IBInspectable public var listHeight: Int = 0
+    
+    /// Determine expanding duration for `SwiftyMenu`.
+    @IBInspectable public var expandingDuration: Double = 0.5
+    
+    /// Determine collapsing duration for `SwiftyMenu`.
+    @IBInspectable public var collapsingDuration: Double = 0.5
+    
+    /// Determine expanding delay for `SwiftyMenu`.
+    @IBInspectable public var expandingDelay: Double = 0.0
+    
+    /// Determine collapsing delay for `SwiftyMenu`.
+    @IBInspectable public var collapsingDelay: Double = 0.0
+    
+    /// Determine expanding animation style for `SwiftyMenu`.
+    public var expandingAnimationStyle: AnimationStyle = .linear
+    
+    /// Determine collapsing animation style for `SwiftyMenu`.
+    public var collapsingAnimationStyle: AnimationStyle = .linear
+    
+    // MARK: - Private Properties
     
     private var selectButton: UIButton!
     private var optionsTableView: UITableView!
@@ -72,113 +197,6 @@ public class SwiftyMenu: UIView {
     private var TableDidAppearCompletion: () -> () = { }
     private var TableWillDisappearCompletion: () -> () = { }
     private var TableDidDisappearCompletion: () -> () = { }
-
-    // MARK: - IBInspectable
-    
-    /// Determine if Menu is multi selection or single selection
-    @IBInspectable public var isMultiSelect: Bool = false
-    
-    /// Determine if Menu will hide after selection or not
-    @IBInspectable public var hideOptionsWhenSelect: Bool = false
-    
-    /// Determine if Menu will scroll or not
-    @IBInspectable public var scrollingEnabled: Bool = true {
-        didSet {
-            optionsTableView.isScrollEnabled = scrollingEnabled
-        }
-    }
-    
-    /// Determine Menu row height
-    @IBInspectable public var rowHeight: Double = 35
-    
-    /// Determine Menu header background color
-    @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
-        didSet {
-            selectButton.backgroundColor = menuHeaderBackgroundColor
-        }
-    }
-    
-    /// Determine Menu row background color
-    @IBInspectable public var rowBackgroundColor: UIColor = .white
-    
-    /// Determine Menu selected row background color
-    @IBInspectable public var selectedRowColor: UIColor?
-    
-    /// Determine Menu option text color
-    @IBInspectable public var optionColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-    
-    /// Determine Menu placeholder text color
-    @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
-        didSet {
-            selectButton.setTitleColor(placeHolderColor, for: .normal)
-        }
-    }
-    
-    /// Determine default Menu placeholder text
-    @IBInspectable public var placeHolderText: String? {
-        didSet {
-            UIView.performWithoutAnimation {
-                selectButton.setTitle(placeHolderText, for: .normal)
-                selectButton.layoutIfNeeded()
-            }
-        }
-    }
-    
-    /// Determine arrow image for Menu item
-    @IBInspectable public var arrow: UIImage? {
-        didSet {
-            selectButton.setImage(arrow, for: .normal)
-        }
-    }
-    
-    /// Determine title left inset for Menu item
-    @IBInspectable public var titleLeftInset: Int = 0 {
-        didSet {
-            selectButton.titleEdgeInsets.left = CGFloat(titleLeftInset)
-        }
-    }
-    
-    /// Determine border color for Menu item
-    @IBInspectable public var borderColor: UIColor =  UIColor.clear {
-        didSet {
-            layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    /// Determine menu height
-    @IBInspectable public var listHeight: Int = 0
-    
-    /// Determine border color for Menu
-    @IBInspectable public var borderWidth: CGFloat = 0.0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    
-    /// Determine corner radius for Menu
-    @IBInspectable public var cornerRadius: CGFloat = 8.0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    /// Determine expanding duration for Menu
-    @IBInspectable public var expandingDuration: Double = 0.5
-    
-    /// Determine collapsing duration for Menu
-    @IBInspectable public var collapsingDuration: Double = 0.5
-    
-    /// Determine expanding delay for Menu
-    @IBInspectable public var expandingDelay: Double = 0.0
-    
-    /// Determine collapsing delay for Menu
-    @IBInspectable public var collapsingDelay: Double = 0.0
-    
-    /// Determine expanding animation style for Menu
-    public var expandingAnimationStyle: AnimationStyle = .linear
-    
-    /// Determine collapsing animation style for Menu
-    public var collapsingAnimationStyle: AnimationStyle = .linear
     
     // MARK: - Init
     
@@ -307,9 +325,9 @@ extension SwiftyMenu: UITableViewDataSource {
         if isMultiSelect {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
-            cell.textLabel?.textColor = optionColor
+            cell.textLabel?.textColor = itemTextColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
-            cell.tintColor = optionColor
+            cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = selectedIndecis[indexPath.row] != nil ? .checkmark : .none
             cell.selectionStyle = .none
@@ -317,9 +335,9 @@ extension SwiftyMenu: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
-            cell.textLabel?.textColor = optionColor
+            cell.textLabel?.textColor = itemTextColor
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
-            cell.tintColor = optionColor
+            cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
             cell.selectionStyle = .none
@@ -345,7 +363,7 @@ extension SwiftyMenu: UITableViewDelegate {
             selectButton.setTitle(selectedTitle, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.setTitleColor(optionColor, for: .normal)
+        selectButton.setTitleColor(itemTextColor, for: .normal)
     }
     
     fileprivate func setSingleSelectedOption() {
@@ -353,7 +371,7 @@ extension SwiftyMenu: UITableViewDelegate {
             selectButton.setTitle(items[selectedIndex!].displayableValue, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.setTitleColor(optionColor, for: .normal)
+        selectButton.setTitleColor(itemTextColor, for: .normal)
     }
     
     fileprivate func setPlaceholder() {

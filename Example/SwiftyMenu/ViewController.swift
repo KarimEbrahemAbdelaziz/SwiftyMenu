@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         
         // Custom Colors
         dropDown.borderColor = .black
-        dropDown.optionColor = .red
+        dropDown.itemTextColor = .red
         dropDown.placeHolderColor = .blue
         dropDown.menuHeaderBackgroundColor = .lightGray
         dropDown.rowBackgroundColor = .orange
