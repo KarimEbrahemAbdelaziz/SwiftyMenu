@@ -26,7 +26,7 @@ import UIKit
 
 extension UIView {
     /// Returns the `ParentViewController` for any view.
-    var parentViewController: UIViewController {
+    var parentViewController: UIViewController? {
         var responder: UIResponder? = self
         while !(responder is UIViewController) {
             responder = responder?.next
@@ -34,6 +34,6 @@ extension UIView {
                 break
             }
         }
-        return (responder as? UIViewController)!
+        return (responder as? UIViewController)
     }
 }
