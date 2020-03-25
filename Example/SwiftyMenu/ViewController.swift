@@ -8,19 +8,36 @@
 
 import UIKit
 import SwiftyMenu
+import SnapKit
 
 class ViewController: UIViewController {
 
     @IBOutlet private weak var dropDown: SwiftyMenu!
+    @IBOutlet private weak var otherView: UIView!
     
     private let dropDownOptionsDataSource = ["Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let dropDown2 = SwiftyMenu(frame: CGRect(x: 0, y: 0, width: 0, height: 40))
+        
+        view.addSubview(dropDown2)
+        
+        dropDown2.translatesAutoresizingMaskIntoConstraints = false
+        let horizontalConstraint = NSLayoutConstraint(item: dropDown2, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+        let topConstraint = NSLayoutConstraint(item: dropDown2, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: otherView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 64)
+        let widthConstraint = NSLayoutConstraint(item: dropDown2, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 255)
+        dropDown2.heightConstraint = NSLayoutConstraint(item: dropDown2, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 40)
+        NSLayoutConstraint.activate([horizontalConstraint, topConstraint, widthConstraint, dropDown2.heightConstraint])
+        
         // Setup component
         dropDown.delegate = self
         dropDown.items = dropDownOptionsDataSource
+        dropDown2.items = dropDownOptionsDataSource
+        
+        dropDown.placeHolderText = "Pleas Select Item"
+        dropDown2.placeHolderText = "Pleas Select Item"
         
         // Support CallBacks
         dropDown.didExpand = {
@@ -48,8 +65,8 @@ class ViewController: UIViewController {
         // Custom Colors
         dropDown.borderColor = .black
         dropDown.itemTextColor = .red
-        dropDown.placeHolderColor = .blue
-        dropDown.menuHeaderBackgroundColor = .lightGray
+        dropDown.placeHolderColor = .lightGray
+        dropDown.menuHeaderBackgroundColor = .white
         dropDown.rowBackgroundColor = .orange
         
         // Custom Animation

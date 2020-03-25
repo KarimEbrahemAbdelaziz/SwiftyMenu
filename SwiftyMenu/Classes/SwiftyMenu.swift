@@ -31,7 +31,7 @@ final public class SwiftyMenu: UIView {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet public var heightConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
     
