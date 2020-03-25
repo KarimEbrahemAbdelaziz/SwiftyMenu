@@ -85,14 +85,14 @@ Then setup your view controller:
 // Connect view in storyboard with you outlet
 @IBOutlet private weak var dropDownMenu: SwiftyMenu!
 
-// Define your Generic options array)
-private let optionsData: [SwiftyMenuDisplayable] = ["Option 1", "Option 2", "Option 3", "Option 4"]
+// Define your Generic items array)
+private let items: [SwiftyMenuDisplayable] = ["Option 1", "Option 2", "Option 3", "Option 4"]
 
 // Assign the component that implement SwiftyMenuDelegate to SwiftyMenu component
 dropDownMenu.delegate = self
 
-// Give array of options to SwiftyMenu
-dropDownMenu.options = optionsData
+// Give array of items to SwiftyMenu
+dropDownMenu.items = items
 ```
 
 Then implement SwiftyMenuDelegate:
@@ -100,28 +100,28 @@ Then implement SwiftyMenuDelegate:
 ```swift
 extension ViewController: SwiftyMenuDelegate {
     // Get selected option from SwiftyMenu
-    func didSelectOption(_ swiftyMenu: SwiftyMenu, _ selectedOption: SwiftyMenuDisplayable, _ index: Int) {
-        print("Selected option: \(selectedOption), at index: \(index)")
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
+        print("Selected item: \(item), at index: \(index)")
     }
     
-    // SwiftyMenu drop down menu will appear
-    func swiftyMenuWillAppear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu will appear.")
+    // SwiftyMenu drop down menu will expand
+    func swiftyMenu(willExpand swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu willExpand.")
     }
 
-    // SwiftyMenu drop down menu did appear
-    func swiftyMenuDidAppear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu did appear.")
+    // SwiftyMenu drop down menu did expand
+    func swiftyMenu(didExpand swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu didExpand.")
     }
 
-    // SwiftyMenu drop down menu will disappear
-    func swiftyMenuWillDisappear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu will disappear.")
-        }
+    // SwiftyMenu drop down menu will collapse
+    func swiftyMenu(willCollapse swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu willCollapse.")
+    }
 
-    // SwiftyMenu drop down menu did disappear
-    func swiftyMenuDidDisappear(_ swiftyMenu: SwiftyMenu) {
-        print("SwiftyMenu did disappear.")
+    // SwiftyMenu drop down menu did collapse
+    func swiftyMenu(didCollapse swiftyMenu: SwiftyMenu) {
+        print("SwiftyMenu didCollapse.")
     }
 }
 ```
@@ -138,8 +138,8 @@ dropDownMenu.didCollapse = {
     print("SwiftyMeny Collapsed")
 }
 
-dropDownMenu.didSelectOption = { (selection: Selection) in
-    print("\(selection.value) at index: \(selection.index)")
+dropDown.didSelectItem = { menu, item, index in
+    print("\(item) at index: \(index)")
 }
 ```
 
@@ -163,13 +163,13 @@ dropDownMenu.scrollingEnabled = false
 
 // Change drop down menu default colors
 dropDownMenu.borderColor = .black
-dropDownMenu.optionColor = .red
+dropDownMenu.itemTextColor = .red
 dropDownMenu.placeHolderColor = .blue
 dropDownMenu.menuHeaderBackgroundColor = .lightGray
 dropDownMenu.rowBackgroundColor = .orange
 
 // Change drop down menu default expand and collapse animation
-dropDownMenu.expandingAnimationStyle = .spring(level: .high)
+dropDownMenu.expandingAnimationStyle = .spring(level: .low)
 dropDownMenu.expandingDuration = 0.5
 dropDownMenu.collapsingAnimationStyle = .linear
 dropDownMenu.collapsingDuration = 0.5
@@ -177,7 +177,7 @@ dropDownMenu.collapsingDuration = 0.5
 
 ## TODO
 
-- [x] Automate release new version to Cocoapods from Travis CI.
+- [x] Automate release new version to Cocoapods from Github Actions.
 - [x] Add CHANGELOG file for the project.
 - [ ] Allow custom header and options cells.
 - [ ] Allow different interactions to dismiss SwiftyMenu.
