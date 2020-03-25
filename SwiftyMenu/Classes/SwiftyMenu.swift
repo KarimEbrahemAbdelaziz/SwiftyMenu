@@ -304,9 +304,9 @@ public class SwiftyMenu: UIView {
     @objc private func handleMenuState() {
         switch self.state {
         case .shown:
-            collapseMenu()
+            collapseSwiftyMenu()
         case .hidden:
-            expandMenu()
+            expandSwiftyMenu()
         }
     }
     
@@ -406,7 +406,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseMenu()
+                    collapseSwiftyMenu()
                 }
             } else {
                 selectedIndecis[indexPath.row] = indexPath.row
@@ -416,13 +416,13 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseMenu()
+                    collapseSwiftyMenu()
                 }
             }
         } else {
             if selectedIndex == indexPath.row {
                 if hideOptionsWhenSelect {
-                    collapseMenu()
+                    collapseSwiftyMenu()
                 }
             } else {
                 selectedIndex = indexPath.row
@@ -432,17 +432,18 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseMenu()
+                    collapseSwiftyMenu()
                 }
             }
         }
     }
 }
 
-// MARK: - Private Functions
+// MARK: - SwiftyMenu Expand and Collapse Functions
 
 extension SwiftyMenu {
-    private func expandMenu() {
+    /// Called to Expand `SwiftyMenu`.
+    private func expandSwiftyMenu() {
         delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
         self.state = .shown
@@ -469,7 +470,8 @@ extension SwiftyMenu {
         }
     }
     
-    private func collapseMenu() {
+    /// Called to Collapse `SwiftyMenu`.
+    private func collapseSwiftyMenu() {
         delegate?.swiftyMenu(willCollapse: self)
         self.willCollapse()
         self.state = .hidden
