@@ -206,7 +206,7 @@ SwiftyMenu is available under the MIT license. See the `LICENSE` file for more i
 
 ## Credits
 
-You can find me on Twitter [@KarimEbrahem512](https://twitter.com/KarimEbrahem512).
+You can find me on Twitter [@k_ebrahem_](https://twitter.com/k_ebrahem_).
 
 It will be updated when necessary and fixes will be done as soon as discovered to keep it up to date.
 
