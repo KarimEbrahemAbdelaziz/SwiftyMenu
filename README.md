@@ -24,58 +24,40 @@
 
 SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow you to have drop down menu that doesn't appear over your views, which give you awesome user experience.
 
-### Android version 
+- [Screenshots](#screenshots)
+- [Requirements](#requirements)
+- [Installation](#installation)
+    - [Cocoapods](#cocoapods)
+- [Usage](#usage)
+    - [Storyboard](#storyboard)
+    - [Customize UI](#customizeui)
+- [Todo](#todo)
+- [Android Version](#android)
+- [Author](#author)
+- [Credits](#credits)
+- [License](#license)
 
-- [ExpandableSelectionView](https://github.com/ashrafDoubleO7/ExpandableSelectionView), Thanks to [Ahmed Ashraf](https://github.com/ashrafDoubleO7) ❤️💪🏻
-
-## TODO 💪🏻
-
-- [x] Automate release new version to Cocoapods from Travis CI.
-- [x] Add CHANGELOG file for the project.
-- [ ] Allow custom header and options cells.
-- [ ] Allow different interactions to dismiss SwiftyMenu.
-- [ ] Allow to customize the default seperator.
-- [x] Support Generic DataSource.
-- [x] Support multi selection in SwiftMenu 🔥.
-- [x] Support multi SwiftyMenu in one screen.
-- [x] Support stack view and add example.
-- [x] Support call backs and delegation.
-- [x] Support different types of Animations. 
-- [x] Add different customization to colors for default cells.
-
-And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
-
-#
-
-## Screenshots 👀
+## Screenshots
 
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/2.gif" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png" width="250" height="500">
 
-## Requirements ⚙️
+## Requirements
 
 * Xcode 10.2+
-* Swift 5
+* Swift 5+
 * iOS 10+
 
-## Example 🛠
-
-Do `pod try SwiftyMenu` in your console and run the project to try a demo.
-To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapods` in your console.
-
-## Installation 📱
-
-`SwiftyMenu` supports Swift 5.0 since version `0.1.0`.
+## Installation
 
 ### CocoaPods
 
-Use [CocoaPods](http://www.cocoapods.org).
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate SwiftyMenu into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-#### Swift 5
-1. Add `pod 'SwiftyMenu', '~> 0.5.9'` to your *Podfile*.
-2. Install the pod(s) by running `pod install`.
-3. Add `import SwiftyMenu` in the .swift files where you want to use it
+```ruby
+pod 'SwiftyMenu', '~> 0.6.0'
+```
 
-## Basic Usage 💎
+## Usage
 
 ### Storyboard
 
@@ -161,7 +143,7 @@ dropDownMenu.didSelectOption = { (selection: Selection) in
 }
 ```
 
-## Customize UI 😎
+### CustomizeUI
 
 You can configure SwiftyMenu from Storyboard or Code as following:
 
@@ -192,6 +174,27 @@ dropDownMenu.expandingDuration = 0.5
 dropDownMenu.collapsingAnimationStyle = .linear
 dropDownMenu.collapsingDuration = 0.5
 ````
+
+## TODO
+
+- [x] Automate release new version to Cocoapods from Travis CI.
+- [x] Add CHANGELOG file for the project.
+- [ ] Allow custom header and options cells.
+- [ ] Allow different interactions to dismiss SwiftyMenu.
+- [ ] Allow to customize the default seperator.
+- [x] Support Generic DataSource.
+- [x] Support multi selection in SwiftMenu 🔥.
+- [x] Support multi SwiftyMenu in one screen.
+- [x] Support stack view and add example.
+- [x] Support call backs and delegation.
+- [x] Support different types of Animations. 
+- [x] Add different customization to colors for default cells.
+
+And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
+
+## Android 
+
+- [ExpandableSelectionView](https://github.com/ashrafDoubleO7/ExpandableSelectionView), Thanks to [Ahmed Ashraf](https://github.com/ashrafDoubleO7) ❤️💪🏻
 
 ## Author
 
