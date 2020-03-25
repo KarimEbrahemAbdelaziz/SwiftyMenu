@@ -47,7 +47,7 @@ final public class SwiftyMenu: UIView {
     }
     public var items = [SwiftyMenuDisplayable]() {
         didSet {
-            self.optionsTableView.reloadData()
+            self.itemsTableView.reloadData()
         }
     }
     public weak var delegate: SwiftyMenuDelegate?
@@ -84,7 +84,7 @@ final public class SwiftyMenu: UIView {
     /// Determine if `SwiftyMenu` is scrollable.
     @IBInspectable public var scrollingEnabled: Bool = true {
         didSet {
-            optionsTableView.isScrollEnabled = scrollingEnabled
+            itemsTableView.isScrollEnabled = scrollingEnabled
         }
     }
     
@@ -99,7 +99,11 @@ final public class SwiftyMenu: UIView {
     }
     
     /// Determine `SwiftyMenu` row background color.
-    @IBInspectable public var rowBackgroundColor: UIColor = .white
+    @IBInspectable public var rowBackgroundColor: UIColor = .white {
+        didSet {
+            itemsTableView.backgroundColor = rowBackgroundColor
+        }
+    }
     
     /// Determine `SwiftyMenu` selected row background color.
     @IBInspectable public var selectedRowColor: UIColor?
@@ -183,7 +187,7 @@ final public class SwiftyMenu: UIView {
     // MARK: - Private Properties
     
     private var selectButton: UIButton!
-    private var optionsTableView: UITableView!
+    private var itemsTableView: UITableView!
     private var state: SwiftyMenuState = .hidden
     private var width: CGFloat!
     private var height: CGFloat!
@@ -273,22 +277,23 @@ final public class SwiftyMenu: UIView {
     }
     
     private func setupDataTableView() {
-        optionsTableView = UITableView()
-        self.addSubview(optionsTableView)
+        itemsTableView = UITableView()
+        self.addSubview(itemsTableView)
         
-        optionsTableView.snp.makeConstraints { maker in
+        itemsTableView.snp.makeConstraints { maker in
             maker.leading.trailing.bottom.equalTo(self)
             maker.top.equalTo(selectButton.snp_bottom)
         }
         
-        optionsTableView.delegate = self
-        optionsTableView.dataSource = self
-        optionsTableView.rowHeight = CGFloat(rowHeight)
-        optionsTableView.separatorInset.left = 8
-        optionsTableView.separatorInset.right = 8
-        optionsTableView.backgroundColor = rowBackgroundColor
-        optionsTableView.isScrollEnabled = scrollingEnabled
-        optionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
+        itemsTableView.delegate = self
+        itemsTableView.dataSource = self
+        itemsTableView.rowHeight = CGFloat(rowHeight)
+        itemsTableView.separatorInset.left = 8
+        itemsTableView.separatorInset.right = 8
+        itemsTableView.backgroundColor = rowBackgroundColor
+        itemsTableView.isScrollEnabled = scrollingEnabled
+        itemsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
+        itemsTableView.showsVerticalScrollIndicator = false
     }
     
     @objc private func handleMenuState() {
