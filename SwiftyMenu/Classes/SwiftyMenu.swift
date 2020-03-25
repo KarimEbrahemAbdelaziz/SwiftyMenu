@@ -522,7 +522,7 @@ extension SwiftyMenu {
 
 extension SwiftyMenu {
     private func animationBlock() {
-        self.parentViewController.view.layoutIfNeeded()
+        self.parentViewController?.view.layoutIfNeeded()
     }
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
