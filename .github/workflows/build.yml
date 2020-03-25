@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+        
       - name: Build
         run: |
           cd Example
@@ -27,3 +28,8 @@ jobs:
           xcodebuild clean build -workspace SwiftyMenu.xcworkspace -scheme SwiftyMenu-Example -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env: 
          destination: ${{ matrix.destination }}
+       
+      - name: Lint
+        run: |
+          set -eo pipefail
+          pod lib lint --allow-warnings  
