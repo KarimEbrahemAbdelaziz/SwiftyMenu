@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+    <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/workflows/Build/badge.svg" />
     <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
@@ -15,8 +16,8 @@
     <a href="https://www.facebook.com/KarimEbrahemAbdelaziz">
         <img src="http://img.shields.io/badge/facebook-%40KarimEbrahemAbdelaziz-70a1fb.svg?style=flat" alt="Facebook: @KarimEbrahemAbdelaziz" />
     </a>
-    <a href="https://twitter.com/KarimEbrahem512">
-        <img src="https://img.shields.io/badge/twitter-@KarimEbrahem512-blue.svg?style=flat" alt="Twitter: @KarimEbrahem512" />
+    <a href="https://twitter.com/@k_ebrahem_">
+        <img src="https://img.shields.io/badge/twitter-@@k_ebrahem_-blue.svg?style=flat" alt="Twitter: @@k_ebrahem_" />
     </a>
 </p>
 
