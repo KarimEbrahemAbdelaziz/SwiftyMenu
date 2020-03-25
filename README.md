@@ -7,7 +7,7 @@
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
-    <img src="http://img.shields.io/badge/version-0.5.9-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-0.6.0-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
