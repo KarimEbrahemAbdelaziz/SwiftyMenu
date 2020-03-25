@@ -17,7 +17,7 @@
         <img src="http://img.shields.io/badge/facebook-%40KarimEbrahemAbdelaziz-70a1fb.svg?style=flat" alt="Facebook: @KarimEbrahemAbdelaziz" />
     </a>
     <a href="https://twitter.com/@k_ebrahem_">
-        <img src="https://img.shields.io/badge/twitter-@@k_ebrahem_-blue.svg?style=flat" alt="Twitter: @k_ebrahem_" />
+        <img src="https://img.shields.io/badge/twitter-@k_ebrahem_-blue.svg?style=flat" alt="Twitter: @k_ebrahem_" />
     </a>
 </p>
 
