@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Setup component
-//        dropDown.delegate = self
+        dropDown.delegate = self
         dropDown.items = dropDownOptionsDataSource
         
         // Support CallBacks

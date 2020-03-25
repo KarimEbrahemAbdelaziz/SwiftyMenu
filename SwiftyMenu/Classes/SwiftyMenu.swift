@@ -306,12 +306,16 @@ final public class SwiftyMenu: UIView {
         state.toggle()
     }
     
+    /// Expand or Collapse `SwiftyMenu` from Code.
+    public func toggle() {
+        handleMenuState()
+    }
+    
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource Functions
 
 extension SwiftyMenu: UITableViewDataSource {
-    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
