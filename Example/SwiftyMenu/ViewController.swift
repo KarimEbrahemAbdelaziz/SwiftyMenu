@@ -13,13 +13,13 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var dropDown: SwiftyMenu!
     
-    private let dropDownOptionsDataSource = ["Option 1"]
+    private let dropDownOptionsDataSource = ["Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1", "Option 1"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Setup component
-        dropDown.delegate = self
+//        dropDown.delegate = self
         dropDown.items = dropDownOptionsDataSource
         
         // Support CallBacks

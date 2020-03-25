@@ -26,7 +26,8 @@ import Foundation
 import UIKit
 import SnapKit
 
-public class SwiftyMenu: UIView {
+/// `SwiftyMenu` is the menu class that provides common state, delegate, and callbacks handling.
+final public class SwiftyMenu: UIView {
     
     // MARK: - IBOutlets
     
@@ -183,20 +184,9 @@ public class SwiftyMenu: UIView {
     
     private var selectButton: UIButton!
     private var optionsTableView: UITableView!
-    private var state: MenuState = .hidden
-    private enum MenuState {
-        case shown
-        case hidden
-    }
+    private var state: SwiftyMenuState = .hidden
     private var width: CGFloat!
     private var height: CGFloat!
-
-    private var updateHeightConstraint: () -> () = { }
-    private var didSelectCompletion: (SwiftyMenuDisplayable, Int) -> () = { selectedText, index in }
-    private var TableWillAppearCompletion: () -> () = { }
-    private var TableDidAppearCompletion: () -> () = { }
-    private var TableWillDisappearCompletion: () -> () = { }
-    private var TableDidDisappearCompletion: () -> () = { }
     
     // MARK: - Init
     
@@ -308,6 +298,7 @@ public class SwiftyMenu: UIView {
         case .hidden:
             expandSwiftyMenu()
         }
+        state.toggle()
     }
     
 }
@@ -346,56 +337,11 @@ extension SwiftyMenu: UITableViewDataSource {
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate Functions
 
 extension SwiftyMenu: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(rowHeight)
-    }
-    
-    fileprivate func setMultiSelectedOptions() {
-        let titles = selectedIndecis.mapValues { (index) -> String in
-            return items[index].displayableValue
-        }
-        var selectedTitle = ""
-        selectedTitle = titles.values.joined(separator: ", ")
-        UIView.performWithoutAnimation {
-            selectButton.setTitle(selectedTitle, for: .normal)
-            selectButton.layoutIfNeeded()
-        }
-        selectButton.setTitleColor(itemTextColor, for: .normal)
-    }
-    
-    fileprivate func setSingleSelectedOption() {
-        UIView.performWithoutAnimation {
-            selectButton.setTitle(items[selectedIndex!].displayableValue, for: .normal)
-            selectButton.layoutIfNeeded()
-        }
-        selectButton.setTitleColor(itemTextColor, for: .normal)
-    }
-    
-    fileprivate func setPlaceholder() {
-        UIView.performWithoutAnimation {
-            selectButton.setTitle(placeHolderText, for: .normal)
-            selectButton.layoutIfNeeded()
-        }
-        selectButton.setTitleColor(placeHolderColor, for: .normal)
-    }
-    
-    private func setSelectedOptionsAsTitle() {
-        if isMultiSelect {
-            if selectedIndecis.isEmpty {
-                setPlaceholder()
-            } else {
-                setMultiSelectedOptions()
-            }
-        } else {
-            if selectedIndex == nil {
-                setPlaceholder()
-            } else {
-                setSingleSelectedOption()
-            }
-        }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -439,6 +385,55 @@ extension SwiftyMenu: UITableViewDelegate {
     }
 }
 
+// MARK: - Private Functions
+
+extension SwiftyMenu {
+    private func setMultiSelectedOptions() {
+        let titles = selectedIndecis.mapValues { (index) -> String in
+            return items[index].displayableValue
+        }
+        var selectedTitle = ""
+        selectedTitle = titles.values.joined(separator: ", ")
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(selectedTitle, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(itemTextColor, for: .normal)
+    }
+    
+    private func setSingleSelectedOption() {
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(items[selectedIndex!].displayableValue, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(itemTextColor, for: .normal)
+    }
+    
+    private func setPlaceholder() {
+        UIView.performWithoutAnimation {
+            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.layoutIfNeeded()
+        }
+        selectButton.setTitleColor(placeHolderColor, for: .normal)
+    }
+    
+    private func setSelectedOptionsAsTitle() {
+        if isMultiSelect {
+            if selectedIndecis.isEmpty {
+                setPlaceholder()
+            } else {
+                setMultiSelectedOptions()
+            }
+        } else {
+            if selectedIndex == nil {
+                setPlaceholder()
+            } else {
+                setSingleSelectedOption()
+            }
+        }
+    }
+}
+
 // MARK: - SwiftyMenu Expand and Collapse Functions
 
 extension SwiftyMenu {
@@ -446,7 +441,6 @@ extension SwiftyMenu {
     private func expandSwiftyMenu() {
         delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
-        self.state = .shown
         heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(items.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(items.count + 1)) : CGFloat(listHeight)
         
         switch expandingAnimationStyle {
@@ -474,7 +468,6 @@ extension SwiftyMenu {
     private func collapseSwiftyMenu() {
         delegate?.swiftyMenu(willCollapse: self)
         self.willCollapse()
-        self.state = .hidden
         heightConstraint.constant = CGFloat(rowHeight)
         
         switch collapsingAnimationStyle {
@@ -496,25 +489,12 @@ extension SwiftyMenu {
                            animations: animationBlock,
                            completion: collapsingAnimationCompletionBlock)
         }
-        updateHeightConstraint()
     }
 }
 
-// MARK: - Delegates
+// MARK: - SwiftyMenu Animation Functions
 
 extension SwiftyMenu {
-    public func updateConstraints(completion: @escaping () -> ()) {
-        updateHeightConstraint = completion
-    }
-    
-    public func didSelectOption(completion: @escaping (_ selected: SwiftyMenuDisplayable, _ index: Int) -> ()) {
-        didSelectCompletion = completion
-    }
-    
-    public func menuWillAppear(completion: @escaping () -> ()) {
-        TableWillAppearCompletion = completion
-    }
-    
     private func animationBlock() {
         self.parentViewController.view.layoutIfNeeded()
     }
