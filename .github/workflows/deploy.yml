@@ -1,4 +1,4 @@
-name: deploy_to_cocoapods
+name: Deploy
 
 on:
   push:
