@@ -4,9 +4,6 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
-    <a href="https://travis-ci.org/KarimEbrahemAbdelaziz/SwiftyMenu.svg?branch=master">
-        <img src="https://img.shields.io/travis/KarimEbrahemAbdelaziz/SwiftyMenu/master.svg?style=flat" alt="CI Status" />
-    </a>
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>

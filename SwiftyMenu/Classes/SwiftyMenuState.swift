@@ -1,7 +1,7 @@
 //
-//  SnapKit
+//  SwiftyMenuState.swift
 //
-//  Copyright (c) 2011-Present SnapKit Team - https://github.com/SnapKit
+//  Copyright (c) 2019-2020 Karim Ebrahem (https://twitter.com/k_ebrahem_)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +20,25 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
-#if os(iOS) || os(tvOS)
-    import UIKit
-    public typealias ConstraintInterfaceLayoutDirection = UIUserInterfaceLayoutDirection
-#else
-    import AppKit
-    public typealias ConstraintInterfaceLayoutDirection = NSUserInterfaceLayoutDirection
-#endif
+import Foundation
 
-
-public struct ConstraintConfig {
+/// Type describing the current state of `SwiftyMenu`.
+public enum SwiftyMenuState {
+    /// `SwiftyMenu` is expanded.
+    case shown
     
-    public static var interfaceLayoutDirection: ConstraintInterfaceLayoutDirection = .leftToRight
+    /// `SwiftyMenu` is collapsed.
+    case hidden
     
+    /// Change the current state of SwiftyMenu
+    mutating func toggle() {
+        switch self {
+        case .shown:
+            self = .hidden
+        case .hidden:
+            self = .shown
+        }
+    }
 }

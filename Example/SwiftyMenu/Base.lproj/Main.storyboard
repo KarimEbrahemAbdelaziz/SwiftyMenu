@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-Fi-mme">
-                                <rect key="frame" x="60" y="120" width="255" height="151"/>
+                                <rect key="frame" x="60" y="100" width="255" height="151"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-dq-Ipz" customClass="SwiftyMenu" customModule="SwiftyMenu">
                                         <rect key="frame" x="0.0" y="0.0" width="255" height="35"/>
@@ -34,7 +32,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="heightConstraint" destination="7UK-p1-k6b" id="cxF-24-ja6"/>
+                                            <outlet property="heightConstraint" destination="7UK-p1-k6b" id="AsB-2L-fSb"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eg6-xa-Q7o">
@@ -63,11 +61,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dropDown" destination="Ag2-dq-Ipz" id="sRx-It-hvF"/>
+                        <outlet property="dropDown" destination="Ag2-dq-Ipz" id="Uek-WB-8c2"/>
+                        <outlet property="otherView" destination="jS5-4Y-B4p" id="B2t-9k-gfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="138" y="134"/>
         </scene>
     </scenes>
 </document>
