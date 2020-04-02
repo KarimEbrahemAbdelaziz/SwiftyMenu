@@ -522,6 +522,9 @@ extension SwiftyMenu {
 
 extension SwiftyMenu {
     private func animationBlock() {
+        if self.arrow != nil{
+            self.selectButton.imageView?.transform = self.selectButton.imageView!.transform.rotated(by: CGFloat.pi)
+        }
         self.parentViewController?.view.layoutIfNeeded()
     }
     
