@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.6.2] - 2020-04-03
 ### Fixed
+
 - Fix arrow rotation when open or close SwiftyMenu
 ## [0.6.1] - 2019-03-25
 ### Added
