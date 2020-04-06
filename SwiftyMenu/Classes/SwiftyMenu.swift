@@ -116,6 +116,13 @@ final public class SwiftyMenu: UIView {
     
     /// Determine `SwiftyMenu` selected row background color.
     @IBInspectable public var selectedRowColor: UIColor?
+	
+	/// Determine `SwiftyMenu` separator color.
+	@IBInspectable public var separatorColor: UIColor? {
+		didSet {
+			itemsTableView.separatorColor = separatorColor
+		}
+	}
     
     /// Determine `SwiftyMenu` item text color.
     @IBInspectable public var itemTextColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)

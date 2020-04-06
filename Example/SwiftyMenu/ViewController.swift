@@ -67,7 +67,8 @@ class ViewController: UIViewController {
         dropDown.itemTextColor = .red
         dropDown.placeHolderColor = .lightGray
         dropDown.menuHeaderBackgroundColor = .white
-        dropDown.rowBackgroundColor = .orange
+		dropDown.rowBackgroundColor = .orange
+		dropDown.separatorColor = .white
         
         // Custom Animation
         dropDown.expandingAnimationStyle = .spring(level: .low)
