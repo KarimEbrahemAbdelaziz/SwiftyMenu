@@ -38,6 +38,9 @@ class ViewController: UIViewController {
         
         dropDown.placeHolderText = "Please Select Item"
         dropDown2.placeHolderText = "Please Select Item"
+		
+		dropDown.separatorCharacters = " & "
+		print(dropDown2.selectedIndecis)
         
         // Support CallBacks
         dropDown.didExpand = {

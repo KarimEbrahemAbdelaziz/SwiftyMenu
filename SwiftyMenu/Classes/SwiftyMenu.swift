@@ -60,6 +60,9 @@ final public class SwiftyMenu: UIView {
     
     /// `delegate` is the `SwiftyMenu` delegate property.
     public weak var delegate: SwiftyMenuDelegate?
+	
+	/// `separatorCharacters` is a property to get and set separator characters  in `SwiftyMenu` when it is a Multi Selection.
+	public var separatorCharacters: String?
     
     // MARK: - Public Callbacks
     
@@ -426,7 +429,7 @@ extension SwiftyMenu {
             return items[index].displayableValue
         }
         var selectedTitle = ""
-        selectedTitle = titles.values.joined(separator: ", ")
+        selectedTitle = titles.values.joined(separator: separatorCharacters ?? ", ")
         UIView.performWithoutAnimation {
             selectButton.setTitle(selectedTitle, for: .normal)
             selectButton.layoutIfNeeded()
