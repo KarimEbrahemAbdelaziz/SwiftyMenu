@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         dropDown.items = dropDownOptionsDataSource
         dropDown2.items = dropDownOptionsDataSource
         
-        dropDown.placeHolderText = "Pleas Select Item"
-        dropDown2.placeHolderText = "Pleas Select Item"
+        dropDown.placeHolderText = "Please Select Item"
+        dropDown2.placeHolderText = "Please Select Item"
         
         // Support CallBacks
         dropDown.didExpand = {
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         }
         
         dropDown.didCollapse = {
-            print("SwiftyMeny Collapsed")
+            print("SwiftyMenu Collapsed!")
         }
         
         dropDown.didSelectItem = { _, item, index in
