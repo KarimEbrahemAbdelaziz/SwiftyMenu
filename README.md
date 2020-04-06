@@ -168,6 +168,7 @@ dropDownMenu.itemTextColor = .red
 dropDownMenu.placeHolderColor = .blue
 dropDownMenu.menuHeaderBackgroundColor = .lightGray
 dropDownMenu.rowBackgroundColor = .orange
+dropDown.separatorColor = .white
 
 // Change drop down menu default expand and collapse animation
 dropDownMenu.expandingAnimationStyle = .spring(level: .low)
