@@ -36,8 +36,11 @@ class ViewController: UIViewController {
         dropDown.items = dropDownOptionsDataSource
         dropDown2.items = dropDownOptionsDataSource
         
-        dropDown.placeHolderText = "Pleas Select Item"
-        dropDown2.placeHolderText = "Pleas Select Item"
+        dropDown.placeHolderText = "Please Select Item"
+        dropDown2.placeHolderText = "Please Select Item"
+		
+		dropDown.separatorCharacters = " & "
+		print(dropDown2.selectedIndecis)
         
         // Support CallBacks
         dropDown.didExpand = {
@@ -45,7 +48,7 @@ class ViewController: UIViewController {
         }
         
         dropDown.didCollapse = {
-            print("SwiftyMeny Collapsed")
+            print("SwiftyMenu Collapsed!")
         }
         
         dropDown.didSelectItem = { _, item, index in
@@ -67,7 +70,8 @@ class ViewController: UIViewController {
         dropDown.itemTextColor = .red
         dropDown.placeHolderColor = .lightGray
         dropDown.menuHeaderBackgroundColor = .white
-        dropDown.rowBackgroundColor = .orange
+		dropDown.rowBackgroundColor = .orange
+		dropDown.separatorColor = .white
         
         // Custom Animation
         dropDown.expandingAnimationStyle = .spring(level: .low)

@@ -60,6 +60,9 @@ final public class SwiftyMenu: UIView {
     
     /// `delegate` is the `SwiftyMenu` delegate property.
     public weak var delegate: SwiftyMenuDelegate?
+	
+	/// `separatorCharacters` is a property to get and set separator characters  in `SwiftyMenu` when it is a Multi Selection.
+	public var separatorCharacters: String?
     
     // MARK: - Public Callbacks
     
@@ -116,6 +119,13 @@ final public class SwiftyMenu: UIView {
     
     /// Determine `SwiftyMenu` selected row background color.
     @IBInspectable public var selectedRowColor: UIColor?
+	
+	/// Determine `SwiftyMenu` separator color.
+	@IBInspectable public var separatorColor: UIColor? {
+		didSet {
+			itemsTableView.separatorColor = separatorColor
+		}
+	}
     
     /// Determine `SwiftyMenu` item text color.
     @IBInspectable public var itemTextColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
@@ -419,7 +429,7 @@ extension SwiftyMenu {
             return items[index].displayableValue
         }
         var selectedTitle = ""
-        selectedTitle = titles.values.joined(separator: ", ")
+        selectedTitle = titles.values.joined(separator: separatorCharacters ?? ", ")
         UIView.performWithoutAnimation {
             selectButton.setTitle(selectedTitle, for: .normal)
             selectButton.layoutIfNeeded()
