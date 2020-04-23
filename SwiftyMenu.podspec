@@ -34,7 +34,7 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.source_files = 'SwiftyMenu/Classes/**/*'
   s.resources = 'SwiftyMenu/Assets/*'
   
-  s.dependency 'SnapKit', '~> 4.2.0'
+  s.dependency 'SnapKit', '~> 5.0.0'
   
   # s.resource_bundles = {
   #   'SwiftyMenu' => ['SwiftyMenu/Assets/*.png']
