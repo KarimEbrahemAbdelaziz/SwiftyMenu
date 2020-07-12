@@ -210,17 +210,22 @@ final public class SwiftyMenu: UIView {
     private var state: SwiftyMenuState = .hidden
     private var width: CGFloat!
     private var height: CGFloat!
+    private var setuped: Bool = false
     
     // MARK: - Init
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        
+        selectButton = UIButton(frame: self.frame)
+        itemsTableView = UITableView()
     }
     
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        setupUI()
+        
+        selectButton = UIButton(frame: self.frame)
+        itemsTableView = UITableView()
     }
     
     // MARK: - LifeCycle
@@ -228,7 +233,11 @@ final public class SwiftyMenu: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        setupArrowImage()
+        if !setuped {
+            setupUI()
+            setupArrowImage()
+            setuped = true
+        }
     }
     
     // MARK: - Public Funcitons
@@ -334,7 +343,11 @@ extension SwiftyMenu {
     
     private func setupArrowImage() {
         let spacing = self.selectButton.frame.width - 20 // the amount of spacing to appear between image and title
-        selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
+        var imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
+        if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
+            imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing))
+        }
+        selectButton.imageEdgeInsets = imageEdgeInsets
     }
     
     private func setupView() {
@@ -345,7 +358,6 @@ extension SwiftyMenu {
     }
     
     private func setupSelectButton() {
-        selectButton = UIButton(frame: self.frame)
         self.addSubview(selectButton)
         
         selectButton.snp.makeConstraints { maker in
@@ -359,10 +371,16 @@ extension SwiftyMenu {
             selectButton.setTitle(placeHolderText, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
         selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        selectButton.imageEdgeInsets.left = width - 16
-        selectButton.titleEdgeInsets.right = 16
+        if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
+            selectButton.imageEdgeInsets.right = width - 16
+            selectButton.titleEdgeInsets.left = 32
+            selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
+        } else {
+            selectButton.imageEdgeInsets.left = width - 16
+            selectButton.titleEdgeInsets.right = 32
+            selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
+        }
         selectButton.backgroundColor = menuHeaderBackgroundColor
         
         let frameworkBundle = Bundle(for: SwiftyMenu.self)
@@ -383,12 +401,11 @@ extension SwiftyMenu {
     }
     
     private func setupDataTableView() {
-        itemsTableView = UITableView()
         self.addSubview(itemsTableView)
         
         itemsTableView.snp.makeConstraints { maker in
             maker.leading.trailing.bottom.equalTo(self)
-            maker.top.equalTo(selectButton.snp_bottom)
+            maker.top.equalTo(selectButton.snp.bottom)
         }
         
         itemsTableView.delegate = self
