@@ -30,5 +30,5 @@ public protocol SwiftyMenuDisplayable {
     var displayableValue: String { get }
     
     /// The value that will be returned when select menu item
-    var retrivableValue: Any { get }
+    var retrievableValue: Any { get }
 }
