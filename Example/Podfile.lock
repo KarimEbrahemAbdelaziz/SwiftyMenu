@@ -1,7 +1,7 @@
 PODS:
-  - SnapKit (4.2.0)
-  - SwiftyMenu (0.6.2):
-    - SnapKit (~> 4.2.0)
+  - SnapKit (5.0.1)
+  - SwiftyMenu (0.6.4):
+    - SnapKit (~> 5.0.1)
 
 DEPENDENCIES:
   - SwiftyMenu (from `../`)
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  SwiftyMenu: 039a1fe10f32cf91abb9257c63663721abb0140b
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyMenu: 78a70edddb323f6b671ace1bd47853629cf040a9
 
 PODFILE CHECKSUM: e76fbe8ebeca450e6d7f72e5036d5d85d327d6d2
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

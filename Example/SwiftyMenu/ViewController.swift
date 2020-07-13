@@ -114,7 +114,7 @@ extension String: SwiftyMenuDisplayable {
         return self
     }
     
-    public var retrivableValue: Any {
+    public var retrievableValue: Any {
         return self
     }
 }

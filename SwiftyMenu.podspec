@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '0.6.3'
+  s.version          = '0.6.4'
   s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,7 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.source_files = 'SwiftyMenu/Classes/**/*'
   s.resources = 'SwiftyMenu/Assets/*'
   
-  s.dependency 'SnapKit', '~> 4.2.0'
+  s.dependency 'SnapKit', '~> 5.0.1'
   
   # s.resource_bundles = {
   #   'SwiftyMenu' => ['SwiftyMenu/Assets/*.png']
