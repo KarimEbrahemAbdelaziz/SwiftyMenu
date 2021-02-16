@@ -214,7 +214,7 @@ final public class SwiftyMenu: UIView {
     
     // MARK: - Init
     
-    public override init(frame: CGRect, hideOptionsWhenSelect: Bool) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
