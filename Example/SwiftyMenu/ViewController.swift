@@ -38,6 +38,8 @@ class ViewController: UIViewController {
         
         dropDown.placeHolderText = "Please Select Item"
         dropDown2.placeHolderText = "Please Select Item"
+        // With this set true, drop down menu will change collapse
+        // state when item is selected
         dropDown2.hideOptionsWhenSelect = true
 		
 		dropDown.separatorCharacters = " & "
