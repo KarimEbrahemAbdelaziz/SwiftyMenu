@@ -214,7 +214,7 @@ final public class SwiftyMenu: UIView {
     
     // MARK: - Init
     
-    public override init(frame: CGRect) {
+    public override init(frame: CGRect, hideOptionsWhenSelect: Bool) {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
@@ -296,7 +296,8 @@ extension SwiftyMenu: UITableViewDelegate {
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
+//                    collapseSwiftyMenu()
                 }
             } else {
                 selectedIndecis[indexPath.row] = indexPath.row
@@ -306,13 +307,15 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
+//                    collapseSwiftyMenu()
                 }
             }
         } else {
             if selectedIndex == indexPath.row {
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
+//                    collapseSwiftyMenu()
                 }
             } else {
                 selectedIndex = indexPath.row
@@ -322,7 +325,8 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
+//                    collapseSwiftyMenu()
                 }
             }
         }
