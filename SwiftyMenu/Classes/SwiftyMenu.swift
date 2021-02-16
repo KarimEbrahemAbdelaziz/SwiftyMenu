@@ -311,6 +311,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 }
             }
         } else {
+            print("\(selectedIndex) & \(indexPath.row)")
             if selectedIndex == indexPath.row {
                 if hideOptionsWhenSelect {
                     collapseSwiftyMenu()
