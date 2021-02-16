@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         
         dropDown.placeHolderText = "Please Select Item"
         dropDown2.placeHolderText = "Please Select Item"
+        dropDown2.hideOptionsWhenSelect = true
 		
 		dropDown.separatorCharacters = " & "
 		print(dropDown2.selectedIndecis)
