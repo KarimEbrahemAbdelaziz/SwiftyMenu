@@ -218,7 +218,7 @@ final public class SwiftyMenu: UIView {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
-        print("Parent: \(parentViewController)")
+        print("Parent: \(self.parentViewController)")
     }
     
     public required init(coder aDecoder: NSCoder) {
@@ -554,6 +554,7 @@ extension SwiftyMenu {
             self.selectButton.imageView?.transform = self.selectButton.imageView!.transform.rotated(by: CGFloat.pi)
         }
         self.parentViewController?.view.layoutIfNeeded()
+        print("Parent: \(parentViewController)")
     }
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
