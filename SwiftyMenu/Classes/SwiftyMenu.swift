@@ -218,12 +218,10 @@ final public class SwiftyMenu: UIView {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
-        print("Parent: \(self.parentViewController)")
     }
     
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
     }
@@ -247,6 +245,7 @@ final public class SwiftyMenu: UIView {
     public func toggle() {
         handleMenuState()
     }
+    
     
 }
 
@@ -554,7 +553,6 @@ extension SwiftyMenu {
             self.selectButton.imageView?.transform = self.selectButton.imageView!.transform.rotated(by: CGFloat.pi)
         }
         self.parentViewController?.view.layoutIfNeeded()
-        print("Parent: \(parentViewController)")
     }
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
