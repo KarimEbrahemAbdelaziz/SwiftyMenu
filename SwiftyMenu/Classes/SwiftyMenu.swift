@@ -239,6 +239,15 @@ final public class SwiftyMenu: UIView {
         }
     }
     
+    //MARK: Change 1
+    public override func touchesBegan(_ touches: Set<AnyHashable>, withEvent event: UIEvent) {
+        var touch: UITouch? = touches.first
+        if touch?.view != self.view {
+            handleMenuState()
+        }
+    }
+
+    
     // MARK: - Public Funcitons
     
     /// Expand or Collapse `SwiftyMenu` from Code.
