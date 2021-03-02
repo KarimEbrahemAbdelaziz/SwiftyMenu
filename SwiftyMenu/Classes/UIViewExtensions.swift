@@ -36,4 +36,6 @@ extension UIView {
         }
         return (responder as? UIViewController)
     }
+    
+    parentViewController.userInteractionEnabled = true
 }
