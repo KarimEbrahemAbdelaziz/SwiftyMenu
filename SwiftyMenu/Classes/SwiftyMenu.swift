@@ -419,6 +419,13 @@ extension SwiftyMenu {
         itemsTableView.showsVerticalScrollIndicator = false
     }
     
+    //MARK: Change 1
+    public func customizeSeperator(seperatorInvisible: Bool){
+        if seperatorVisible{
+            itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        }
+    }
+    
     @objc private func handleMenuState() {
         switch self.state {
         case .shown:
