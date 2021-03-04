@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         dropDown.rowHeight = 35
         dropDown.listHeight = 300
         dropDown.borderWidth = 1.0
-        
+        dropDown.customizeSeperator(seperatorInvisible: true)
         
         // Custom Colors
         dropDown.borderColor = .black
