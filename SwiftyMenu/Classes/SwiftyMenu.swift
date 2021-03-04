@@ -420,8 +420,8 @@ extension SwiftyMenu {
     }
     
     //MARK: Change 1
-    public func separatorCustomization(){
-        print("oh boy")
+    public func separatorCustomization(aThing: String){
+        print("oh \(aThing)")
     }
 //    public func customizeSeperator(seperatorInvisible: Bool){
 //        if seperatorVisible{
