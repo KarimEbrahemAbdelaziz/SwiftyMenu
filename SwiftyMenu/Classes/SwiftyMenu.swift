@@ -420,11 +420,14 @@ extension SwiftyMenu {
     }
     
     //MARK: Change 1
-    public func customizeSeperator(seperatorInvisible: Bool){
-        if seperatorVisible{
-            itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        }
+    public func separatorCustomization(){
+        print("oh boy")
     }
+//    public func customizeSeperator(seperatorInvisible: Bool){
+//        if seperatorVisible{
+//            itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+//        }
+//    }
     
     @objc private func handleMenuState() {
         switch self.state {
