@@ -420,16 +420,16 @@ extension SwiftyMenu {
     }
     
     //MARK: Change 1
-    public func separatorCustomization(seperatorInvisible: Bool){
-        if seperatorInvisible{
+    public func separatorCustomization(color: UIColor, noSeparator: Bool){
+        if noSeparator{
             itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         }
+        itemsTableView.separatorColor = color
+        itemsTableView.separatorEffect = UIBlurEffect()
+//            UIVibrancyEffect()
+//        ableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurredBackgroundView.blurView.effect as UIBlurEffect)
+//        itemsTableView.sep
     }
-//    public func customizeSeperator(seperatorInvisible: Bool){
-//        if seperatorVisible{
-//            itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-//        }
-//    }
     
     @objc private func handleMenuState() {
         switch self.state {
