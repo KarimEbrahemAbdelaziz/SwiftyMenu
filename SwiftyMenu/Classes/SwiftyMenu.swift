@@ -425,7 +425,7 @@ extension SwiftyMenu {
             itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         }
         if blur{
-            itemsTableView.separatorEffect = UIBlurEffect(style: .dark)
+            itemsTableView.separatorEffect = UIBlurEffect()
         }
         itemsTableView.separatorColor = color
     }
