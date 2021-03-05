@@ -218,7 +218,8 @@ final public class SwiftyMenu: UIView {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
-        self.parentViewController?.userInteractionEnabled = true
+//        self.parentViewController?.userInteractionEnabled = true
+        print(self.parentViewController?)
     }
     
     public required init(coder aDecoder: NSCoder) {
