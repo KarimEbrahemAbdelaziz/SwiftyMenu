@@ -227,9 +227,13 @@ final public class SwiftyMenu: UIView {
     }
     
     // MARK: - LifeCycle
+    public override func viewWillAppear(){
+        print("Whoop")
+    }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
+        print(self.parentViewController?.touchUpInside)
         
         if !setuped {
             setupUI()

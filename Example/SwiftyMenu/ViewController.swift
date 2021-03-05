@@ -67,6 +67,7 @@ class ViewController: UIViewController {
         dropDown.rowHeight = 35
         dropDown.listHeight = 300
         dropDown.borderWidth = 1.0
+        
         /// Allows for customization of the seperator - color, blur, noSeparator
         dropDown.separatorCustomization(color: .white)
         
