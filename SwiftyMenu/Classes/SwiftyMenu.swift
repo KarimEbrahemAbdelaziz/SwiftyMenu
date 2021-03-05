@@ -224,6 +224,14 @@ final public class SwiftyMenu: UIView {
         super.init(coder: aDecoder)!
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
+        let gestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(printThis))
+        gestureRecognizer.cancelsTouchesInView = false
+        gestureRecognizer.delegate = self
+        self.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func printThis(){
+        print("whoops")
     }
     
     // MARK: - LifeCycle
@@ -238,17 +246,17 @@ final public class SwiftyMenu: UIView {
         }
     }
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-
-        let touch = touches.first
-        guard let location = touch?.location(in: self.frame) else { return }
-        if self.parentViewController?.frame.contains(location) {
-            print("Tapped outside the view")
-        } else {
-            print("Tapped inside the view")
-        }
-    }
+//    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//
+//        let touch = touches.first
+//        guard let location = touch?.location(in: self.parentViewController!.view) else { return }
+//        if self.frame.contains(location) {
+//            print("Tapped outside the view")
+//        } else {
+//            print("Tapped inside the view")
+//        }
+//    }
 
 
     
@@ -593,3 +601,12 @@ extension SwiftyMenu {
         }
     }
 }
+
+
+extension SwiftyMenu: UIGestureRecognizerDelegate {
+
+      public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                             shouldReceive touch: UITouch) -> Bool {
+        return (touch.view === self)
+      }
+    }
