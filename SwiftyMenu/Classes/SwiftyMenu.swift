@@ -238,12 +238,12 @@ final public class SwiftyMenu: UIView {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
 
         let touch = touches.first
-        guard let location = touch?.location(in: self.view) else { return }
-        if !currentView.frame.contains(location) {
+        guard let location = touch?.location(in: self.frame) else { return }
+        if self.parentViewController?.frame.contains(location) {
             print("Tapped outside the view")
         } else {
             print("Tapped inside the view")
