@@ -218,8 +218,6 @@ final public class SwiftyMenu: UIView {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
-//        self.parentViewController?.userInteractionEnabled = true
-        print(self.parentViewController?)
     }
     
     public required init(coder aDecoder: NSCoder) {
@@ -239,6 +237,19 @@ final public class SwiftyMenu: UIView {
             setuped = true
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        let touch = touches.first
+        guard let location = touch?.location(in: self.view) else { return }
+        if !currentView.frame.contains(location) {
+            print("Tapped outside the view")
+        } else {
+            print("Tapped inside the view")
+        }
+    }
+
 
     
     // MARK: - Public Funcitons
