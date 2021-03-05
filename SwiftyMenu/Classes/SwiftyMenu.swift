@@ -218,6 +218,7 @@ final public class SwiftyMenu: UIView {
         super.init(frame: frame)
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
+        self.parentViewController?.userInteractionEnabled = true
     }
     
     public required init(coder aDecoder: NSCoder) {
@@ -227,13 +228,9 @@ final public class SwiftyMenu: UIView {
     }
     
     // MARK: - LifeCycle
-    public override func viewWillAppear(){
-        print("Whoop")
-    }
-    
+
     public override func layoutSubviews() {
         super.layoutSubviews()
-        print(self.parentViewController?.touchUpInside)
         
         if !setuped {
             setupUI()
