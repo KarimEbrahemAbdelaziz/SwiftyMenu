@@ -238,6 +238,18 @@ final public class SwiftyMenu: UIView {
         }
     }
     
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        let touch = touches.first
+        if touch?.view == self{
+            print("Tapped inside menu")
+        }else{
+            print("Tapped outside menu")
+        }
+    }
+
+    
     // MARK: - Public Funcitons
     
     /// Expand or Collapse `SwiftyMenu` from Code.
