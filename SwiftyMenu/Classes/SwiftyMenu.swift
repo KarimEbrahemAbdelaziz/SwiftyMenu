@@ -291,11 +291,6 @@ extension SwiftyMenu: UITableViewDataSource {
             return cell
         }
     }
-    
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection
-                                section: Int) -> String? {
-       return "Header \(section)"
-    }
 }
 
 // MARK: - UITableViewDelegate Functions
