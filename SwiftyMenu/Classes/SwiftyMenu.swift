@@ -222,13 +222,12 @@ final public class SwiftyMenu: UIView {
     
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        
         selectButton = UIButton(frame: self.frame)
         itemsTableView = UITableView()
     }
     
     // MARK: - LifeCycle
-    
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -239,12 +238,25 @@ final public class SwiftyMenu: UIView {
         }
     }
     
+//    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//
+//        let touch = touches.first
+//        if touch?.view == self{
+//            print("Tapped inside menu")
+//        }else{
+//            print("Tapped outside menu")
+//        }
+//    }
+
+    
     // MARK: - Public Funcitons
     
     /// Expand or Collapse `SwiftyMenu` from Code.
     public func toggle() {
         handleMenuState()
     }
+    
     
 }
 
@@ -418,6 +430,17 @@ extension SwiftyMenu {
         itemsTableView.showsVerticalScrollIndicator = false
     }
     
+    //MARK: Change - Separator Customization
+    public func separatorCustomization(color: UIColor, noSeparator: Bool = false, blur: Bool = false){
+        if noSeparator{
+            itemsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        }
+        if blur{
+            itemsTableView.separatorEffect = UIBlurEffect()
+        }
+        itemsTableView.separatorColor = color
+    }
+    
     @objc private func handleMenuState() {
         switch self.state {
         case .shown:
@@ -568,3 +591,4 @@ extension SwiftyMenu {
         }
     }
 }
+
