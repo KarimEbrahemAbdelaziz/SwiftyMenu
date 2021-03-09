@@ -38,7 +38,11 @@ final public class SwiftyMenu: UIView {
     /// `selectedIndex` is a property to get and set selected item in `SwiftyMenu` when it is a Single Selection.
     public var selectedIndex: Int? {
         didSet {
-            setSingleSelectedOption()
+	    if selectedIndex == nil {
+                setPlaceholder()
+            } else {
+                setSingleSelectedOption()
+            }
         }
     }
     
