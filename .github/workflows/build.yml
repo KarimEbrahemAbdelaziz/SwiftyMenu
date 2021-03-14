@@ -25,7 +25,7 @@ jobs:
         run: |
           cd Example
           pod install
-          xcodebuild clean build -workspace SwiftyMenu.xcworkspace -scheme SwiftyMenu-Example -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          xcodebuild clean build -workspace SwiftyMenu.xcworkspace -scheme SwiftyMenu-Example -destination "platform:iOS Simulator, OS:14.4, name:iPhone 11 Pro Max" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env: 
          destination: ${{ matrix.destination }}
        
