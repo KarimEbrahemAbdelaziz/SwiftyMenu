@@ -55,7 +55,7 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate SwiftyMenu into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftyMenu', '~> 0.6.4'
+pod 'SwiftyMenu', '~> 0.6.5'
 ```
 
 ## Usage
