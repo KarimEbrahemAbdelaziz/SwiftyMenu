@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-latest
     strategy:
         matrix: 
-          destination: ['platform=iOS Simulator,OS=13.5,name=iPhone 11 Pro Max']
+          destination: ['platform:iOS Simulator,id:063231EC-543B-4517-A643-93CA221C73B3,OS:14.4,name:iPhone 11 Pro Max']
     steps:
       - name: Checkout
         uses: actions/checkout@master
