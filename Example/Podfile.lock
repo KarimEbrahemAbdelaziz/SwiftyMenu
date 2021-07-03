@@ -1,6 +1,6 @@
 PODS:
   - SnapKit (5.0.1)
-  - SwiftyMenu (0.6.4):
+  - SwiftyMenu (0.6.5):
     - SnapKit (~> 5.0.1)
 
 DEPENDENCIES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftyMenu: 78a70edddb323f6b671ace1bd47853629cf040a9
+  SwiftyMenu: 9f38e9a22fb9c01b889d33cc362ffc12de042dd2
 
 PODFILE CHECKSUM: e76fbe8ebeca450e6d7f72e5036d5d85d327d6d2
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
