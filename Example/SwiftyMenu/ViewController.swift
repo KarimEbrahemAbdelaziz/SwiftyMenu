@@ -133,8 +133,16 @@ class ViewController: UIViewController {
         dropDownCode.items = dropDownCodeOptionsDataSource
 
         /// SwiftyMenu also supports `CallBacks`
+        dropDownCode.willExpand = {
+            print("SwiftyMenu Code Will Expand!")
+        }
+
         dropDownCode.didExpand = {
             print("SwiftyMenu Code Expanded!")
+        }
+
+        dropDownCode.willCollapse = {
+            print("SwiftyMenu Code Will Collapse!")
         }
 
         dropDownCode.didCollapse = {
