@@ -17,6 +17,8 @@
 		BC4F88DD22802E050056082A /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = BC4F88DC22802E050056082A /* CHANGELOG.md */; };
 		BC7A3004242BF8BD00B76276 /* SwiftyMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A3003242BF8BD00B76276 /* SwiftyMenuTests.swift */; };
 		BC7A3009242BF9B900B76276 /* SwiftyMenuDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A3007242BF9B400B76276 /* SwiftyMenuDelegateSpy.swift */; };
+		BC8E4C6A2690AD4700029145 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E4C692690AD4600029145 /* String+Extensions.swift */; };
+		BC8E4C6C2690AD7C00029145 /* MealSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E4C6B2690AD7C00029145 /* MealSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		BC4F88DC22802E050056082A /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		BC7A3003242BF8BD00B76276 /* SwiftyMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyMenuTests.swift; sourceTree = "<group>"; };
 		BC7A3007242BF9B400B76276 /* SwiftyMenuDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyMenuDelegateSpy.swift; sourceTree = "<group>"; };
+		BC8E4C692690AD4600029145 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		BC8E4C6B2690AD7C00029145 /* MealSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSize.swift; sourceTree = "<group>"; };
 		DD0DD0B626C9414217DC8F17 /* Pods_SwiftyMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -117,6 +121,8 @@
 		607FACD21AFB9204008FA782 /* Example for SwiftyMenu */ = {
 			isa = PBXGroup;
 			children = (
+				BC8E4C682690AD3600029145 /* Extensions */,
+				BC8E4C672690AD2800029145 /* Models */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -171,6 +177,22 @@
 				BC7A3007242BF9B400B76276 /* SwiftyMenuDelegateSpy.swift */,
 			);
 			name = Spies;
+			sourceTree = "<group>";
+		};
+		BC8E4C672690AD2800029145 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BC8E4C6B2690AD7C00029145 /* MealSize.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BC8E4C682690AD3600029145 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BC8E4C692690AD4600029145 /* String+Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,7 +371,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				BC8E4C6A2690AD4700029145 /* String+Extensions.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				BC8E4C6C2690AD7C00029145 /* MealSize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2021-07-04
+### Added
+- SwiftMenu different Attributes.
+- Support for SPM.
+
+### Changed
+- Removed all `IBDesignable` from SwiftyMenu and changed the styling of the menu using `SwiftyMenuAttributes`.
+
+### Fixed
+- Arrow direction when multi selection enabled.
+
+
+## [0.6.5] - 2021-03-15
+### Fixed
+- UI issues.
+
 ## [0.6.4] - 2020-07-13
 ### Changed
 - Update SnapKit version.

@@ -38,7 +38,7 @@ final public class SwiftyMenu: UIView {
     /// `selectedIndex` is a property to get and set selected item in `SwiftyMenu` when it is a Single Selection.
     public var selectedIndex: Int? {
         didSet {
-	    if selectedIndex == nil {
+            if selectedIndex == nil {
                 setPlaceholder()
             } else {
                 setSingleSelectedOption()
@@ -64,9 +64,9 @@ final public class SwiftyMenu: UIView {
     
     /// `delegate` is the `SwiftyMenu` delegate property.
     public weak var delegate: SwiftyMenuDelegate?
-	
-	/// `separatorCharacters` is a property to get and set separator characters  in `SwiftyMenu` when it is a Multi Selection.
-	public var separatorCharacters: String?
+
+    /// `separatorCharacters` is a property to get and set separator characters  in `SwiftyMenu` when it is a Multi Selection.
+    public var separatorCharacters: String?
     
     // MARK: - Public Callbacks
     
@@ -89,124 +89,6 @@ final public class SwiftyMenu: UIView {
     ///   - index: The `Index` of the selected `Item`.
     public var didSelectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
 
-    // MARK: - Public IBInspectable
-    
-    /// Determine if `SwiftyMenu` is multi selection or single selection.
-    @IBInspectable public var isMultiSelect: Bool = false
-    
-    /// Determine if `SwiftyMenu` will hide after selection or not.
-    @IBInspectable public var hideOptionsWhenSelect: Bool = false
-    
-    /// Determine if `SwiftyMenu` is scrollable.
-    @IBInspectable public var scrollingEnabled: Bool = true {
-        didSet {
-            itemsTableView.isScrollEnabled = scrollingEnabled
-        }
-    }
-    
-    /// Determine `SwiftyMenu` row height.
-    @IBInspectable public var rowHeight: Double = 35
-    
-    /// Determine `SwiftyMenu` header background color.
-    @IBInspectable public var menuHeaderBackgroundColor: UIColor = .white {
-        didSet {
-            selectButton.backgroundColor = menuHeaderBackgroundColor
-        }
-    }
-    
-    /// Determine `SwiftyMenu` row background color.
-    @IBInspectable public var rowBackgroundColor: UIColor = .white {
-        didSet {
-            itemsTableView.backgroundColor = rowBackgroundColor
-        }
-    }
-    
-    /// Determine `SwiftyMenu` selected row background color.
-    @IBInspectable public var selectedRowColor: UIColor?
-	
-	/// Determine `SwiftyMenu` separator color.
-	@IBInspectable public var separatorColor: UIColor? {
-		didSet {
-			itemsTableView.separatorColor = separatorColor
-		}
-	}
-    
-    /// Determine `SwiftyMenu` item text color.
-    @IBInspectable public var itemTextColor: UIColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-    
-    /// Determine `SwiftyMenu` placeholder text color.
-    @IBInspectable public var placeHolderColor: UIColor = UIColor(red: 149.0/255.0, green: 149.0/255.0, blue: 149.0/255.0, alpha: 1.0) {
-        didSet {
-            selectButton.setTitleColor(placeHolderColor, for: .normal)
-        }
-    }
-    
-    /// Determine default `SwiftyMenu` placeholder text.
-    @IBInspectable public var placeHolderText: String? {
-        didSet {
-            UIView.performWithoutAnimation {
-                selectButton.setTitle(placeHolderText, for: .normal)
-                selectButton.layoutIfNeeded()
-            }
-        }
-    }
-    
-    /// Determine arrow image for `SwiftyMenu` item.
-    @IBInspectable public var arrow: UIImage? {
-        didSet {
-            selectButton.setImage(arrow, for: .normal)
-        }
-    }
-    
-    /// Determine title left inset for `SwiftyMenu` item.
-    @IBInspectable public var titleLeftInset: Int = 0 {
-        didSet {
-            selectButton.titleEdgeInsets.left = CGFloat(titleLeftInset)
-        }
-    }
-    
-    /// Determine border color for `SwiftyMenu` item.
-    @IBInspectable public var borderColor: UIColor =  UIColor.clear {
-        didSet {
-            layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    /// Determine border width for `SwiftyMenu`.
-    @IBInspectable public var borderWidth: CGFloat = 0.0 {
-        didSet {
-            layer.borderWidth = borderWidth
-        }
-    }
-    
-    /// Determine corner radius for `SwiftyMenu`.
-    @IBInspectable public var cornerRadius: CGFloat = 8.0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    /// Determine `SwiftyMenu` height.
-    @IBInspectable public var listHeight: Int = 0
-    
-    /// Determine expanding duration for `SwiftyMenu`.
-    @IBInspectable public var expandingDuration: Double = 0.5
-    
-    /// Determine collapsing duration for `SwiftyMenu`.
-    @IBInspectable public var collapsingDuration: Double = 0.5
-    
-    /// Determine expanding delay for `SwiftyMenu`.
-    @IBInspectable public var expandingDelay: Double = 0.0
-    
-    /// Determine collapsing delay for `SwiftyMenu`.
-    @IBInspectable public var collapsingDelay: Double = 0.0
-    
-    /// Determine expanding animation style for `SwiftyMenu`.
-    public var expandingAnimationStyle: AnimationStyle = .linear
-    
-    /// Determine collapsing animation style for `SwiftyMenu`.
-    public var collapsingAnimationStyle: AnimationStyle = .linear
-    
     // MARK: - Private Properties
     
     private var selectButton: UIButton!
@@ -215,6 +97,7 @@ final public class SwiftyMenu: UIView {
     private var width: CGFloat!
     private var height: CGFloat!
     private var setuped: Bool = false
+    private var attributes: SwiftyMenuAttributes!
     
     // MARK: - Init
     
@@ -245,6 +128,11 @@ final public class SwiftyMenu: UIView {
     }
     
     // MARK: - Public Funcitons
+
+    /// Configure `SwiftyMenu` with attributes.
+    public func configure(with attributes: SwiftyMenuAttributes) {
+        self.attributes = attributes
+    }
     
     /// Expand or Collapse `SwiftyMenu` from Code.
     public func toggle() {
@@ -262,27 +150,31 @@ extension SwiftyMenu: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if isMultiSelect {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = items[indexPath.row].displayableValue
-            cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
-            cell.tintColor = itemTextColor
-            cell.backgroundColor = rowBackgroundColor
-            cell.accessoryType = selectedIndecis[indexPath.row] != nil ? .checkmark : .none
-            cell.selectionStyle = .none
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
+        cell.textLabel?.text = items[indexPath.row].displayableValue
+        cell.textLabel?.textColor = attributes.textStyle.textStyleValues.color
+        cell.textLabel?.font = attributes.textStyle.textStyleValues.font
+        cell.tintColor = attributes.textStyle.textStyleValues.color
+        cell.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
+        cell.selectionStyle = .none
+
+        if attributes.multiSelect.isEnabled {
+            if selectedIndecis[indexPath.row] != nil {
+                cell.accessoryType = attributes.accessory.isEnabled ? .checkmark : .none
+                cell.backgroundColor = attributes.rowStyle.rowStyleValues.selectedColor
+            } else {
+                cell.accessoryType = .none
+            }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
-            cell.textLabel?.text = items[indexPath.row].displayableValue
-            cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
-            cell.tintColor = itemTextColor
-            cell.backgroundColor = rowBackgroundColor
-            cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
-            cell.selectionStyle = .none
-            return cell
+            if indexPath.row == selectedIndex {
+                cell.accessoryType = attributes.accessory.isEnabled ? .checkmark : .none
+                cell.backgroundColor = attributes.rowStyle.rowStyleValues.selectedColor
+            } else {
+                cell.accessoryType = .none
+            }
         }
+
+        return cell
     }
 }
 
@@ -290,18 +182,18 @@ extension SwiftyMenu: UITableViewDataSource {
 
 extension SwiftyMenu: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(rowHeight)
+        return CGFloat(attributes.rowStyle.rowStyleValues.height)
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if isMultiSelect {
+        if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
                 selectedIndecis[indexPath.row] = nil
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
-                if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                if attributes.hideOptionsWhenSelect.isEnabled {
+                    handleMenuState()
                 }
             } else {
                 selectedIndecis[indexPath.row] = indexPath.row
@@ -310,14 +202,14 @@ extension SwiftyMenu: UITableViewDelegate {
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
-                if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                if attributes.hideOptionsWhenSelect.isEnabled {
+                    handleMenuState()
                 }
             }
         } else {
             if selectedIndex == indexPath.row {
-                if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                if attributes.hideOptionsWhenSelect.isEnabled {
+                    handleMenuState()
                 }
             } else {
                 selectedIndex = indexPath.row
@@ -326,8 +218,8 @@ extension SwiftyMenu: UITableViewDelegate {
                 delegate?.swiftyMenu(self, didSelectItem: selectedText, atIndex: indexPath.row)
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
-                if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                if attributes.hideOptionsWhenSelect.isEnabled {
+                    handleMenuState()
                 }
             }
         }
@@ -343,6 +235,15 @@ extension SwiftyMenu {
         getViewHeight()
         setupSelectButton()
         setupDataTableView()
+        setupSeparatorStyle()
+    }
+
+    public func setupSeparatorStyle() {
+        itemsTableView.separatorStyle = attributes.separatorStyle.separatorStyleValues.style
+        if attributes.separatorStyle.separatorStyleValues.isBlured {
+            itemsTableView.separatorEffect = UIBlurEffect()
+        }
+        itemsTableView.separatorColor = attributes.separatorStyle.separatorStyleValues.color
     }
     
     private func setupArrowImage() {
@@ -356,9 +257,9 @@ extension SwiftyMenu {
     
     private func setupView() {
         clipsToBounds = true
-        layer.cornerRadius = cornerRadius
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
+        layer.cornerRadius = attributes.roundCorners.cornerValue ?? 0
+        layer.borderWidth = attributes.border.borderValues?.width ?? 0
+        layer.borderColor = attributes.border.borderValues?.color.cgColor
     }
     
     private func setupSelectButton() {
@@ -368,31 +269,39 @@ extension SwiftyMenu {
             maker.leading.trailing.top.equalTo(self)
             maker.height.equalTo(height)
         }
-        
-        let color = placeHolderColor
+
+        let color = attributes.placeHolderStyle.placeHolderValues.textColor
         selectButton.setTitleColor(color, for: .normal)
         UIView.performWithoutAnimation {
-            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.setTitle(attributes.placeHolderStyle.placeHolderValues.text, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        selectButton.titleLabel?.font = attributes.textStyle.textStyleValues.font
+
+        selectButton.imageEdgeInsets.right = width - 16
+        selectButton.imageEdgeInsets.left = width - 16
+        
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
-            selectButton.imageEdgeInsets.right = width - 16
-            selectButton.titleEdgeInsets.left = 32
+            selectButton.titleEdgeInsets.right = 16
+            selectButton.titleEdgeInsets.left = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
             selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
         } else {
-            selectButton.imageEdgeInsets.left = width - 16
-            selectButton.titleEdgeInsets.right = 32
+            selectButton.titleEdgeInsets.right = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
+            selectButton.titleEdgeInsets.left = 16
             selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
         }
-        selectButton.backgroundColor = menuHeaderBackgroundColor
-        
-        let frameworkBundle = Bundle(for: SwiftyMenu.self)
-        let image = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)
-        arrow = image
-        
-        if arrow == nil {
-            selectButton.titleEdgeInsets.left = 16
+
+        selectButton.backgroundColor = attributes.headerStyle.headerStyleValues.backgroundColor
+
+        let arrow = attributes.arrowStyle.arrowStyleValues.image
+
+        if attributes.arrowStyle.arrowStyleValues.isEnabled {
+            if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
+                selectButton.titleEdgeInsets.right = 4
+            } else {
+                selectButton.titleEdgeInsets.left = 4
+            }
+            selectButton.setImage(arrow, for: .normal)
         }
         
         if #available(iOS 11.0, *) {
@@ -414,11 +323,11 @@ extension SwiftyMenu {
         
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
-        itemsTableView.rowHeight = CGFloat(rowHeight)
+        itemsTableView.rowHeight = CGFloat(attributes.rowStyle.rowStyleValues.height)
         itemsTableView.separatorInset.left = 8
         itemsTableView.separatorInset.right = 8
-        itemsTableView.backgroundColor = rowBackgroundColor
-        itemsTableView.isScrollEnabled = scrollingEnabled
+        itemsTableView.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
+        itemsTableView.isScrollEnabled = attributes.scroll.isEnabled
         itemsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
         itemsTableView.showsVerticalScrollIndicator = false
     }
@@ -455,7 +364,7 @@ extension SwiftyMenu {
             selectButton.setTitle(selectedTitle, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.setTitleColor(itemTextColor, for: .normal)
+        selectButton.setTitleColor(attributes.textStyle.textStyleValues.color, for: .normal)
     }
     
     private func setSingleSelectedOption() {
@@ -463,19 +372,19 @@ extension SwiftyMenu {
             selectButton.setTitle(items[selectedIndex!].displayableValue, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.setTitleColor(itemTextColor, for: .normal)
+        selectButton.setTitleColor(attributes.textStyle.textStyleValues.color, for: .normal)
     }
     
     private func setPlaceholder() {
         UIView.performWithoutAnimation {
-            selectButton.setTitle(placeHolderText, for: .normal)
+            selectButton.setTitle(attributes.placeHolderStyle.placeHolderValues.text, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.setTitleColor(placeHolderColor, for: .normal)
+        selectButton.setTitleColor(attributes.placeHolderStyle.placeHolderValues.textColor, for: .normal)
     }
     
     private func setSelectedOptionsAsTitle() {
-        if isMultiSelect {
+        if attributes.multiSelect.isEnabled {
             if selectedIndecis.isEmpty {
                 setPlaceholder()
             } else {
@@ -498,12 +407,12 @@ extension SwiftyMenu {
     private func expandSwiftyMenu() {
         delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
-        heightConstraint.constant = listHeight == 0 || !scrollingEnabled || (CGFloat(rowHeight * Double(items.count + 1)) < CGFloat(listHeight)) ? CGFloat(rowHeight * Double(items.count + 1)) : CGFloat(listHeight)
-        
-        switch expandingAnimationStyle {
+        heightConstraint.constant = attributes.height.listHeightValue == 0 || !attributes.scroll.isEnabled || (CGFloat(Double(attributes.rowStyle.rowStyleValues.height) * Double(items.count + 1)) < CGFloat(attributes.height.listHeightValue)) ? CGFloat(Double(attributes.rowStyle.rowStyleValues.height) * Double(items.count + 1)) : CGFloat(attributes.height.listHeightValue)
+
+        switch attributes.expandingAnimation {
         case .linear:
-            UIView.animate(withDuration: expandingDuration,
-                           delay: expandingDelay,
+            UIView.animate(withDuration: attributes.expandingTiming.animationTimingValues.duration,
+                           delay: attributes.expandingTiming.animationTimingValues.delay,
                            animations: animationBlock,
                            completion: expandingAnimationCompletionBlock)
             
@@ -511,8 +420,8 @@ extension SwiftyMenu {
             let damping = CGFloat(0.5 / powerLevel.rawValue)
             let initialVelocity = CGFloat(0.5 * powerLevel.rawValue)
             
-            UIView.animate(withDuration: expandingDuration,
-                           delay: expandingDelay,
+            UIView.animate(withDuration: attributes.expandingTiming.animationTimingValues.duration,
+                           delay: attributes.expandingTiming.animationTimingValues.delay,
                            usingSpringWithDamping: damping,
                            initialSpringVelocity: initialVelocity,
                            options: [],
@@ -525,12 +434,12 @@ extension SwiftyMenu {
     private func collapseSwiftyMenu() {
         delegate?.swiftyMenu(willCollapse: self)
         self.willCollapse()
-        heightConstraint.constant = CGFloat(rowHeight)
+        heightConstraint.constant = CGFloat(attributes.headerStyle.headerStyleValues.height)
         
-        switch collapsingAnimationStyle {
+        switch attributes.collapsingAnimation {
         case .linear:
-            UIView.animate(withDuration: collapsingDuration,
-                           delay: collapsingDelay,
+            UIView.animate(withDuration: attributes.collapsingTiming.animationTimingValues.duration,
+                           delay: attributes.collapsingTiming.animationTimingValues.delay,
                            animations: animationBlock,
                            completion: collapsingAnimationCompletionBlock)
             
@@ -538,8 +447,8 @@ extension SwiftyMenu {
             let damping = CGFloat(1.0 * powerLevel.rawValue)
             let initialVelocity = CGFloat(10.0 * powerLevel.rawValue)
             
-            UIView.animate(withDuration: collapsingDuration,
-                           delay: collapsingDelay,
+            UIView.animate(withDuration: attributes.collapsingTiming.animationTimingValues.duration,
+                           delay: attributes.collapsingTiming.animationTimingValues.delay,
                            usingSpringWithDamping: damping,
                            initialSpringVelocity: initialVelocity,
                            options: .curveEaseIn,
@@ -553,7 +462,7 @@ extension SwiftyMenu {
 
 extension SwiftyMenu {
     private func animationBlock() {
-        if self.arrow != nil{
+        if attributes.arrowStyle.arrowStyleValues.isEnabled {
             self.selectButton.imageView?.transform = self.selectButton.imageView!.transform.rotated(by: CGFloat.pi)
         }
         self.parentViewController?.view.layoutIfNeeded()
