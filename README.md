@@ -9,7 +9,7 @@
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
     <img src="http://img.shields.io/badge/SPM-available-green.svg?style=flat" alt="Swift Package Manager" />
-    <img src="http://img.shields.io/badge/version-1.0.0-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-1.0.1-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
@@ -77,7 +77,7 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate SwiftyMenu into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftyMenu', '~> 1.0.0'
+pod 'SwiftyMenu', '~> 1.0.1'
 ```
 
 ### Swift Package Manager
@@ -90,7 +90,7 @@ pod 'SwiftyMenu', '~> 1.0.0'
 2. Manually in your **Package.swift** file add:
 
 ```swift
-.package(url: "https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu", from: "1.0.0")
+.package(url: "https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu", from: "1.0.1")
 ```
 
 ## Usage

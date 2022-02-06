@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
 
   s.description      = <<-DESC
