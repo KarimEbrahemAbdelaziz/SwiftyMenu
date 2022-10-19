@@ -35,7 +35,11 @@ public extension SwiftyMenuAttributes {
         case value(isEnabled: Bool, image: UIImage? = nil)
 
         var arrowStyleValues: (isEnabled: Bool, image: UIImage?) {
+#if SWIFT_PACKAGE
+            let frameworkBundle = Bundle.module
+#else
             let frameworkBundle = Bundle(for: SwiftyMenu.self)
+#endif
             let defaultImage = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)!
 
             switch self {
