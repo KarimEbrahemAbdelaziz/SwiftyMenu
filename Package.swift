@@ -23,7 +23,8 @@ let package = Package(
         .target(
             name: "SwiftyMenu",
 			dependencies: ["SnapKit"],
-			path: "SwiftyMenu"
+			path: "SwiftyMenu",
+            resources: [.process("Assets")]
         ),
     ],
     swiftLanguageVersions: [.v5]

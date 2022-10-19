@@ -154,12 +154,14 @@ extension SwiftyMenu: UITableViewDataSource {
         cell.textLabel?.text = items[indexPath.row].displayableValue
         cell.textLabel?.textColor = attributes.textStyle.textStyleValues.color
         cell.textLabel?.font = attributes.textStyle.textStyleValues.font
+        cell.textLabel?.textAlignment = attributes.textStyle.textStyleValues.alignment
         cell.tintColor = attributes.textStyle.textStyleValues.color
         cell.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
         cell.selectionStyle = .none
 
         if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
+                cell.textLabel?.textColor = attributes.textStyle.textStyleValues.selectedColor
                 cell.accessoryType = attributes.accessory.isEnabled ? .checkmark : .none
                 cell.backgroundColor = attributes.rowStyle.rowStyleValues.selectedColor
             } else {
@@ -167,6 +169,7 @@ extension SwiftyMenu: UITableViewDataSource {
             }
         } else {
             if indexPath.row == selectedIndex {
+                cell.textLabel?.textColor = attributes.textStyle.textStyleValues.selectedColor
                 cell.accessoryType = attributes.accessory.isEnabled ? .checkmark : .none
                 cell.backgroundColor = attributes.rowStyle.rowStyleValues.selectedColor
             } else {
@@ -304,11 +307,7 @@ extension SwiftyMenu {
             selectButton.setImage(arrow, for: .normal)
         }
         
-        if #available(iOS 11.0, *) {
-            selectButton.contentHorizontalAlignment = .leading
-        } else {
-            selectButton.contentHorizontalAlignment = .left
-        }
+        selectButton.contentHorizontalAlignment = attributes.headerStyle.headerStyleValues.contentHorizontalAlignment
         
         selectButton.addTarget(self, action: #selector(handleMenuState), for: .touchUpInside)
     }

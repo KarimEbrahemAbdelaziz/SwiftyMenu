@@ -31,12 +31,20 @@ public extension SwiftyMenuAttributes {
     enum HeaderStyle {
 
         /** Row with background color */
-        case value(backgroundColor: UIColor, height: Int)
+        case value(backgroundColor: UIColor, contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = Self.defaultContentHorizontalAlignment, height: Int)
 
-        var headerStyleValues: (backgroundColor: UIColor, height: Int) {
+        var headerStyleValues: (backgroundColor: UIColor, contentHorizontalAlignment: UIControl.ContentHorizontalAlignment, height: Int) {
             switch self {
-            case let .value(backgroundColor, height):
-                return (backgroundColor: backgroundColor, height: height)
+            case let .value(backgroundColor, contentHorizontalAlignment, height):
+                return (backgroundColor: backgroundColor, contentHorizontalAlignment: contentHorizontalAlignment, height: height)
+            }
+        }
+
+        public static var defaultContentHorizontalAlignment: UIControl.ContentHorizontalAlignment {
+            if #available(iOS 11.0, *) {
+                return .leading
+            } else {
+                return .left
             }
         }
     }
