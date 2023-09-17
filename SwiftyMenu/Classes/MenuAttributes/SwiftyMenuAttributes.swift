@@ -103,6 +103,9 @@ public struct SwiftyMenuAttributes {
     /** Describes how long the menu animates while collapsing */
     public var collapsingTiming = AnimationTiming.default
 
+    /** Describes errorInfo */
+    public var errorInfo = ErrorInformation.default
+    
     /** Init with default attributes */
     public init() {}
 }
