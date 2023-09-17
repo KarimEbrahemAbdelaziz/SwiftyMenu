@@ -98,6 +98,7 @@ final public class SwiftyMenu: UIView {
     private var height: CGFloat!
     private var setuped: Bool = false
     private var attributes: SwiftyMenuAttributes!
+    private var hasError: Bool = false
     
     // MARK: - Init
     
@@ -138,7 +139,41 @@ final public class SwiftyMenu: UIView {
     public func toggle() {
         handleMenuState()
     }
-    
+
+    /// change style for Error  from Code.
+    public func setError(hasError: Bool){
+        if attributes.multiSelect.isEnabled {
+            if selectedIndecis.isEmpty {
+                selectButton.setTitleColor(hasError ? attributes.errorInfo.errorInfoValues.placeholderTextColor : attributes.placeHolderStyle.placeHolderValues.textColor, for: .normal)
+            } else {
+                selectButton.setTitleColor(hasError ? attributes.errorInfo.errorInfoValues.placeholderTextColor : attributes.textStyle.textStyleValues.color, for: .normal)
+            }
+        } else {
+            if selectedIndex == nil {
+                selectButton.setTitleColor(hasError ? attributes.errorInfo.errorInfoValues.placeholderTextColor : attributes.placeHolderStyle.placeHolderValues.textColor, for: .normal)
+            } else {
+                selectButton.setTitleColor(hasError ? attributes.errorInfo.errorInfoValues.placeholderTextColor : attributes.textStyle.textStyleValues.color, for: .normal)
+            }
+        }
+        
+        selectButton.tintColor = .red
+        if attributes.arrowStyle.arrowStyleValues.isEnabled {
+            if #available(iOS 13.0, *) {
+                if let _ = attributes.arrowStyle.arrowStyleValues.image{
+                    if let tintColor = attributes.arrowStyle.arrowStyleValues.tintColor{
+                        selectButton.tintColor = (hasError ? (attributes.errorInfo.errorInfoValues.iconTintColor ?? tintColor) : tintColor)
+                    }else{
+                        if hasError, let errorColor = attributes.errorInfo.errorInfoValues.iconTintColor{
+                            selectButton.tintColor = (errorColor)
+                        }else{
+                            selectButton.tintColor = nil
+                        }
+                    }
+                }
+            }
+            selectButton.layoutIfNeeded()
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource Functions
@@ -247,7 +282,7 @@ extension SwiftyMenu {
     }
     
     private func setupArrowImage() {
-        let spacing = self.selectButton.frame.width - 20 // the amount of spacing to appear between image and title
+        let spacing = self.selectButton.frame.width - 20 - 10// the amount of spacing to appear between image and title
         var imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing))
