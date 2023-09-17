@@ -156,7 +156,6 @@ final public class SwiftyMenu: UIView {
             }
         }
         
-        selectButton.tintColor = .red
         if attributes.arrowStyle.arrowStyleValues.isEnabled {
             if #available(iOS 13.0, *) {
                 if let _ = attributes.arrowStyle.arrowStyleValues.image{
