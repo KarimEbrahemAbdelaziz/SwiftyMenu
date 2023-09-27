@@ -281,7 +281,7 @@ extension SwiftyMenu {
     }
     
     private func setupArrowImage() {
-        let spacing = self.selectButton.frame.width - 20 - 10// the amount of spacing to appear between image and title
+        let spacing = self.selectButton.frame.width - 20 - 5// the amount of spacing to appear between image and title
         var imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing))
@@ -316,12 +316,14 @@ extension SwiftyMenu {
         selectButton.imageEdgeInsets.left = width - 16
         
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
+            debugPrint("here rightToLeft")
             selectButton.titleEdgeInsets.right = 16
             selectButton.titleEdgeInsets.left = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
             selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
         } else {
+            debugPrint("here rightToLeft else")
             selectButton.titleEdgeInsets.right = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
-            selectButton.titleEdgeInsets.left = 16
+            selectButton.titleEdgeInsets.left = 0//16
             selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
         }
 
@@ -330,10 +332,14 @@ extension SwiftyMenu {
         let arrow = attributes.arrowStyle.arrowStyleValues.image
 
         if attributes.arrowStyle.arrowStyleValues.isEnabled {
+            selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
+            
             if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
-                selectButton.titleEdgeInsets.right = 4
+                debugPrint("here rightToLeft isEnabled")
+                selectButton.titleEdgeInsets.right = 0//4
             } else {
-                selectButton.titleEdgeInsets.left = 4
+                debugPrint("here rightToLeft isEnabled else")
+                selectButton.titleEdgeInsets.left = 0//4
             }
             selectButton.setImage(arrow, for: .normal)
         }
@@ -343,6 +349,11 @@ extension SwiftyMenu {
         } else {
             selectButton.contentHorizontalAlignment = .left
         }
+        
+        //***delete START***
+        //selectButton.backgroundColor = .green
+        //selectButton.titleLabel?.backgroundColor = .purple
+        //***delete END***
         
         selectButton.addTarget(self, action: #selector(handleMenuState), for: .touchUpInside)
     }
@@ -358,8 +369,8 @@ extension SwiftyMenu {
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
         itemsTableView.rowHeight = CGFloat(attributes.rowStyle.rowStyleValues.height)
-        itemsTableView.separatorInset.left = 8
-        itemsTableView.separatorInset.right = 8
+        itemsTableView.separatorInset.left = 0
+        itemsTableView.separatorInset.right = 0
         itemsTableView.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
         itemsTableView.isScrollEnabled = attributes.scroll.isEnabled
         itemsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
