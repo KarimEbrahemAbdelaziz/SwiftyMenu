@@ -64,7 +64,7 @@ final public class SwiftyMenu: UIView {
     
     /// `delegate` is the `SwiftyMenu` delegate property.
     public weak var delegate: SwiftyMenuDelegate?
-
+    
     /// `separatorCharacters` is a property to get and set separator characters  in `SwiftyMenu` when it is a Multi Selection.
     public var separatorCharacters: String?
     
@@ -88,7 +88,7 @@ final public class SwiftyMenu: UIView {
     ///   - item: The `Item` that had been selected from `SwiftyMenu`.
     ///   - index: The `Index` of the selected `Item`.
     public var didSelectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
-
+    
     // MARK: - Private Properties
     
     private var selectButton: UIButton!
@@ -129,7 +129,7 @@ final public class SwiftyMenu: UIView {
     }
     
     // MARK: - Public Funcitons
-
+    
     /// Configure `SwiftyMenu` with attributes.
     public func configure(with attributes: SwiftyMenuAttributes) {
         self.attributes = attributes
@@ -139,7 +139,7 @@ final public class SwiftyMenu: UIView {
     public func toggle() {
         handleMenuState()
     }
-
+    
     /// change style for Error  from Code.
     public func setError(hasError: Bool){
         if attributes.multiSelect.isEnabled {
@@ -183,7 +183,7 @@ extension SwiftyMenu: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
         cell.textLabel?.text = items[indexPath.row].displayableValue
         cell.textLabel?.textColor = attributes.textStyle.textStyleValues.color
@@ -191,7 +191,7 @@ extension SwiftyMenu: UITableViewDataSource {
         cell.tintColor = attributes.textStyle.textStyleValues.color
         cell.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
         cell.selectionStyle = .none
-
+        
         if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
                 cell.accessoryType = attributes.accessory.isEnabled ? .checkmark : .none
@@ -207,7 +207,7 @@ extension SwiftyMenu: UITableViewDataSource {
                 cell.accessoryType = .none
             }
         }
-
+        
         return cell
     }
 }
@@ -220,7 +220,7 @@ extension SwiftyMenu: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
                 selectedIndecis[indexPath.row] = nil
@@ -242,6 +242,17 @@ extension SwiftyMenu: UITableViewDelegate {
             }
         } else {
             if selectedIndex == indexPath.row {
+                switch attributes.multiSelect{
+                case .disabled(let allowSingleDeselection):
+                    if allowSingleDeselection{
+                        selectedIndex = nil
+                        setSelectedOptionsAsTitle()
+                        tableView.reloadData()
+                    }
+                default:
+                    break
+                }
+                
                 if attributes.hideOptionsWhenSelect.isEnabled {
                     handleMenuState()
                 }
@@ -271,7 +282,7 @@ extension SwiftyMenu {
         setupDataTableView()
         setupSeparatorStyle()
     }
-
+    
     public func setupSeparatorStyle() {
         itemsTableView.separatorStyle = attributes.separatorStyle.separatorStyleValues.style
         if attributes.separatorStyle.separatorStyleValues.isBlured {
@@ -303,7 +314,7 @@ extension SwiftyMenu {
             maker.leading.trailing.top.equalTo(self)
             maker.height.equalTo(height)
         }
-
+        
         let color = attributes.placeHolderStyle.placeHolderValues.textColor
         selectButton.setTitleColor(color, for: .normal)
         UIView.performWithoutAnimation {
@@ -311,7 +322,7 @@ extension SwiftyMenu {
             selectButton.layoutIfNeeded()
         }
         selectButton.titleLabel?.font = attributes.textStyle.textStyleValues.font
-
+        
         selectButton.imageEdgeInsets.right = width - 16
         selectButton.imageEdgeInsets.left = width - 16
         
@@ -326,11 +337,11 @@ extension SwiftyMenu {
             selectButton.titleEdgeInsets.left = 0//16
             selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
         }
-
+        
         selectButton.backgroundColor = attributes.headerStyle.headerStyleValues.backgroundColor
-
+        
         let arrow = attributes.arrowStyle.arrowStyleValues.image
-
+        
         if attributes.arrowStyle.arrowStyleValues.isEnabled {
             selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
             
@@ -453,7 +464,7 @@ extension SwiftyMenu {
         delegate?.swiftyMenu(willExpand: self)
         self.willExpand()
         heightConstraint.constant = attributes.height.listHeightValue == 0 || !attributes.scroll.isEnabled || (CGFloat(Double(attributes.rowStyle.rowStyleValues.height) * Double(items.count + 1)) < CGFloat(attributes.height.listHeightValue)) ? CGFloat(Double(attributes.rowStyle.rowStyleValues.height) * Double(items.count + 1)) : CGFloat(attributes.height.listHeightValue)
-
+        
         switch attributes.expandingAnimation {
         case .linear:
             UIView.animate(withDuration: attributes.expandingTiming.animationTimingValues.duration,

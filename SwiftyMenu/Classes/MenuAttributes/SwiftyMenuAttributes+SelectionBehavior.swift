@@ -30,7 +30,7 @@ public extension SwiftyMenuAttributes {
     enum MultiSelection {
 
         /** The scroll ability is totally disabled */
-        case disabled
+        case disabled(allowSingleDeselection: Bool = false)
 
         /** The scroll abiliby is enabled */
         case enabled

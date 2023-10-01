@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         var attributes = SwiftyMenuAttributes()
 
         // Custom Behavior
-        attributes.multiSelect = .disabled
+        attributes.multiSelect = .disabled(allowSingleDeselection: true)
         attributes.scroll = .disabled
         attributes.hideOptionsWhenSelect = .enabled
 
