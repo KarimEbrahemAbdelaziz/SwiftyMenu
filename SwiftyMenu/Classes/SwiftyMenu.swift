@@ -350,7 +350,7 @@ extension SwiftyMenu {
                 selectButton.titleEdgeInsets.right = 0//4
             } else {
                 debugPrint("here rightToLeft isEnabled else")
-                selectButton.titleEdgeInsets.left = 0//4
+                selectButton.titleEdgeInsets.left = 10//4
             }
             selectButton.setImage(arrow, for: .normal)
         }
