@@ -123,8 +123,9 @@ final public class SwiftyMenu: UIView {
         
         if !setuped {
             setupUI()
-            setupArrowImage()
+            //setupArrowImage()
             setuped = true
+            changeTintColorArrow(hasError: hasError)
         }
     }
     
@@ -142,6 +143,7 @@ final public class SwiftyMenu: UIView {
     
     /// change style for Error  from Code.
     public func setError(hasError: Bool){
+        self.hasError = hasError
         if attributes.multiSelect.isEnabled {
             if selectedIndecis.isEmpty {
                 selectButton.setTitleColor(hasError ? attributes.errorInfo.errorInfoValues.placeholderTextColor : attributes.placeHolderStyle.placeHolderValues.textColor, for: .normal)
@@ -156,17 +158,25 @@ final public class SwiftyMenu: UIView {
             }
         }
         
+        changeTintColorArrow(hasError: hasError)
+    }
+    
+    private func changeTintColorArrow(hasError: Bool){
         if attributes.arrowStyle.arrowStyleValues.isEnabled {
-            if #available(iOS 13.0, *) {
-                if let _ = attributes.arrowStyle.arrowStyleValues.image{
-                    if let tintColor = attributes.arrowStyle.arrowStyleValues.tintColor{
-                        selectButton.tintColor = (hasError ? (attributes.errorInfo.errorInfoValues.iconTintColor ?? tintColor) : tintColor)
+            if let image = attributes.arrowStyle.arrowStyleValues.image{
+                if let tintColor = attributes.arrowStyle.arrowStyleValues.tintColor{
+                    print("here changing 1 - tintColor: \(tintColor) - hasError: \(hasError)")
+                    selectButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+                    selectButton.tintColor = (hasError ? (attributes.errorInfo.errorInfoValues.iconTintColor ?? tintColor) : tintColor)
+                }else{
+                    print("here changing 2")
+                    if hasError, let errorColor = attributes.errorInfo.errorInfoValues.iconTintColor{
+                        selectButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+                        selectButton.tintColor = (errorColor)
                     }else{
-                        if hasError, let errorColor = attributes.errorInfo.errorInfoValues.iconTintColor{
-                            selectButton.tintColor = (errorColor)
-                        }else{
-                            selectButton.tintColor = nil
-                        }
+                        print("here changing 3")
+                        selectButton.tintColor = nil
+                        selectButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
                     }
                 }
             }
@@ -184,13 +194,16 @@ extension SwiftyMenu: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath) as! SwiftyMenuCell
         cell.textLabel?.text = items[indexPath.row].displayableValue
         cell.textLabel?.textColor = attributes.textStyle.textStyleValues.color
         cell.textLabel?.font = attributes.textStyle.textStyleValues.font
         cell.tintColor = attributes.textStyle.textStyleValues.color
         cell.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
         cell.selectionStyle = .none
+        cell.leftMargin = attributes.itemMarginHorizontal.leadingValue
+        cell.rightMargin = attributes.itemMarginHorizontal.trailingValue
+        cell.isContentRightToLeft = self.isContentRightToLeft()
         
         if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
@@ -208,6 +221,7 @@ extension SwiftyMenu: UITableViewDataSource {
             }
         }
         
+        
         return cell
     }
 }
@@ -223,6 +237,8 @@ extension SwiftyMenu: UITableViewDelegate {
         
         if attributes.multiSelect.isEnabled {
             if selectedIndecis[indexPath.row] != nil {
+                let deselectedText = self.items[selectedIndecis[indexPath.row]!]
+                delegate?.swiftyMenu(self, didDeselectItem: deselectedText, atIndex: indexPath.row)
                 selectedIndecis[indexPath.row] = nil
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
@@ -230,6 +246,11 @@ extension SwiftyMenu: UITableViewDelegate {
                     handleMenuState()
                 }
             } else {
+                //clean arrow color for error
+                if hasError && selectedIndecis.isEmpty{
+                    hasError = false
+                    changeTintColorArrow(hasError: hasError)
+                }
                 selectedIndecis[indexPath.row] = indexPath.row
                 setSelectedOptionsAsTitle()
                 let selectedText = self.items[selectedIndecis[indexPath.row]!]
@@ -245,6 +266,8 @@ extension SwiftyMenu: UITableViewDelegate {
                 switch attributes.multiSelect{
                 case .disabled(let allowSingleDeselection):
                     if allowSingleDeselection{
+                        let deselectedText = self.items[self.selectedIndex!]
+                        delegate?.swiftyMenu(self, didDeselectItem: deselectedText, atIndex: indexPath.row)
                         selectedIndex = nil
                         setSelectedOptionsAsTitle()
                         tableView.reloadData()
@@ -257,6 +280,11 @@ extension SwiftyMenu: UITableViewDelegate {
                     handleMenuState()
                 }
             } else {
+                //clean arrow color for error
+                if hasError && selectedIndex == nil{
+                    hasError = false
+                    changeTintColorArrow(hasError: hasError)
+                }
                 selectedIndex = indexPath.row
                 setSelectedOptionsAsTitle()
                 let selectedText = self.items[self.selectedIndex!]
@@ -292,12 +320,37 @@ extension SwiftyMenu {
     }
     
     private func setupArrowImage() {
-        let spacing = self.selectButton.frame.width - 20 - 5// the amount of spacing to appear between image and title
+        var arrowSpacing = getSelectButtonSpacing()
+        let spacing = self.selectButton.frame.width - arrowSpacing - 10// the amount of spacing to appear between image and title
+        if attributes.arrowStyle.arrowStyleValues.isEnabled{
+            debugPrint("spacing: \(spacing) - arrowSpacing: \(arrowSpacing)")
+        }
+        selectButton.imageView?.contentMode = .scaleAspectFit
         var imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
-        if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
+        if isContentRightToLeft() {
             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing))
         }
         selectButton.imageEdgeInsets = imageEdgeInsets
+    }
+    
+    private func isContentRightToLeft() -> Bool{
+        return UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft
+    }
+    
+    private func getSelectButtonSpacing() -> CGFloat{
+        var arrowSpacing = (UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft ? attributes.titleMarginHorizontal.leadingValue : attributes.titleMarginHorizontal.trailingValue)
+        
+        if attributes.arrowStyle.arrowStyleValues.isEnabled{
+            //arrowSpacing += attributes.arrowMarginRight
+            debugPrint("attributes.titleMarginHorizontal.trailingValue: \(attributes.titleMarginHorizontal.trailingValue)")
+            
+            debugPrint("attributes.arrowStyle.arrowStyleValues.image: \(attributes.arrowStyle.arrowStyleValues.image?.size)")
+            
+            debugPrint("attributes.arrowStyle.arrowStyleValues.image2 width: \(attributes.arrowStyle.arrowStyleValues.image?.size.width)")
+            debugPrint("attributes.arrowStyle.arrowStyleValues.image2 size: \(selectButton.imageView?.frame.size)")
+        }
+        
+        return arrowSpacing
     }
     
     private func setupView() {
@@ -321,51 +374,139 @@ extension SwiftyMenu {
             selectButton.setTitle(attributes.placeHolderStyle.placeHolderValues.text, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.titleLabel?.font = attributes.textStyle.textStyleValues.font
         
-        selectButton.imageEdgeInsets.right = width - 16
-        selectButton.imageEdgeInsets.left = width - 16
+        let isContentRightToLeft = isContentRightToLeft()
         
-        if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
-            debugPrint("here rightToLeft")
-            selectButton.titleEdgeInsets.right = 16
-            selectButton.titleEdgeInsets.left = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
-            selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
-        } else {
-            debugPrint("here rightToLeft else")
-            selectButton.titleEdgeInsets.right = attributes.arrowStyle.arrowStyleValues.isEnabled ? 32 : 16
-            selectButton.titleEdgeInsets.left = 0//16
-            selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
-        }
+        //selectButton.imageEdgeInsets.right = width - 16//(isContentRightToLeft ? attributes.titleMarginHorizontal.trailingValue: arrowSpacing) - 10
+        //selectButton.imageEdgeInsets.left = width - 16//(isContentRightToLeft ? arrowSpacing : attributes.titleMarginHorizontal.leadingValue) - 10
+        
+        
+        let lineBreakMode: NSLineBreakMode = isContentRightToLeft ? .byTruncatingHead : .byTruncatingTail
+        let isArrowEnable: Bool = attributes.arrowStyle.arrowStyleValues.isEnabled
+        let arrow = isArrowEnable ? attributes.arrowStyle.arrowStyleValues.image : nil
+        let leftPadding = isContentRightToLeft ? attributes.titleMarginHorizontal.trailingValue : attributes.titleMarginHorizontal.leadingValue
+        let rightPadding = isContentRightToLeft ? attributes.titleMarginHorizontal.leadingValue : attributes.titleMarginHorizontal.trailingValue
+        let font = self.attributes.textStyle.textStyleValues.font
+        let placeholderTextColor = attributes.placeHolderStyle.placeHolderValues.textColor
+        let spacingBetweenText = isArrowEnable ? attributes.arrowStyle.arrowStyleValues.spacingBetweenText : 0.0
+        
+        /*if isContentRightToLeft {
+         debugPrint("here rightToLeft")
+         //selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.leadingValue
+         //selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.trailingValue
+         selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
+         } else {
+         debugPrint("here rightToLeft else")
+         //selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.trailingValue
+         //selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.leadingValue
+         selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
+         }*/
         
         selectButton.backgroundColor = attributes.headerStyle.headerStyleValues.backgroundColor
         
-        let arrow = attributes.arrowStyle.arrowStyleValues.image
         
-        if attributes.arrowStyle.arrowStyleValues.isEnabled {
-            selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
-            
-            if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
-                debugPrint("here rightToLeft isEnabled")
-                selectButton.titleEdgeInsets.right = 0//4
-            } else {
-                debugPrint("here rightToLeft isEnabled else")
-                selectButton.titleEdgeInsets.left = 10//4
+        selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        if #available(iOS 15.0, *){
+            var btnConfig = UIButton.Configuration.plain()
+            btnConfig.titleAlignment = .leading
+            btnConfig.imagePlacement = .trailing
+            btnConfig.image = arrow
+            btnConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: leftPadding, bottom: 0, trailing: rightPadding - 2)
+            btnConfig.imagePadding = spacingBetweenText //spacing between image and icon
+            btnConfig.image =  arrow
+            btnConfig.titleLineBreakMode = lineBreakMode
+            btnConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = font
+                return outgoing
             }
-            selectButton.setImage(arrow, for: .normal)
+            
+            selectButton.configuration = btnConfig
+            selectButton.translatesAutoresizingMaskIntoConstraints = false
+            selectButton.contentMode = .scaleAspectFit
+            selectButton.contentHorizontalAlignment = isContentRightToLeft ? (isArrowEnable ? .fill : .right) : (isArrowEnable ? .fill : .left)
+            selectButton.clipsToBounds = true
+            selectButton.setTitleColor(color, for: .normal)
+        }else{
+            if #available(iOS 11.0, *) {
+                selectButton.contentHorizontalAlignment = isContentRightToLeft ? .trailing : .leading
+            } else {
+                selectButton.contentHorizontalAlignment = isContentRightToLeft ? .right : .left
+            }
+            
+            selectButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
+            selectButton.titleLabel?.lineBreakMode = lineBreakMode
+            selectButton.titleLabel?.font = font
+            selectButton.setTitleColor(placeholderTextColor, for: .normal)
+            //selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            //selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: isArrowEnable ?  -selectButton.imageView!.frame.width : 0)
+            
+            //self.selectButton.imageEdgeInsets.right = isArrowEnable ? -self.selectButton.frame.width - 16 : 0
+            
+            //selectButton.imageEdgeInsets.right = width - 16
+            if isArrowEnable{
+                print("width icon: \(selectButton.imageView?.frame.size.width) - \(selectButton.imageView?.frame.width) - \(arrow?.size.width)")
+                print("rightPadding: \(rightPadding)")
+            }
+            self.selectButton?.imageView?.contentMode = .scaleAspectFit
+            
+            //DispatchQueue.main.async {
+            //self.selectButton.imageEdgeInsets.left = 150//isArrowEnable ? -self.selectButton.frame.width - 16 : 0
+            //self.selectButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right:  -self.selectButton.frame.width + rightPadding)
+            
+            self.selectButton.setImage(arrow, for: .normal)
+            //}
+            
+            let imageWidth: CGFloat  = isArrowEnable ? (arrow?.size.width ?? .zero) : 0
+            
+            
+            var adjustImageEdgeInsets: UIEdgeInsets = .zero
+            var adjustTitleEdgeInsets: UIEdgeInsets = .zero
+            
+            //if isArrowEnable{
+            let arrowRight = rightPadding + imageWidth
+            
+            adjustImageEdgeInsets.left = width - arrowRight
+            adjustImageEdgeInsets.right = rightPadding
+            //adjustImageEdgeInsets.right = -width - 100//- rightPadding
+            
+            adjustTitleEdgeInsets.left = -imageWidth + leftPadding
+            adjustTitleEdgeInsets.right = arrowRight + spacingBetweenText
+            
+            self.selectButton.imageEdgeInsets = adjustImageEdgeInsets
+            self.selectButton.titleEdgeInsets = adjustTitleEdgeInsets
+            //}
+            
         }
         
-        if #available(iOS 11.0, *) {
-            selectButton.contentHorizontalAlignment = .leading
-        } else {
-            selectButton.contentHorizontalAlignment = .left
-        }
+        /*if isContentRightToLeft {
+         debugPrint("here2 rightToLeft isEnabled")
+         selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.trailingValue + 10 //+ attributes.arrowMarginRight
+         } else {
+         debugPrint("here2 rightToLeft isEnabled else")
+         selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.trailingValue + 10 + attributes.arrowMarginRight
+         selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.leadingValue //- attributes.arrowMarginRight
+         }*/
+        //selectButton.setImage(arrow, for: .normal)
+        
+        print("selectButton.imageEdgeInsets: \(selectButton.imageEdgeInsets) - \(attributes.placeHolderStyle.placeHolderValues.text) - margin extra: \(attributes.arrowMarginRight)")
+        //}
+        
+        /*if #available(iOS 11.0, *) {
+         selectButton.contentHorizontalAlignment = attributes.arrowStyle.arrowStyleValues.isEnabled ? .fill : .leading
+         } else {
+         selectButton.contentHorizontalAlignment = .left
+         }*/
+        
+        //selectButton.semanticContentAttribute = .forceRightToLeft
+        //UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        
         
         //***delete START***
         //selectButton.backgroundColor = .green
         //selectButton.titleLabel?.backgroundColor = .purple
         //***delete END***
-        
         selectButton.addTarget(self, action: #selector(handleMenuState), for: .touchUpInside)
     }
     
@@ -384,7 +525,7 @@ extension SwiftyMenu {
         itemsTableView.separatorInset.right = 0
         itemsTableView.backgroundColor = attributes.rowStyle.rowStyleValues.backgroundColor
         itemsTableView.isScrollEnabled = attributes.scroll.isEnabled
-        itemsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
+        itemsTableView.register(SwiftyMenuCell.self, forCellReuseIdentifier: "OptionCell")
         itemsTableView.showsVerticalScrollIndicator = false
     }
     
@@ -411,11 +552,12 @@ extension SwiftyMenu {
     }
     
     private func setMultiSelectedOptions() {
-        let titles = selectedIndecis.mapValues { (index) -> String in
+        let sortedSelectedIndecis = selectedIndecis.sorted { $0.key < $1.key }
+        let titles = sortedSelectedIndecis.map { (index, _) -> String in
             return items[index].displayableValue
         }
         var selectedTitle = ""
-        selectedTitle = titles.values.joined(separator: separatorCharacters ?? ", ")
+        selectedTitle = titles.joined(separator: separatorCharacters ?? ", ")
         UIView.performWithoutAnimation {
             selectButton.setTitle(selectedTitle, for: .normal)
             selectButton.layoutIfNeeded()

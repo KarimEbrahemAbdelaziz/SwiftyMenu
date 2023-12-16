@@ -32,23 +32,23 @@ public extension SwiftyMenuAttributes {
         
         case `default`
         
-        case value(isEnabled: Bool, image: UIImage? = nil, tintColor: UIColor? = nil) // Added tintColor parameter with default nil
+        case value(isEnabled: Bool, image: UIImage? = nil, tintColor: UIColor? = nil, spacingBetweenText: CGFloat = 0) // Added tintColor parameter with default nil
         
-        var arrowStyleValues: (isEnabled: Bool, image: UIImage?, tintColor: UIColor?) { // Added tintColor to the return type
+        var arrowStyleValues: (isEnabled: Bool, image: UIImage?, tintColor: UIColor?, spacingBetweenText: CGFloat) { // Added tintColor to the return type
             let frameworkBundle = Bundle(for: SwiftyMenu.self)
             let defaultImage = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)!
             
             switch self {
-            case let .value(isEnabled, image, tintColor):
+            case let .value(isEnabled, image, tintColor, spacingBetweenText):
                 if isEnabled && image != nil {
-                    return (isEnabled: isEnabled, image: image, tintColor: tintColor)
+                    return (isEnabled: isEnabled, image: image, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else if isEnabled {
-                    return (isEnabled: isEnabled, image: defaultImage, tintColor: tintColor)
+                    return (isEnabled: isEnabled, image: defaultImage, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else {
-                    return (isEnabled: isEnabled, image: nil, tintColor: tintColor)
+                    return (isEnabled: isEnabled, image: nil, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 }
             case .default:
-                return (isEnabled: true, image: defaultImage, tintColor: nil) // Default tintColor is nil
+                return (isEnabled: true, image: defaultImage, tintColor: nil, spacingBetweenText: 0) // Default tintColor is nil
             }
         }
     }

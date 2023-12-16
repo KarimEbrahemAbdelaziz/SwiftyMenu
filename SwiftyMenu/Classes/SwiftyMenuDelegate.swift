@@ -34,6 +34,14 @@ public protocol SwiftyMenuDelegate: AnyObject {
     ///   - index: The `Index` of the selected `Item`.
     func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int)
     
+    /// Called when select an item from `SwiftyMenu`.
+    ///
+    /// - Parameters:
+    ///   - swiftyMenu: The `SwiftyMenu` that was deselected from it's items.
+    ///   - item: The `Item` that had been deselected from `SwiftyMenu`.
+    ///   - index: The `Index` of the deselected `Item`.
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didDeselectItem item: SwiftyMenuDisplayable, atIndex index: Int)
+    
     /// Called when `SwiftyMenu` will going to Expand.
     ///
     /// - Parameter swiftyMenu: The `SwiftyMenu` that is going to Expand.

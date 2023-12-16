@@ -12,9 +12,16 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var contentScrollView: UIView!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet private weak var dropDown: SwiftyMenu!
+    @IBOutlet private weak var dropDown2: SwiftyMenu!
+    @IBOutlet private weak var dropDown3: SwiftyMenu!
     @IBOutlet private weak var otherView: UIView!
-
+    @IBOutlet weak var isErrorEnableSwitch: UISwitch!
+    
+    let indexSelectedForError = 0
+    
     /// Define menu data source
     /// The data source type should conform to `SwiftyMenuDisplayable`
     private let dropDownOptionsDataSource = [
@@ -55,7 +62,12 @@ class ViewController: UIViewController {
 
         attributes.collapsingAnimation = .linear
         attributes.collapsingTiming = .value(duration: 0.5, delay: 0)
-
+        
+        attributes.titleMarginHorizontal = .value(leading: 5, trailing: 5)
+        attributes.itemMarginHorizontal = .value(leading: 5, trailing: 5)
+        
+        attributes.errorInfo = .default
+        
         return attributes
     }
 
@@ -91,6 +103,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         setupStoryboardMenu()
+        setupMenu2()
+        setupMenu3()
         setupCodeMenu()
     }
 
@@ -104,6 +118,43 @@ class ViewController: UIViewController {
         dropDown.configure(with: storyboardMenuAttributes)
     }
 
+    //Example for swiftyMenu2 with custom margins
+    private func setupMenu2() {
+        /// Setup component
+        dropDown2.delegate = self
+        dropDown2.items = dropDownOptionsDataSource
+
+        var attributes = storyboardMenuAttributes
+        attributes.titleMarginHorizontal = .value(leading: 10, trailing: 20)
+        attributes.itemMarginHorizontal = .value(leading: 10, trailing: 10)
+        //attributes.hideOptionsWhenSelect = .enabled
+        //if #available(iOS 13.0, *) {
+            //adding custom view
+            //let image = UIImage(systemName: "arrow.down")//?.withRenderingMode(.alwaysTemplate)
+            let image = UIImage(named: "arrow.down.custom")
+            attributes.arrowStyle = .value(isEnabled: true, image: image, tintColor: .purple, spacingBetweenText: 10.0)
+        //}
+        /// Configure SwiftyMenu with the attributes
+        dropDown2.configure(with: attributes)
+    }
+    
+    private func setupMenu3() {
+        /// Setup component
+        dropDown3.delegate = self
+        dropDown3.items = dropDownOptionsDataSource
+
+        var attributes = storyboardMenuAttributes
+        attributes.titleMarginHorizontal = .value(leading: 0, trailing: 0)
+        attributes.itemMarginHorizontal = .value(leading: 40, trailing: 40)
+        
+        attributes.multiSelect = .disabled(allowSingleDeselection: false)
+        attributes.arrowStyle = .value(isEnabled: false)
+        attributes.hideOptionsWhenSelect = .enabled
+        
+        /// Configure SwiftyMenu with the attributes
+        dropDown3.configure(with: attributes)
+    }
+    
     /// Example of building SwiftyMenu from Code
     private func setupCodeMenu() {
 
@@ -116,18 +167,21 @@ class ViewController: UIViewController {
         /// Add constraints to SwiftyMenu
         /// You must take care of `hegiht` constraint, please.
         dropDownCode.translatesAutoresizingMaskIntoConstraints = false
-        let horizontalConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-        let topConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: otherView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 64)
-        let widthConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 255)
+        //let horizontalConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+        //let topConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: otherView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 64)
+        //let widthConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 255)
         dropDownCode.heightConstraint = NSLayoutConstraint(item: dropDownCode, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 40)
+        
         NSLayoutConstraint.activate(
             [
-                horizontalConstraint,
-                topConstraint,
-                widthConstraint,
-                dropDownCode.heightConstraint
+                //horizontalConstraint,
+                //topConstraint,
+                //widthConstraint,
+                dropDownCode.heightConstraint,
             ]
         )
+        
+        stackView.addArrangedSubview(dropDownCode)
 
         /// Setup SwiftyMenu data source
         dropDownCode.items = dropDownCodeOptionsDataSource
@@ -154,16 +208,73 @@ class ViewController: UIViewController {
         }
 
         /// Configure SwiftyMenu with the attributes
-        dropDownCode.configure(with: codeMenuAttributes)
+        var attributes = codeMenuAttributes
+        /*//attributes.arrowStyle = .default
+        //attributes.arrowStyle = .value(isEnabled: true, image: nil, tintColor: nil)
+        attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)
+        attributes.arrowStyle = .value(isEnabled: false)
+        //attributes.multiSelect = .disabled(allowSingleDeselection: false)
+        attributes.multiSelect = .enabled
+        attributes.hideOptionsWhenSelect = .disabled*/
+        
+        dropDownCode.configure(with: attributes)
+        
     }
-
+    
+    @IBAction func toggleIsErrorEnable(_ sender: UISwitch) {
+        if sender == isErrorEnableSwitch{
+            if sender.isOn{
+                if dropDown.selectedIndecis.contains(where: { $0.key == indexSelectedForError }),  isErrorEnableSwitch.isOn{
+                    dropDown.setError(hasError: true)
+                }else{
+                    dropDown.setError(hasError: false)
+                }
+            }else{
+                dropDown.setError(hasError: false)
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            self.dropDown2.setError(hasError: true)
+        }
+    }
 }
 
 // MARK: - SwiftMenuDelegate
 
 extension ViewController: SwiftyMenuDelegate {
     func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
-        print("Selected item: \(item), at index: \(index)")
+        print("didSelectItem item: \(item), at index: \(index)")
+        
+        if swiftyMenu == dropDown{
+            if index == indexSelectedForError{
+                if isErrorEnableSwitch.isOn{
+                    dropDown.setError(hasError: true)
+                }else{
+                    dropDown.setError(hasError: false)
+                }
+            }else{
+                if dropDown.selectedIndecis.contains(where: { $0.key == indexSelectedForError }),  isErrorEnableSwitch.isOn{
+                    dropDown.setError(hasError: true)
+                }else{
+                    dropDown.setError(hasError: false)
+                }
+            }
+        }
+    }
+    
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didDeselectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
+        print("didDeselectItem item: \(item), at index: \(index)")
+        
+        if swiftyMenu == dropDown{
+            if index == indexSelectedForError{
+                if isErrorEnableSwitch.isOn{
+                    dropDown.setError(hasError: false)
+                }
+            }
+        }
     }
     
     func swiftyMenu(willExpand swiftyMenu: SwiftyMenu) {

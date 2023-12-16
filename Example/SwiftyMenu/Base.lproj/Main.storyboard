@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,50 +20,150 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-Fi-mme">
-                                <rect key="frame" x="60" y="100" width="255" height="151"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Gd-pd-uf8">
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-dq-Ipz" customClass="SwiftyMenu" customModule="SwiftyMenu">
-                                        <rect key="frame" x="0.0" y="0.0" width="255" height="35"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDw-A1-LJZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="647"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RXo-Fi-mme">
+                                                <rect key="frame" x="20" y="20" width="303" height="381.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ecM-yF-2mA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="303" height="31"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is Error Enable when selecting first item:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Nrt-Sf-Hbm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="246" height="31"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HGD-ZK-PhZ">
+                                                                <rect key="frame" x="254" y="0.0" width="51" height="31"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="49" id="FoG-et-Rzt"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <action selector="toggleIsErrorEnable:" destination="vXZ-lx-hvc" eventType="valueChanged" id="adI-K2-Ii1"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqm-7X-6Y2">
+                                                        <rect key="frame" x="0.0" y="39" width="303" height="39.5"/>
+                                                        <string key="text">Normal 
+MultiSelect
+default item and title margin horizontal</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag2-dq-Ipz" customClass="SwiftyMenu" customModule="SwiftyMenu">
+                                                        <rect key="frame" x="0.0" y="86.5" width="303" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="7UK-p1-k6b"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="heightConstraint" destination="7UK-p1-k6b" id="AsB-2L-fSb"/>
+                                                        </connections>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eg6-xa-Q7o">
+                                                        <rect key="frame" x="0.0" y="129.5" width="303" height="50"/>
+                                                        <color key="backgroundColor" red="0.46881388460000001" green="0.44683777229999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="CPO-w8-P92"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEK-Tk-I7P" customClass="SwiftyMenu" customModule="SwiftyMenu">
+                                                        <rect key="frame" x="0.0" y="187.5" width="303" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="yep-wr-lOk"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="heightConstraint" destination="yep-wr-lOk" id="g9n-lZ-tRv"/>
+                                                        </connections>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVU-U7-e3W">
+                                                        <rect key="frame" x="0.0" y="230.5" width="303" height="50"/>
+                                                        <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="46H-Fo-E6Y"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbB-uK-x60" customClass="SwiftyMenu" customModule="SwiftyMenu">
+                                                        <rect key="frame" x="0.0" y="288.5" width="303" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="udb-jd-j64"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="heightConstraint" destination="udb-jd-j64" id="SqY-4y-rP8"/>
+                                                        </connections>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS5-4Y-B4p">
+                                                        <rect key="frame" x="0.0" y="331.5" width="303" height="50"/>
+                                                        <color key="backgroundColor" red="1" green="0.36078431370000003" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="I3K-LS-s7T"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fi2-Mu-0lf">
+                                                <rect key="frame" x="60" y="401" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="Is Enable Error in selecting first item:" translatesAutoresizingMaskIntoConstraints="NO" id="huS-ry-KBo">
+                                                <rect key="frame" x="-56" y="517" width="305" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </switch>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="7UK-p1-k6b"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Please select option"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="heightConstraint" destination="7UK-p1-k6b" id="AsB-2L-fSb"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eg6-xa-Q7o">
-                                        <rect key="frame" x="0.0" y="43" width="255" height="50"/>
-                                        <color key="backgroundColor" red="0.46881388460000001" green="0.44683777229999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="CPO-w8-P92"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS5-4Y-B4p">
-                                        <rect key="frame" x="0.0" y="101" width="255" height="50"/>
-                                        <color key="backgroundColor" red="1" green="0.36078431370000003" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="I3K-LS-s7T"/>
+                                            <constraint firstAttribute="trailing" secondItem="RXo-Fi-mme" secondAttribute="trailing" constant="20" id="09z-5z-V1S"/>
+                                            <constraint firstItem="RXo-Fi-mme" firstAttribute="top" secondItem="PDw-A1-LJZ" secondAttribute="top" constant="20" symbolic="YES" id="1Zs-L3-XK8"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RXo-Fi-mme" secondAttribute="bottom" constant="20" id="8mT-Zo-IXl"/>
+                                            <constraint firstItem="RXo-Fi-mme" firstAttribute="leading" secondItem="PDw-A1-LJZ" secondAttribute="leading" constant="20" id="XUA-cm-jc3"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="PDw-A1-LJZ" firstAttribute="height" secondItem="6Gd-pd-uf8" secondAttribute="height" priority="250" id="3gS-Ua-EIa"/>
+                                    <constraint firstAttribute="bottom" secondItem="PDw-A1-LJZ" secondAttribute="bottom" id="Cbg-1v-1y0"/>
+                                    <constraint firstAttribute="trailing" secondItem="PDw-A1-LJZ" secondAttribute="trailing" id="G7D-na-vBo"/>
+                                    <constraint firstItem="PDw-A1-LJZ" firstAttribute="top" secondItem="6Gd-pd-uf8" secondAttribute="top" id="NuF-ot-Gcn"/>
+                                    <constraint firstItem="PDw-A1-LJZ" firstAttribute="leading" secondItem="6Gd-pd-uf8" secondAttribute="leading" id="ZIU-TJ-1jS"/>
+                                    <constraint firstItem="PDw-A1-LJZ" firstAttribute="width" secondItem="6Gd-pd-uf8" secondAttribute="width" id="uAw-Ax-P9O"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.78344153462441313" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="RXo-Fi-mme" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="60" id="90K-8r-F4s"/>
-                            <constraint firstItem="RXo-Fi-mme" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="I5S-fC-aHe"/>
-                            <constraint firstAttribute="trailing" secondItem="RXo-Fi-mme" secondAttribute="trailing" constant="60" id="K9r-4N-831"/>
-                            <constraint firstItem="RXo-Fi-mme" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="zA3-OL-VYR"/>
+                            <constraint firstItem="6Gd-pd-uf8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ofi-dl-dWz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6Gd-pd-uf8" secondAttribute="trailing" id="cTi-j1-tZC"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="6Gd-pd-uf8" secondAttribute="bottom" id="cwt-XN-xTJ"/>
+                            <constraint firstItem="6Gd-pd-uf8" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ngt-Kk-fI0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentScrollView" destination="PDw-A1-LJZ" id="7qg-KL-cTI"/>
                         <outlet property="dropDown" destination="Ag2-dq-Ipz" id="Uek-WB-8c2"/>
+                        <outlet property="dropDown2" destination="NEK-Tk-I7P" id="7de-Jw-X9v"/>
+                        <outlet property="dropDown3" destination="LbB-uK-x60" id="7iy-VR-4ok"/>
+                        <outlet property="isErrorEnableSwitch" destination="HGD-ZK-PhZ" id="0or-Fh-uxo"/>
                         <outlet property="otherView" destination="jS5-4Y-B4p" id="B2t-9k-gfT"/>
+                        <outlet property="stackView" destination="RXo-Fi-mme" id="AKi-Yh-3Co"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -70,4 +171,10 @@
             <point key="canvasLocation" x="138" y="134"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.down" catalog="system" width="118" height="128"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

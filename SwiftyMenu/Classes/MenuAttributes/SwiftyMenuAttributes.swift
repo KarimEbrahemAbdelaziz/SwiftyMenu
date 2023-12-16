@@ -106,6 +106,15 @@ public struct SwiftyMenuAttributes {
     /** Describes errorInfo */
     public var errorInfo = ErrorInformation.default
     
+    /** Describes title margin horizontal  */
+    public var titleMarginHorizontal = MarginHorizontal.default
+    
+    /** Describes item margin horizontal  */
+    public var itemMarginHorizontal = MarginHorizontal.default
+    
+    /** Describes arrow margin right, sometime the custom image is no loaded well, so it's better add more space  */
+    public var arrowMarginRight = CGFloat.zero
+    
     /** Init with default attributes */
     public init() {}
 }
