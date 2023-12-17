@@ -208,6 +208,7 @@ class ViewController: UIViewController {
         
         /// Configure SwiftyMenu with the attributes
         var attributes = codeMenuAttributes
+        attributes.border = .value(color: .black, width: 1.0)
         /*//attributes.arrowStyle = .default
          //attributes.arrowStyle = .value(isEnabled: true, image: nil, tintColor: nil)
          attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)

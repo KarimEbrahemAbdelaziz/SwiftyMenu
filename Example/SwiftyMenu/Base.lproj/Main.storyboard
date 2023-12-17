@@ -120,10 +120,6 @@ default item and title margin horizontal</string>
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fi2-Mu-0lf">
-                                                <rect key="frame" x="60" y="401" width="240" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="Is Enable Error in selecting first item:" translatesAutoresizingMaskIntoConstraints="NO" id="huS-ry-KBo">
                                                 <rect key="frame" x="-56" y="517" width="305" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -172,7 +168,6 @@ default item and title margin horizontal</string>
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.down" catalog="system" width="118" height="128"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
