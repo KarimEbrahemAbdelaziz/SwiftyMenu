@@ -29,26 +29,26 @@ public extension SwiftyMenuAttributes {
 
     /** Describes the style for row of the menu */
     enum ArrowStyle {
-
+        
         case `default`
-
-        case value(isEnabled: Bool, image: UIImage? = nil)
-
-        var arrowStyleValues: (isEnabled: Bool, image: UIImage?) {
+        
+        case value(isEnabled: Bool, image: UIImage? = nil, tintColor: UIColor? = nil, spacingBetweenText: CGFloat = 0) // Added tintColor parameter with default nil
+        
+        var arrowStyleValues: (isEnabled: Bool, image: UIImage?, tintColor: UIColor?, spacingBetweenText: CGFloat) { // Added tintColor to the return type
             let frameworkBundle = Bundle(for: SwiftyMenu.self)
             let defaultImage = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)!
-
+            
             switch self {
-            case let .value(isEnabled, image):
+            case let .value(isEnabled, image, tintColor, spacingBetweenText):
                 if isEnabled && image != nil {
-                    return (isEnabled: isEnabled, image: image)
+                    return (isEnabled: isEnabled, image: image, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else if isEnabled {
-                    return (isEnabled: isEnabled, image: defaultImage)
+                    return (isEnabled: isEnabled, image: defaultImage, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else {
-                    return (isEnabled: isEnabled, image: nil)
+                    return (isEnabled: isEnabled, image: nil, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 }
             case .default:
-                return (isEnabled: true, image: defaultImage)
+                return (isEnabled: true, image: defaultImage, tintColor: nil, spacingBetweenText: 0) // Default tintColor is nil
             }
         }
     }
