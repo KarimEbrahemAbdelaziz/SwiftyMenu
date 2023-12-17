@@ -64,7 +64,7 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/2.gif" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png" width="250" height="500">
 
-<img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/5.gif" width="250" height="500"> <img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/6.png" width="250" height="500">
+<img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/5.gif" width="250" height="500"> <img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/6.gif" width="250" height="500">
 
 ## Requirements
 
