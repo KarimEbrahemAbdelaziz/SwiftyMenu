@@ -89,6 +89,13 @@ final public class SwiftyMenu: UIView {
     ///   - index: The `Index` of the selected `Item`.
     public var didSelectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
     
+    /// `didDselectItem` is a completion closure that will be executed when deselect an item from `SwiftyMenu`.
+    /// - Parameters:
+    ///   - swiftyMenu: The `SwiftyMenu` that was deselected from it's items.
+    ///   - item: The `Item` that had been deselected from `SwiftyMenu`.
+    ///   - index: The `Index` of the deselected `Item`.
+    public var didDeselectItem: ((_ swiftyMenu: SwiftyMenu,_ item: SwiftyMenuDisplayable,_ index: Int) -> Void) = { _, _, _ in }
+    
     // MARK: - Private Properties
     
     private var selectButton: UIButton!
@@ -238,6 +245,7 @@ extension SwiftyMenu: UITableViewDelegate {
             if selectedIndecis[indexPath.row] != nil {
                 let deselectedText = self.items[selectedIndecis[indexPath.row]!]
                 delegate?.swiftyMenu(self, didDeselectItem: deselectedText, atIndex: indexPath.row)
+                self.didDeselectItem(self, deselectedText, indexPath.row)
                 selectedIndecis[indexPath.row] = nil
                 setSelectedOptionsAsTitle()
                 tableView.reloadData()
@@ -267,6 +275,7 @@ extension SwiftyMenu: UITableViewDelegate {
                     if allowSingleDeselection{
                         let deselectedText = self.items[self.selectedIndex!]
                         delegate?.swiftyMenu(self, didDeselectItem: deselectedText, atIndex: indexPath.row)
+                        self.didDeselectItem(self, deselectedText, indexPath.row)
                         selectedIndex = nil
                         setSelectedOptionsAsTitle()
                         tableView.reloadData()

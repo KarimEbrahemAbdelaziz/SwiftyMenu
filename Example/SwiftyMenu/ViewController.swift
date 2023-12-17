@@ -202,6 +202,10 @@ class ViewController: UIViewController {
             print("Selected from Code \(item) at index: \(index)")
         }
         
+        dropDownCode.didDeselectItem = { _, item, index in
+            print("Deselected from Code \(item) at index: \(index)")
+        }
+        
         /// Configure SwiftyMenu with the attributes
         var attributes = codeMenuAttributes
         /*//attributes.arrowStyle = .default
