@@ -123,7 +123,6 @@ final public class SwiftyMenu: UIView {
         
         if !setuped {
             setupUI()
-            //setupArrowImage()
             setuped = true
             changeTintColorArrow(hasError: hasError)
         }
@@ -319,38 +318,8 @@ extension SwiftyMenu {
         itemsTableView.separatorColor = attributes.separatorStyle.separatorStyleValues.color
     }
     
-    private func setupArrowImage() {
-        var arrowSpacing = getSelectButtonSpacing()
-        let spacing = self.selectButton.frame.width - arrowSpacing - 10// the amount of spacing to appear between image and title
-        if attributes.arrowStyle.arrowStyleValues.isEnabled{
-            debugPrint("spacing: \(spacing) - arrowSpacing: \(arrowSpacing)")
-        }
-        selectButton.imageView?.contentMode = .scaleAspectFit
-        var imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(spacing), bottom: 0, right: 0)
-        if isContentRightToLeft() {
-            imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: CGFloat(spacing))
-        }
-        selectButton.imageEdgeInsets = imageEdgeInsets
-    }
-    
     private func isContentRightToLeft() -> Bool{
         return UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft
-    }
-    
-    private func getSelectButtonSpacing() -> CGFloat{
-        var arrowSpacing = (UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft ? attributes.titleMarginHorizontal.leadingValue : attributes.titleMarginHorizontal.trailingValue)
-        
-        if attributes.arrowStyle.arrowStyleValues.isEnabled{
-            //arrowSpacing += attributes.arrowMarginRight
-            debugPrint("attributes.titleMarginHorizontal.trailingValue: \(attributes.titleMarginHorizontal.trailingValue)")
-            
-            debugPrint("attributes.arrowStyle.arrowStyleValues.image: \(attributes.arrowStyle.arrowStyleValues.image?.size)")
-            
-            debugPrint("attributes.arrowStyle.arrowStyleValues.image2 width: \(attributes.arrowStyle.arrowStyleValues.image?.size.width)")
-            debugPrint("attributes.arrowStyle.arrowStyleValues.image2 size: \(selectButton.imageView?.frame.size)")
-        }
-        
-        return arrowSpacing
     }
     
     private func setupView() {
@@ -377,10 +346,6 @@ extension SwiftyMenu {
         
         let isContentRightToLeft = isContentRightToLeft()
         
-        //selectButton.imageEdgeInsets.right = width - 16//(isContentRightToLeft ? attributes.titleMarginHorizontal.trailingValue: arrowSpacing) - 10
-        //selectButton.imageEdgeInsets.left = width - 16//(isContentRightToLeft ? arrowSpacing : attributes.titleMarginHorizontal.leadingValue) - 10
-        
-        
         let lineBreakMode: NSLineBreakMode = isContentRightToLeft ? .byTruncatingHead : .byTruncatingTail
         let isArrowEnable: Bool = attributes.arrowStyle.arrowStyleValues.isEnabled
         let arrow = isArrowEnable ? attributes.arrowStyle.arrowStyleValues.image : nil
@@ -390,24 +355,13 @@ extension SwiftyMenu {
         let placeholderTextColor = attributes.placeHolderStyle.placeHolderValues.textColor
         let spacingBetweenText = isArrowEnable ? attributes.arrowStyle.arrowStyleValues.spacingBetweenText : 0.0
         
-        /*if isContentRightToLeft {
-         debugPrint("here rightToLeft")
-         //selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.leadingValue
-         //selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.trailingValue
-         selectButton.titleLabel?.lineBreakMode = .byTruncatingHead
-         } else {
-         debugPrint("here rightToLeft else")
-         //selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.trailingValue
-         //selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.leadingValue
-         selectButton.titleLabel?.lineBreakMode = .byTruncatingTail
-         }*/
-        
         selectButton.backgroundColor = attributes.headerStyle.headerStyleValues.backgroundColor
         
         
         selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         if #available(iOS 15.0, *){
+            
             var btnConfig = UIButton.Configuration.plain()
             btnConfig.titleAlignment = .leading
             btnConfig.imagePlacement = .trailing
@@ -421,42 +375,33 @@ extension SwiftyMenu {
                 outgoing.font = font
                 return outgoing
             }
-            
             selectButton.configuration = btnConfig
             selectButton.translatesAutoresizingMaskIntoConstraints = false
             selectButton.contentMode = .scaleAspectFit
-            selectButton.contentHorizontalAlignment = isContentRightToLeft ? (isArrowEnable ? .fill : .right) : (isArrowEnable ? .fill : .left)
+            selectButton.contentHorizontalAlignment = (isArrowEnable ? .fill : .leading)
             selectButton.clipsToBounds = true
             selectButton.setTitleColor(color, for: .normal)
         }else{
             if #available(iOS 11.0, *) {
-                selectButton.contentHorizontalAlignment = isContentRightToLeft ? .trailing : .leading
+                selectButton.contentHorizontalAlignment = .leading
             } else {
-                selectButton.contentHorizontalAlignment = isContentRightToLeft ? .right : .left
+                selectButton.contentHorizontalAlignment = .left
             }
             
             selectButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
             selectButton.titleLabel?.lineBreakMode = lineBreakMode
             selectButton.titleLabel?.font = font
             selectButton.setTitleColor(placeholderTextColor, for: .normal)
-            //selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
-            //selectButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: isArrowEnable ?  -selectButton.imageView!.frame.width : 0)
             
-            //self.selectButton.imageEdgeInsets.right = isArrowEnable ? -self.selectButton.frame.width - 16 : 0
-            
-            //selectButton.imageEdgeInsets.right = width - 16
             if isArrowEnable{
                 print("width icon: \(selectButton.imageView?.frame.size.width) - \(selectButton.imageView?.frame.width) - \(arrow?.size.width)")
                 print("rightPadding: \(rightPadding)")
+                print("leftPadding: \(leftPadding)")
+                
             }
             self.selectButton?.imageView?.contentMode = .scaleAspectFit
             
-            //DispatchQueue.main.async {
-            //self.selectButton.imageEdgeInsets.left = 150//isArrowEnable ? -self.selectButton.frame.width - 16 : 0
-            //self.selectButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right:  -self.selectButton.frame.width + rightPadding)
-            
             self.selectButton.setImage(arrow, for: .normal)
-            //}
             
             let imageWidth: CGFloat  = isArrowEnable ? (arrow?.size.width ?? .zero) : 0
             
@@ -464,49 +409,28 @@ extension SwiftyMenu {
             var adjustImageEdgeInsets: UIEdgeInsets = .zero
             var adjustTitleEdgeInsets: UIEdgeInsets = .zero
             
-            //if isArrowEnable{
             let arrowRight = rightPadding + imageWidth
             
-            adjustImageEdgeInsets.left = width - arrowRight
-            adjustImageEdgeInsets.right = rightPadding
-            //adjustImageEdgeInsets.right = -width - 100//- rightPadding
+            if isContentRightToLeft {
+                adjustImageEdgeInsets.left = leftPadding
+                adjustImageEdgeInsets.right = width - arrowRight - spacingBetweenText
+                
+                adjustTitleEdgeInsets.left = arrowRight + spacingBetweenText
+                adjustTitleEdgeInsets.right = -imageWidth + rightPadding
+            }else{
+                adjustImageEdgeInsets.left = width - arrowRight
+                adjustImageEdgeInsets.right = rightPadding
+                
+                adjustTitleEdgeInsets.left = -imageWidth + leftPadding
+                adjustTitleEdgeInsets.right = arrowRight + spacingBetweenText
+            }
             
-            adjustTitleEdgeInsets.left = -imageWidth + leftPadding
-            adjustTitleEdgeInsets.right = arrowRight + spacingBetweenText
             
             self.selectButton.imageEdgeInsets = adjustImageEdgeInsets
             self.selectButton.titleEdgeInsets = adjustTitleEdgeInsets
-            //}
             
         }
         
-        /*if isContentRightToLeft {
-         debugPrint("here2 rightToLeft isEnabled")
-         selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.trailingValue + 10 //+ attributes.arrowMarginRight
-         } else {
-         debugPrint("here2 rightToLeft isEnabled else")
-         selectButton.titleEdgeInsets.right = attributes.titleMarginHorizontal.trailingValue + 10 + attributes.arrowMarginRight
-         selectButton.titleEdgeInsets.left = attributes.titleMarginHorizontal.leadingValue //- attributes.arrowMarginRight
-         }*/
-        //selectButton.setImage(arrow, for: .normal)
-        
-        print("selectButton.imageEdgeInsets: \(selectButton.imageEdgeInsets) - \(attributes.placeHolderStyle.placeHolderValues.text) - margin extra: \(attributes.arrowMarginRight)")
-        //}
-        
-        /*if #available(iOS 11.0, *) {
-         selectButton.contentHorizontalAlignment = attributes.arrowStyle.arrowStyleValues.isEnabled ? .fill : .leading
-         } else {
-         selectButton.contentHorizontalAlignment = .left
-         }*/
-        
-        //selectButton.semanticContentAttribute = .forceRightToLeft
-        //UIView.appearance().semanticContentAttribute = .forceRightToLeft
-        
-        
-        //***delete START***
-        //selectButton.backgroundColor = .green
-        //selectButton.titleLabel?.backgroundColor = .purple
-        //***delete END***
         selectButton.addTarget(self, action: #selector(handleMenuState), for: .touchUpInside)
     }
     

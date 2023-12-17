@@ -11,7 +11,7 @@ import SwiftyMenu
 import SnapKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var contentScrollView: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet private weak var dropDown: SwiftyMenu!
@@ -29,23 +29,23 @@ class ViewController: UIViewController {
         "Option 4", "Option 5", "Option 6",
         "Option 7", "Option 8", "Option 9"
     ]
-
+    
     private let dropDownCodeOptionsDataSource = [
         MealSize(id: 1, name: "Small"),
         MealSize(id: 2, name: "Medium"),
         MealSize(id: 3, name: "Large"),
         MealSize(id: 4, name: "Combo Large"),
     ]
-
+    
     /// Define menu attributes
     private var storyboardMenuAttributes: SwiftyMenuAttributes {
         var attributes = SwiftyMenuAttributes()
-
+        
         // Custom Behavior
         attributes.multiSelect = .enabled
         attributes.scroll = .enabled
         attributes.hideOptionsWhenSelect = .disabled
-
+        
         // Custom UI
         attributes.roundCorners = .all(radius: 8)
         attributes.rowStyle = .value(height: 35, backgroundColor: .white, selectedColor: UIColor.gray.withAlphaComponent(0.1))
@@ -55,11 +55,11 @@ class ViewController: UIViewController {
         attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)
         attributes.arrowStyle = .value(isEnabled: true)
         attributes.height = .value(height: 300)
-
+        
         // Custom Animations
         attributes.expandingAnimation = .spring(level: .low)
         attributes.expandingTiming = .value(duration: 0.5, delay: 0)
-
+        
         attributes.collapsingAnimation = .linear
         attributes.collapsingTiming = .value(duration: 0.5, delay: 0)
         
@@ -70,15 +70,15 @@ class ViewController: UIViewController {
         
         return attributes
     }
-
+    
     private var codeMenuAttributes: SwiftyMenuAttributes {
         var attributes = SwiftyMenuAttributes()
-
+        
         // Custom Behavior
         attributes.multiSelect = .disabled(allowSingleDeselection: true)
         attributes.scroll = .disabled
         attributes.hideOptionsWhenSelect = .enabled
-
+        
         // Custom UI
         attributes.roundCorners = .all(radius: 8)
         attributes.rowStyle = .value(height: 39, backgroundColor: .white, selectedColor: .white)
@@ -88,52 +88,47 @@ class ViewController: UIViewController {
         attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)
         attributes.arrowStyle = .value(isEnabled: false)
         attributes.accessory = .disabled
-
+        
         // Custom Animations
         attributes.expandingAnimation = .linear
         attributes.expandingTiming = .value(duration: 0.5, delay: 0)
-
+        
         attributes.collapsingAnimation = .linear
         attributes.collapsingTiming = .value(duration: 0.5, delay: 0)
-
+        
         return attributes
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupStoryboardMenu()
         setupMenu2()
         setupMenu3()
         setupCodeMenu()
     }
-
+    
     /// Example of building SwiftyMenu from Storyboard
     private func setupStoryboardMenu() {
         /// Setup component
         dropDown.delegate = self
         dropDown.items = dropDownOptionsDataSource
-
+        
         /// Configure SwiftyMenu with the attributes
         dropDown.configure(with: storyboardMenuAttributes)
     }
-
+    
     //Example for swiftyMenu2 with custom margins
     private func setupMenu2() {
         /// Setup component
         dropDown2.delegate = self
         dropDown2.items = dropDownOptionsDataSource
-
+        
         var attributes = storyboardMenuAttributes
         attributes.titleMarginHorizontal = .value(leading: 10, trailing: 20)
         attributes.itemMarginHorizontal = .value(leading: 10, trailing: 10)
-        //attributes.hideOptionsWhenSelect = .enabled
-        //if #available(iOS 13.0, *) {
-            //adding custom view
-            //let image = UIImage(systemName: "arrow.down")//?.withRenderingMode(.alwaysTemplate)
-            let image = UIImage(named: "arrow.down.custom")
-            attributes.arrowStyle = .value(isEnabled: true, image: image, tintColor: .purple, spacingBetweenText: 10.0)
-        //}
+        let image = UIImage(named: "arrow.down.custom")
+        attributes.arrowStyle = .value(isEnabled: true, image: image, tintColor: .purple, spacingBetweenText: 10.0)
         /// Configure SwiftyMenu with the attributes
         dropDown2.configure(with: attributes)
     }
@@ -142,7 +137,7 @@ class ViewController: UIViewController {
         /// Setup component
         dropDown3.delegate = self
         dropDown3.items = dropDownOptionsDataSource
-
+        
         var attributes = storyboardMenuAttributes
         attributes.titleMarginHorizontal = .value(leading: 0, trailing: 0)
         attributes.itemMarginHorizontal = .value(leading: 40, trailing: 40)
@@ -157,13 +152,13 @@ class ViewController: UIViewController {
     
     /// Example of building SwiftyMenu from Code
     private func setupCodeMenu() {
-
+        
         /// Init SwiftyMenu from Code
         let dropDownCode = SwiftyMenu(frame: CGRect(x: 0, y: 0, width: 0, height: 40))
-
+        
         /// Add it as subview
         view.addSubview(dropDownCode)
-
+        
         /// Add constraints to SwiftyMenu
         /// You must take care of `hegiht` constraint, please.
         dropDownCode.translatesAutoresizingMaskIntoConstraints = false
@@ -182,40 +177,40 @@ class ViewController: UIViewController {
         )
         
         stackView.addArrangedSubview(dropDownCode)
-
+        
         /// Setup SwiftyMenu data source
         dropDownCode.items = dropDownCodeOptionsDataSource
-
+        
         /// SwiftyMenu also supports `CallBacks`
         dropDownCode.willExpand = {
             print("SwiftyMenu Code Will Expand!")
         }
-
+        
         dropDownCode.didExpand = {
             print("SwiftyMenu Code Expanded!")
         }
-
+        
         dropDownCode.willCollapse = {
             print("SwiftyMenu Code Will Collapse!")
         }
-
+        
         dropDownCode.didCollapse = {
             print("SwiftyMenu Code Collapsed!")
         }
-
+        
         dropDownCode.didSelectItem = { _, item, index in
             print("Selected from Code \(item) at index: \(index)")
         }
-
+        
         /// Configure SwiftyMenu with the attributes
         var attributes = codeMenuAttributes
         /*//attributes.arrowStyle = .default
-        //attributes.arrowStyle = .value(isEnabled: true, image: nil, tintColor: nil)
-        attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)
-        attributes.arrowStyle = .value(isEnabled: false)
-        //attributes.multiSelect = .disabled(allowSingleDeselection: false)
-        attributes.multiSelect = .enabled
-        attributes.hideOptionsWhenSelect = .disabled*/
+         //attributes.arrowStyle = .value(isEnabled: true, image: nil, tintColor: nil)
+         attributes.separatorStyle = .value(color: .black, isBlured: false, style: .singleLine)
+         attributes.arrowStyle = .value(isEnabled: false)
+         //attributes.multiSelect = .disabled(allowSingleDeselection: false)
+         attributes.multiSelect = .enabled
+         attributes.hideOptionsWhenSelect = .disabled*/
         
         dropDownCode.configure(with: attributes)
         
@@ -292,5 +287,5 @@ extension ViewController: SwiftyMenuDelegate {
     func swiftyMenu(didCollapse swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu didCollapse.")
     }
-
+    
 }

@@ -15,9 +15,18 @@ class SwiftyMenuCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         // Adjust the horizontal padding for the textLabel
-        textLabel?.frame.origin.x = isContentRightToLeft ? rightMargin : leftMargin
-        textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+        //textLabel?.frame.origin.x = isContentRightToLeft ? rightMargin : leftMargin
+        //textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+        if isContentRightToLeft {
+            textLabel?.frame.origin.x = rightMargin
+            textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+            textLabel?.textAlignment = .right
+        } else {
+            textLabel?.frame.origin.x = leftMargin
+            textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+            textLabel?.textAlignment = .left
+        }
     }
 }
