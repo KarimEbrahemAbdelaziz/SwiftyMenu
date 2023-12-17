@@ -238,6 +238,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1){
             self.dropDown2.setError(hasError: true)
+            self.dropDown2.toggle()
         }
     }
 }

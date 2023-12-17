@@ -463,6 +463,7 @@ extension SwiftyMenu {
     }
     
     @objc private func handleMenuState() {
+        print("swiftyMenuDelegateSpy handleMenuState: \(self.state)")
         switch self.state {
         case .shown:
             collapseSwiftyMenu()
@@ -542,12 +543,14 @@ extension SwiftyMenu {
         
         switch attributes.expandingAnimation {
         case .linear:
+            print("expandSwiftyMenu linear")
             UIView.animate(withDuration: attributes.expandingTiming.animationTimingValues.duration,
                            delay: attributes.expandingTiming.animationTimingValues.delay,
                            animations: animationBlock,
                            completion: expandingAnimationCompletionBlock)
             
         case .spring(level: let powerLevel):
+            print("expandSwiftyMenu spring")
             let damping = CGFloat(0.5 / powerLevel.rawValue)
             let initialVelocity = CGFloat(0.5 * powerLevel.rawValue)
             
@@ -600,6 +603,7 @@ extension SwiftyMenu {
     }
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
+        print("didAppeared: \(didAppeared)")
         if didAppeared {
             self.delegate?.swiftyMenu(didExpand: self)
             self.didExpand()
