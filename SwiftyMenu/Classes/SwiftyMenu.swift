@@ -171,16 +171,13 @@ final public class SwiftyMenu: UIView {
         if attributes.arrowStyle.arrowStyleValues.isEnabled {
             if let image = attributes.arrowStyle.arrowStyleValues.image{
                 if let tintColor = attributes.arrowStyle.arrowStyleValues.tintColor{
-                    print("here changing 1 - tintColor: \(tintColor) - hasError: \(hasError)")
                     selectButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
                     selectButton.tintColor = (hasError ? (attributes.errorInfo.errorInfoValues.iconTintColor ?? tintColor) : tintColor)
                 }else{
-                    print("here changing 2")
                     if hasError, let errorColor = attributes.errorInfo.errorInfoValues.iconTintColor{
                         selectButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
                         selectButton.tintColor = (errorColor)
                     }else{
-                        print("here changing 3")
                         selectButton.tintColor = nil
                         selectButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
                     }
@@ -402,12 +399,6 @@ extension SwiftyMenu {
             selectButton.titleLabel?.font = font
             selectButton.setTitleColor(placeholderTextColor, for: .normal)
             
-            if isArrowEnable{
-                print("width icon: \(selectButton.imageView?.frame.size.width) - \(selectButton.imageView?.frame.width) - \(arrow?.size.width)")
-                print("rightPadding: \(rightPadding)")
-                print("leftPadding: \(leftPadding)")
-                
-            }
             self.selectButton?.imageView?.contentMode = .scaleAspectFit
             
             self.selectButton.setImage(arrow, for: .normal)
