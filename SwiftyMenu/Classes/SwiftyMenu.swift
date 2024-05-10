@@ -366,8 +366,8 @@ extension SwiftyMenu {
         
         selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        selectButton.titleLabel?.numberOfLines = 0
         if #available(iOS 15.0, *){
+            
             var btnConfig = UIButton.Configuration.plain()
             btnConfig.titleAlignment = .leading
             btnConfig.imagePlacement = .trailing
@@ -375,7 +375,7 @@ extension SwiftyMenu {
             btnConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: leftPadding, bottom: 0, trailing: rightPadding - 2)
             btnConfig.imagePadding = spacingBetweenText //spacing between image and icon
             btnConfig.image =  arrow
-            //btnConfig.titleLineBreakMode = lineBreakMode
+            btnConfig.titleLineBreakMode = lineBreakMode
             btnConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
                 var outgoing = incoming
                 outgoing.font = font
@@ -387,7 +387,6 @@ extension SwiftyMenu {
             selectButton.contentHorizontalAlignment = (isArrowEnable ? .fill : .leading)
             selectButton.clipsToBounds = true
             selectButton.setTitleColor(color, for: .normal)
-            selectButton.titleLabel?.lineBreakMode = lineBreakMode
         }else{
             if #available(iOS 11.0, *) {
                 selectButton.contentHorizontalAlignment = .leading
@@ -455,6 +454,7 @@ extension SwiftyMenu {
     }
     
     @objc private func handleMenuState() {
+        print("swiftyMenuDelegateSpy handleMenuState: \(self.state)")
         switch self.state {
         case .shown:
             collapseSwiftyMenu()
@@ -534,12 +534,14 @@ extension SwiftyMenu {
         
         switch attributes.expandingAnimation {
         case .linear:
+            print("expandSwiftyMenu linear")
             UIView.animate(withDuration: attributes.expandingTiming.animationTimingValues.duration,
                            delay: attributes.expandingTiming.animationTimingValues.delay,
                            animations: animationBlock,
                            completion: expandingAnimationCompletionBlock)
             
         case .spring(level: let powerLevel):
+            print("expandSwiftyMenu spring")
             let damping = CGFloat(0.5 / powerLevel.rawValue)
             let initialVelocity = CGFloat(0.5 * powerLevel.rawValue)
             
@@ -592,6 +594,7 @@ extension SwiftyMenu {
     }
     
     private func expandingAnimationCompletionBlock(didAppeared: Bool) {
+        print("didAppeared: \(didAppeared)")
         if didAppeared {
             self.delegate?.swiftyMenu(didExpand: self)
             self.didExpand()

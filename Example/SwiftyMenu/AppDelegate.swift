@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         // For testing RTL support
-        UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        //UIView.appearance().semanticContentAttribute = .forceRightToLeft
 
         return true
     }
