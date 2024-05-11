@@ -1,7 +1,7 @@
 //
 //  SwiftyMenuAttributes+HeaderStyle.swift
 //
-//  Copyright (c) 2019-2021 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal

@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyMenu'
-  s.version          = '1.0.1'
-  s.summary          = 'SwiftyMenu is simple drop down menu for iOS.'
+  s.version          = '1.1.0'
+  s.summary          = 'SwiftyMenu is Simple Drop Down Menu for iOS.'
 
   s.description      = <<-DESC
 This drop down is to overcome the loss of usability and user experience due to the UIPickerView.
@@ -20,7 +20,7 @@ This drop down is to overcome the loss of usability and user experience due to t
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'KarimEbrahemAbdelaziz' => 'karimabdelazizmansour@gmail.com' }
   s.source           = { :git => 'https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/k_ebrahem_'
+  s.social_media_url = 'https://www.linkedin.com/in/karimebrahem'
 
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.0'
