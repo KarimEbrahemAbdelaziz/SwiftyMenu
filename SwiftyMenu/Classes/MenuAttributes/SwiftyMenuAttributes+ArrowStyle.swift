@@ -35,7 +35,11 @@ public extension SwiftyMenuAttributes {
         case value(isEnabled: Bool, image: UIImage? = nil, tintColor: UIColor? = nil, spacingBetweenText: CGFloat = 0) // Added tintColor parameter with default nil
         
         var arrowStyleValues: (isEnabled: Bool, image: UIImage?, tintColor: UIColor?, spacingBetweenText: CGFloat) { // Added tintColor to the return type
+#if SWIFT_PACKAGE
+            let frameworkBundle = Bundle.module
+#else
             let frameworkBundle = Bundle(for: SwiftyMenu.self)
+#endif
             let defaultImage = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)!
             
             switch self {
