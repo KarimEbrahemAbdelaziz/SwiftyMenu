@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/workflows/Build/badge.svg" />
+    <img src="https://app.bitrise.io/app/71dfd9f5905c292e/status.svg?token=XHvRDPBZjf4d3Y_1f5pKbw&branch=master" />
     <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" />
     <a href="https://cocoadocs.org/pods/SwiftyMenu/">
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
@@ -17,8 +17,8 @@
     <a href="https://www.facebook.com/KarimEbrahemAbdelaziz">
         <img src="http://img.shields.io/badge/facebook-%40KarimEbrahemAbdelaziz-70a1fb.svg?style=flat" alt="Facebook: @KarimEbrahemAbdelaziz" />
     </a>
-    <a href="https://twitter.com/@k_ebrahem_">
-        <img src="https://img.shields.io/badge/twitter-@k_ebrahem_-blue.svg?style=flat" alt="Twitter: @k_ebrahem_" />
+    <a href="https://www.linkedin.com/in/KarimEbrahem">
+        <img src="https://img.shields.io/badge/LinkedIn-@KarimEbrahem-blue.svg?style=flat" alt="LinkedIn: @karimebrahem" />
     </a>
 </p>
 
@@ -53,6 +53,10 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
         - [Header Style](#header-style)
         - [Accessory](#accessory)
         - [Animation](#animation)
+        - [Margin Horizontal](#margin-horizontal)
+        - [Error Info](#error-info)
+        - [Set Error](#set-error)
+    - [New Functionalities](#new-functionalities)
     - [Example Project](#example-project)
 - [Todo](#todo)
 - [Android Version](#android)
@@ -63,6 +67,8 @@ SwiftyMenu is simple yet powerfull drop down menu component for iOS. It allow yo
 ## Screenshots
 
 <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/2.gif" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/1.png" width="250" height="500"> <img src="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/Screenshots/3.png" width="250" height="500">
+
+<img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/5.gif" width="250" height="500"> <img src="https://github.com/nowjordanhappy/SwiftyMenu/blob/feature/customization-ui/Screenshots/6.gif" width="250" height="500">
 
 ## Requirements
 
@@ -224,6 +230,11 @@ extension ViewController: SwiftyMenuDelegate {
         print("Selected item: \(item), at index: \(index)")
     }
     
+    // NEW - Get selected option from SwiftyMenu
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didDeselectItem item: SwiftyMenuDisplayable, atIndex index: Int){
+        print("deselected item: \(item), at index: \(index)")
+    }
+    
     // SwiftyMenu drop down menu will expand
     func swiftyMenu(willExpand swiftyMenu: SwiftyMenu) {
         print("SwiftyMenu willExpand.")
@@ -318,7 +329,12 @@ attributes.scroll = .disabled
 #### Selection Behavior
 
 ```swift
-attributes.multiSelect = .disabled
+//NEW - Single selection disallowing deselection clicking the same item
+attributes.multiSelect = .disabled(allowSingleDeselection: false)
+//NEW - Single selection allowing deselection clicking the same item
+attributes.multiSelect = .disabled(allowSingleDeselection: true)
+//Multi selection enable
+attributes.multiSelect = .enabled
 attributes.hideOptionsWhenSelect = .enabled
 ```
 
@@ -346,6 +362,8 @@ attributes.border = .value(color: .gray, width: 0.5)
 ```swift
 /// `SwiftyMenu` have default arrow
 attributes.arrowStyle = .value(isEnabled: true)
+/// NEW - Now able to add a custom image, tint color and space between icon and text
+attributes.arrowStyle = .value(isEnabled: true, image: image, tintColor: .purple, spacingBetweenText: 10.0)
 ```
 
 #### Separator Style
@@ -375,15 +393,50 @@ attributes.expandingTiming = .value(duration: 0.5, delay: 0)
 attributes.collapsingAnimation = .linear
 attributes.collapsingTiming = .value(duration: 0.5, delay: 0)
 ```
+
+#### Margin Horizontal
+
+```swift
+/// Margin leading and trailing for title / placeholder
+attributes.titleMarginHorizontal = .value(leading: 10, trailing: 20)
+/// Margin leading and trailing for item list
+attributes.itemMarginHorizontal = .value(leading: 10, trailing: 10)
+```
+
+#### Error Info
+
+```swift
+/// Default use the .red color
+attributes.errorInfo = .default
+/// Custom color for placeholder and icon if it's enabled
+attributes.errorInfo = .custom(placeholderTextColor: .red, iconTintColor: .red)
+```
+
+#### Set Error
+
+```swift
+/// Enabling this will show the config in errorInfo
+dropDown.setError(hasError: true)
+```
+
+### New Functionalities
+* Custom arrow and color and space between arrow and title
+* Fix multi select title: showing now sorted by index
+* Margin leading and trailing for title and items
+* Handling deselection for multi and single selection
+* Seting Error with custom color for title and arrow
+
 ### Example Project
 
 You could check the full `Example` project [Here](https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/tree/master/Example).
+
+You could check the full new `Example` project [Here New Example](https://github.com/nowjordanhappy/SwiftyMenu/tree/feature/customization-ui/Example).
 
 ## TODO
 
 - [x] Automate release new version to Cocoapods from Github Actions.
 - [x] Add CHANGELOG file for the project.
-- [ ] Allow custom header and options cells.
+- [x] Allow custom header and options cells.
 - [ ] Allow different interactions to dismiss SwiftyMenu.
 - [x] Allow to customize the default seperator.
 - [x] Support Generic DataSource.
@@ -393,6 +446,10 @@ You could check the full `Example` project [Here](https://github.com/KarimEbrahe
 - [x] Support call backs and delegation.
 - [x] Support different types of Animations. 
 - [x] Add different customization to colors for default cells.
+- [x] Margin horizontal for title and item
+- [x] Custom arrow and tint color
+
+
 
 And much more ideas to make it solid drop down menu for iOS projects 😎💪🏻
 

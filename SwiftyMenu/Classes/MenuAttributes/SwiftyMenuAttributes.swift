@@ -1,7 +1,7 @@
 //
 //  SwiftyMenuAttributes.swift
 //
-//  Copyright (c) 2019-2021 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -103,6 +103,18 @@ public struct SwiftyMenuAttributes {
     /** Describes how long the menu animates while collapsing */
     public var collapsingTiming = AnimationTiming.default
 
+    /** Describes errorInfo */
+    public var errorInfo = ErrorInformation.default
+    
+    /** Describes title margin horizontal  */
+    public var titleMarginHorizontal = MarginHorizontal.default
+    
+    /** Describes item margin horizontal  */
+    public var itemMarginHorizontal = MarginHorizontal.default
+    
+    /** Describes arrow margin right, sometime the custom image is no loaded well, so it's better add more space  */
+    public var arrowMarginRight = CGFloat.zero
+    
     /** Init with default attributes */
     public init() {}
 }

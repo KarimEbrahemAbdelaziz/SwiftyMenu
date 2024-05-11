@@ -16,7 +16,9 @@ class SwiftyMenuDelegateSpy: SwiftyMenuDelegate {
     var didCollapseCalled = false
     
     func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
-        
+    }
+    
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didDeselectItem item: SwiftyMenuDisplayable, atIndex index: Int) {
     }
     
     func swiftyMenu(willExpand swiftyMenu: SwiftyMenu) {

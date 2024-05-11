@@ -19,6 +19,7 @@ class SwiftyMenuTests: XCTestCase {
         sut?.heightConstraint = NSLayoutConstraint(item: sut!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 40)
         swiftyMenuDelegateSpy = SwiftyMenuDelegateSpy()
         sut?.delegate = swiftyMenuDelegateSpy
+        sut?.configure(with: SwiftyMenuAttributes())
         super.setUp()
     }
 
@@ -31,7 +32,7 @@ class SwiftyMenuTests: XCTestCase {
     func testWillExpandDelegateSuccessCalled() {
         // When
         sut?.toggle()
-        
+
         // Then
         XCTAssertTrue(swiftyMenuDelegateSpy?.willExpandCalled ?? false)
     }
@@ -53,6 +54,7 @@ class SwiftyMenuTests: XCTestCase {
             XCTFail("waitForExpectationsWithTimeout errored: \(error)")
           }
         }
+        
     }
     
     func testWillCollapseDelegateSuccessCalled() {

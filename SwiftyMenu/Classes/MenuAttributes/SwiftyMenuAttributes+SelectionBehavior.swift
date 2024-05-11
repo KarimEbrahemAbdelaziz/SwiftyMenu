@@ -1,7 +1,7 @@
 //
 //  SwiftyMenuAttributes+SelectionBehavior.swift
 //
-//  Copyright (c) 2019-2021 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ public extension SwiftyMenuAttributes {
     enum MultiSelection {
 
         /** The scroll ability is totally disabled */
-        case disabled
+        case disabled(allowSingleDeselection: Bool = false)
 
         /** The scroll abiliby is enabled */
         case enabled

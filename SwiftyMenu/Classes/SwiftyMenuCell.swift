@@ -1,5 +1,5 @@
 //
-//  SwiftyMenuAttributes+AnimationTiming.swift
+//  SwiftyMenuCell.swift
 //
 //  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
@@ -24,22 +24,23 @@
 
 import Foundation
 
-public extension SwiftyMenuAttributes {
-
-    /** Describes how long the menu animates */
-    enum AnimationTiming {
-
-        case `default`
-
-        case value(duration: Double, delay: Double)
-
-        var animationTimingValues: (duration: Double, delay: Double) {
-            switch self {
-            case let .value(duration, delay):
-                return (duration: duration, delay: delay)
-            case .default:
-                return (duration: 0.5, delay: 0.0)
-            }
+class SwiftyMenuCell: UITableViewCell {
+    var rightMargin: CGFloat = 0.0
+    var leftMargin: CGFloat = 0.0
+    var isContentRightToLeft: Bool = false
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if isContentRightToLeft {
+            textLabel?.frame.origin.x = rightMargin
+            textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+            textLabel?.textAlignment = .right
+        } else {
+            textLabel?.frame.origin.x = leftMargin
+            textLabel?.frame.size.width = contentView.frame.width - rightMargin - leftMargin
+            textLabel?.textAlignment = .left
         }
     }
 }

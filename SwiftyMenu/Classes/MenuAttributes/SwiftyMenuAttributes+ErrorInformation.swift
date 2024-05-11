@@ -1,5 +1,5 @@
 //
-//  SwiftyMenuAttributes+AnimationTiming.swift
+//  SwiftyMenuAttributes+ErrorInformation.swift
 //
 //  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
@@ -23,22 +23,19 @@
 //
 
 import Foundation
+import UIKit
 
-public extension SwiftyMenuAttributes {
-
-    /** Describes how long the menu animates */
-    enum AnimationTiming {
-
+public extension SwiftyMenuAttributes{
+    enum ErrorInformation {
         case `default`
-
-        case value(duration: Double, delay: Double)
-
-        var animationTimingValues: (duration: Double, delay: Double) {
+        case custom(placeholderTextColor: UIColor = .red, iconTintColor: UIColor? = .red)
+        
+        public var errorInfoValues: (placeholderTextColor: UIColor, iconTintColor: UIColor?) {
             switch self {
-            case let .value(duration, delay):
-                return (duration: duration, delay: delay)
             case .default:
-                return (duration: 0.5, delay: 0.0)
+                return (placeholderTextColor: .red, iconTintColor: .red)
+            case let .custom(placeholderTextColor, iconTintColor):
+                return (placeholderTextColor: placeholderTextColor, iconTintColor: iconTintColor)
             }
         }
     }

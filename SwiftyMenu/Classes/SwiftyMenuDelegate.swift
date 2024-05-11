@@ -1,7 +1,7 @@
 //
 //  SwiftyMenuDelegate.swift
 //
-//  Copyright (c) 2019-2020 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,14 @@ public protocol SwiftyMenuDelegate: AnyObject {
     ///   - item: The `Item` that had been selected from `SwiftyMenu`.
     ///   - index: The `Index` of the selected `Item`.
     func swiftyMenu(_ swiftyMenu: SwiftyMenu, didSelectItem item: SwiftyMenuDisplayable, atIndex index: Int)
+    
+    /// Called when select an item from `SwiftyMenu`.
+    ///
+    /// - Parameters:
+    ///   - swiftyMenu: The `SwiftyMenu` that was deselected from it's items.
+    ///   - item: The `Item` that had been deselected from `SwiftyMenu`.
+    ///   - index: The `Index` of the deselected `Item`.
+    func swiftyMenu(_ swiftyMenu: SwiftyMenu, didDeselectItem item: SwiftyMenuDisplayable, atIndex index: Int)
     
     /// Called when `SwiftyMenu` will going to Expand.
     ///

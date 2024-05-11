@@ -1,7 +1,7 @@
 //
 //  SwiftyMenuAttributes+ArrowStyle.swift
 //
-//  Copyright (c) 2019-2021 Karim Ebrahem (https://twitter.com/k_ebrahem_)
+//  Copyright (c) 2019-2024 Karim Ebrahem (https://www.linkedin.com/in/karimebrahem)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,30 +29,30 @@ public extension SwiftyMenuAttributes {
 
     /** Describes the style for row of the menu */
     enum ArrowStyle {
-
+        
         case `default`
-
-        case value(isEnabled: Bool, image: UIImage? = nil)
-
-        var arrowStyleValues: (isEnabled: Bool, image: UIImage?) {
+        
+        case value(isEnabled: Bool, image: UIImage? = nil, tintColor: UIColor? = nil, spacingBetweenText: CGFloat = 0) // Added tintColor parameter with default nil
+        
+        var arrowStyleValues: (isEnabled: Bool, image: UIImage?, tintColor: UIColor?, spacingBetweenText: CGFloat) { // Added tintColor to the return type
 #if SWIFT_PACKAGE
             let frameworkBundle = Bundle.module
 #else
             let frameworkBundle = Bundle(for: SwiftyMenu.self)
 #endif
             let defaultImage = UIImage(named: "downArrow", in: frameworkBundle, compatibleWith: nil)!
-
+            
             switch self {
-            case let .value(isEnabled, image):
+            case let .value(isEnabled, image, tintColor, spacingBetweenText):
                 if isEnabled && image != nil {
-                    return (isEnabled: isEnabled, image: image)
+                    return (isEnabled: isEnabled, image: image, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else if isEnabled {
-                    return (isEnabled: isEnabled, image: defaultImage)
+                    return (isEnabled: isEnabled, image: defaultImage, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 } else {
-                    return (isEnabled: isEnabled, image: nil)
+                    return (isEnabled: isEnabled, image: nil, tintColor: tintColor, spacingBetweenText: spacingBetweenText)
                 }
             case .default:
-                return (isEnabled: true, image: defaultImage)
+                return (isEnabled: true, image: defaultImage, tintColor: nil, spacingBetweenText: 0) // Default tintColor is nil
             }
         }
     }
