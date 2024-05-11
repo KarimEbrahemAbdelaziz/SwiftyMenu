@@ -369,8 +369,7 @@ extension SwiftyMenu {
         
         selectButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        if #available(iOS 15.0, *){
-            
+        if #available(iOS 15.0, *) {
             var btnConfig = UIButton.Configuration.plain()
             btnConfig.titleAlignment = .leading
             btnConfig.imagePlacement = .trailing
