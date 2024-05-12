@@ -9,7 +9,7 @@
         <img src="http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat" alt="Cocoapod" />
     </a>
     <img src="http://img.shields.io/badge/SPM-available-green.svg?style=flat" alt="Swift Package Manager" />
-    <img src="http://img.shields.io/badge/version-1.0.1-green.svg?style=flat" alt="Version" />
+    <img src="http://img.shields.io/badge/version-1.1.0-green.svg?style=flat" alt="Version" />
     <a href="https://github.com/KarimEbrahemAbdelaziz/SwiftyMenu/blob/master/LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat" alt="MIT License" />
     </a>
